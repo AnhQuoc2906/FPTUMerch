@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "BusinessObjects/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BusinessObjects.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessObjects.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BusinessObjects/1.0.0": {
+      "type": "project",
+      "path": "../BusinessObjects/BusinessObjects.csproj",
+      "msbuildProject": "../BusinessObjects/BusinessObjects.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "BusinessObjects >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\anhqu\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

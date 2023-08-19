@@ -88,6 +88,43 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "BusinessObjects/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BusinessObjects.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessObjects.dll": {}
+        }
+      },
+      "DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BusinessObjects": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccess.dll": {}
+        }
+      },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BusinessObjects": "1.0.0",
+          "DataAccess": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
+        }
       }
     }
   },
@@ -216,10 +253,28 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "BusinessObjects/1.0.0": {
+      "type": "project",
+      "path": "../BusinessObjects/BusinessObjects.csproj",
+      "msbuildProject": "../BusinessObjects/BusinessObjects.csproj"
+    },
+    "DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../DataAccess/DataAccess.csproj",
+      "msbuildProject": "../DataAccess/DataAccess.csproj"
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "../Repository/Repository.csproj",
+      "msbuildProject": "../Repository/Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BusinessObjects >= 1.0.0",
+      "DataAccess >= 1.0.0",
+      "Repository >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -249,7 +304,17 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
+              "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
+            },
+            "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj"
+            },
+            "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj": {
+              "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

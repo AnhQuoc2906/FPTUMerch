@@ -28,8 +28,9 @@ CREATE TABLE Orders( -- Thông tin chính về order
 	OrdererPhoneNumber nvarchar(10) not null, -- SDT giao hàng
 	OrdererEmail nvarchar(255) not null, -- Email của người giao hàng
 	DeliveryAddress nvarchar(255) not null, -- Địa chỉ giao hàng
-	CreateDate datetime not null, -- Ngày đặt hàng
-	Note nvarchar(255) not null,
+	CreateDate datetime not null, -- Ngày đặt hàng'
+    Status bit not null, -- Tình trạng đơn hàng. (Đơn hàng huỷ hay chưa?)
+	Note nvarchar(255) null,
 )
 
 CREATE TABLE Product( -- Thông tin về sản phẩm của Merch
@@ -49,5 +50,9 @@ CREATE TABLE OrderDetail(
 	CreateDate datetime not null,
 )
 
+---------------------------------------------------------------------------------
+ALTER TABLE Orders 
+-- ALTER COLUMN Note nvarchar(255) NULL
+ADD Status Bit NOT NULL
 ---------------------------------------------------------------------------------
 SELECT * FROM Role

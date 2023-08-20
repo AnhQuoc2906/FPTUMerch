@@ -30,3 +30,16 @@ D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\obj\Debug\net6.0\refint\FP
 D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\obj\Debug\net6.0\FPTUMerchAPI.pdb
 D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\obj\Debug\net6.0\FPTUMerchAPI.genruntimeconfig.cache
 D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\obj\Debug\net6.0\ref\FPTUMerchAPI.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\FireSharp.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Microsoft.Threading.Tasks.Extensions.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Microsoft.Threading.Tasks.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\System.Net.Http.Extensions.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\System.Net.Http.Primitives.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\BusinessObjects.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\DataAccess.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Repository.dll
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\BusinessObjects.pdb
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\DataAccess.pdb
+D:\CocSaiGonCode\FPTU Merch\FPTUMerchAPI\FPTUMerchAPI\bin\Debug\net6.0\Repository.pdb

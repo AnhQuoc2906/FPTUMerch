@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="dependencies/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btnGetAll">Get All Products</button><br/><br/>
+    
+    <input type="text" id="txtProductName" placeholder="Name" /><br/>
+    <button id="btnGet">Get Product</button><br/><br/>
+
+    <button id="btnAdd">Add</button> <br/><br/>
+    <button id="btnDelete">Delete Product</button><br/><br/>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#btnGetAll').click(function (){
+            fetch('https://localhost:44385/api/Product')
+                .then(res=>{
+                    return res.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+        });
+
+        $('#btnGet').click(function (){
+            fetch('https://localhost:44385/api/Product/name?name=' + $("#txtProductName").val())
+                .then(res=>{
+                    return res.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+        });
+
+        $('#btnAdd').click(function (){
+            fetch('https://localhost:44385/api/Product',{
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ProductName: "abc",
+                    ProductLink: "def",
+                    ProductDescription: "ghi",
+                    Price: 100,
+                    Note: ""
+                })
+            })
+                .then(res=>{
+                    return res;
+                })
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+        });
+
+        $('#btnDelete').click(function (){
+            fetch('https://localhost:44385/api/Product/id?id=' + $("#txtProductName").val(),{
+                method: "DELETE"
+            })
+                .then(res=>{
+                    return res.json();
+                })
+                .then(data => console.log(data))
+                .catch(error => console.log(error));
+        });
+    });
+</script>

@@ -330,19 +330,6 @@
         "runtime": {
           "bin/placeholder/BusinessObjects.dll": {}
         }
-      },
-      "DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "BusinessObjects": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/DataAccess.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DataAccess.dll": {}
-        }
       }
     }
   },
@@ -982,17 +969,11 @@
       "type": "project",
       "path": "../BusinessObjects/BusinessObjects.csproj",
       "msbuildProject": "../BusinessObjects/BusinessObjects.csproj"
-    },
-    "DataAccess/1.0.0": {
-      "type": "project",
-      "path": "../DataAccess/DataAccess.csproj",
-      "msbuildProject": "../DataAccess/DataAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "BusinessObjects >= 1.0.0",
-      "DataAccess >= 1.0.0",
       "FireSharp >= 2.0.4"
     ]
   },
@@ -1025,9 +1006,6 @@
           "projectReferences": {
             "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
               "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
-            },
-            "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj"
             }
           }
         }

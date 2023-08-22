@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[2.0.4, )"
             },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -59,65 +63,6 @@
               "version": "[7.0.0, )"
             }
           },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj",
-        "projectName": "DataAccess",
-        "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\anhqu\\.nuget\\packages\\",
-        "outputPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\anhqu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",
@@ -164,12 +109,6 @@
             "projectReferences": {
               "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
                 "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
-              },
-              "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj"
-              },
-              "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj": {
-                "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj"
               }
             }
           }
@@ -208,74 +147,6 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj",
-        "projectName": "Repository",
-        "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\anhqu\\.nuget\\packages\\",
-        "outputPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\Repository\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\anhqu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
-              "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj": {
-                "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\BusinessObjects\\BusinessObjects.csproj"
-              },
-              "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "D:\\CocSaiGonCode\\FPTU Merch\\FPTUMerchAPI\\DataAccess\\DataAccess.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "dependencies": {
-            "FireSharp": {
-              "target": "Package",
-              "version": "[2.0.4, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

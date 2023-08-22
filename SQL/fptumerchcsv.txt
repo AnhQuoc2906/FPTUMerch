@@ -1,0 +1,1 @@
+DiscountCodeID,Status,NumberOfTimes

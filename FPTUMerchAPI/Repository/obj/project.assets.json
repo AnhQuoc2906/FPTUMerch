@@ -335,10 +335,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "BusinessObjects": "1.0.0",
-          "FireSharp": "2.0.4",
-          "Microsoft.Extensions.Configuration": "7.0.0",
-          "Microsoft.Extensions.Configuration.Json": "7.0.0"
+          "BusinessObjects": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DataAccess.dll": {}

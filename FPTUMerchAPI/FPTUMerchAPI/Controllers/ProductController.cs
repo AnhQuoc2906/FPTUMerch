@@ -28,7 +28,7 @@ namespace FPTUMerchAPI.Controllers
                 if (docsnap.Exists)
                 {
                     Product product = docsnap.ConvertTo<Product>();
-                    product.ProductId = docsnap.Id;
+                    product.ProductID = docsnap.Id;
                     productList.Add(product);
                 }
             }
@@ -53,7 +53,7 @@ namespace FPTUMerchAPI.Controllers
                     if (docsnap.Exists)
                     {
                         Product product = docsnap.ConvertTo<Product>();
-                        product.ProductId = docsnap.Id;
+                        product.ProductID = docsnap.Id;
                         productList.Add(product);
                     }
                 }
@@ -120,7 +120,7 @@ namespace FPTUMerchAPI.Controllers
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();
                     Product ret = snap.ConvertTo<Product>();
-                    ret.ProductId = id;
+                    ret.ProductID = id;
                     return Ok(ret);
                 }
                 else

@@ -10,7 +10,7 @@ namespace BusinessObjects
 {
     public class Orders
     {
-        [Key] public string OrderId { get; set; }
+        [Key] public string? OrderID { get; set; }
         [ForeignKey("DiscountCode")] public string? DiscountCodeID { get; set; }
         public string OrdererName { get; set; }
         public string OrdererPhoneNumber { get; set; }

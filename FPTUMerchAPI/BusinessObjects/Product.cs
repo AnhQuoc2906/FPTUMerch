@@ -11,7 +11,7 @@ namespace BusinessObjects
     [FirestoreData]
     public class Product
     {
-        public string? ProductId { get; set; }
+        public string? ProductID { get; set; }
         [FirestoreProperty]
         public string ProductName { get; set; }
         [FirestoreProperty]

@@ -35,7 +35,7 @@ namespace FPTUMerchAPI.Controllers
             return Ok(productList);
         }
 
-        [HttpGet("name")]
+        [HttpGet("{name}")]
         public async Task<ActionResult> GetByName(string name)
         {
             try
@@ -57,16 +57,22 @@ namespace FPTUMerchAPI.Controllers
                         productList.Add(product);
                     }
                 }
-                return Ok(productList.Where(x => x.ProductName.Contains(name)));
+                if(name != null && !name.Equals("") && name.Length != 0)
+                {
+                    return Ok(productList.Where(x => x.ProductName.Contains(name)));
+                }
+                else
+                {
+                    return NotFound();
+                }
             } catch (Exception ex)
             {
                     return BadRequest(ex.Message);
-            }
-            
+            }          
         }
 
         [HttpPost]
-        public IActionResult Post(Product product)
+        public IActionResult Post([FromBody]Product product)
         {
             try
             {
@@ -127,7 +133,7 @@ namespace FPTUMerchAPI.Controllers
             }
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             try

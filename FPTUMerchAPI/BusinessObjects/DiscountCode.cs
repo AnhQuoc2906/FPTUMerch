@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
+    [FirestoreData]
     public class DiscountCode
     {
-        [Key] public string DiscountCodeID { get; set; }
+        [FirestoreProperty]
+        public string DiscountCodeID { get; set; }
+        [FirestoreProperty]
         public bool Status { get; set; }
+        [FirestoreProperty]
         public int NumberOfTimes { get; set; }
     }
 }

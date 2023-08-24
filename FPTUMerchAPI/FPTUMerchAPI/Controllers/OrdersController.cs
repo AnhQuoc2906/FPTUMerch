@@ -3,6 +3,8 @@ using FireSharp.Extensions;
 using Google.Cloud.Firestore;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
+using static Google.Cloud.Firestore.V1.StructuredQuery.Types;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -84,7 +86,7 @@ namespace FPTUMerchAPI.Controllers
 
         // POST api/<OrdersController>
         [HttpPost]
-        public IActionResult Post([FromBody] Orders Order)
+        public async Task<ActionResult> Post([FromBody] Orders Order)
         {
             try
             {
@@ -95,6 +97,18 @@ namespace FPTUMerchAPI.Controllers
                 DocumentReference docRef = database.Collection("Order").Document(documentID);
                 var specified = DateTime.SpecifyKind(DateTime.Now,DateTimeKind.Utc);
                 //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
+
+                /*CHECK IF DISCOUNT CODE CORRECT*/
+                if(Order.DiscountCodeID != null && Order.DiscountCodeID != "" && Order.DiscountCodeID.Length != 0)
+                {
+                    DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(Order.DiscountCodeID);
+                    DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
+                    if (!docSnapDiscountCode.Exists)
+                    {
+                        return BadRequest("The Discount Code is not exist");
+                    }
+                }
+                
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
                     { "DiscountCodeID", Order.DiscountCodeID},
@@ -129,10 +143,34 @@ namespace FPTUMerchAPI.Controllers
         }
 
         // PUT api/<OrdersController>/5
+        // Update Order's Entities, Not Order Detail's Entities
         [HttpPut("{OrderId}")]
-        public async Task<ActionResult> Put(string OrderId, [FromBody] Orders order)
+        public IActionResult UpdateOrder(string OrderId, [FromBody] Orders order)
         {
-            return Ok();
+            try
+            {
+                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                DocumentReference docRef = database.Collection("Order").Document(OrderId);
+                var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                Dictionary<string, object> data = new Dictionary<string, object>()
+                {
+                    { "OrdererName", order.OrdererName},
+                    { "OrdererPhoneNumber", order.OrdererPhoneNumber},
+                    { "OrdererEmail", order.OrdererEmail},
+                    { "DeliveryAddress", order.DeliveryAddress},
+                    { "TotalPrice", order.TotalPrice},
+                    { "CreateDate", specified.ToTimestamp()},
+                    { "Note", order.Note },
+                    { "Status", order.Status}
+                };
+                docRef.SetAsync(data);
+                return Ok();
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/<OrdersController>/5

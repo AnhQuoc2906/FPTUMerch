@@ -59,13 +59,13 @@ namespace FPTUMerchAPI.Controllers
                         discountCodeList.Add(discountCode);
                     }
                 }
-                if (id != null && !id.Equals("") && id.Length != 0)
+                if (id == null || id.Equals("") || id.Length == 0)
                 {
-                    return Ok(discountCodeList.Where(x => x.DiscountCodeID.Contains(id)));
+                    return NotFound();
                 }
                 else
                 {
-                    return NotFound();
+                    return Ok(discountCodeList.Where(x => x.DiscountCodeID.Contains(id)));
                 }
             }
             catch (Exception ex)
@@ -101,7 +101,7 @@ namespace FPTUMerchAPI.Controllers
         }
 
         // PUT api/<DiscountCodeController>/5
-        [HttpPut("{id}")]
+        [HttpPut("useCode/{id}")]
         public async Task<ActionResult> UseCode(string id)
         {
             try
@@ -136,8 +136,8 @@ namespace FPTUMerchAPI.Controllers
             }
         }
 
-        [HttpPut("updateStatus")]
-        public async Task<ActionResult> UpdateStatus(string id, bool status)
+        [HttpPut("updateStatus/{id}")]
+        public async Task<ActionResult> UpdateStatus(string id,[FromBody] bool status)
         {
             try
             {

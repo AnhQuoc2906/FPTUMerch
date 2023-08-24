@@ -1,138 +1,136 @@
 ﻿using BusinessObjects;
 using Google.Cloud.Firestore;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 
 namespace FPTUMerchAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class RoleController : ControllerBase
     {
-
+        // GET: api/<RoleController>
         [HttpGet]
         public async Task<ActionResult> Get()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            CollectionReference coll = database.Collection("Product");
-            List<Product> productList = new List<Product>();
-            Query Qref = database.Collection("Product");
+            CollectionReference coll = database.Collection("Role");
+            List<Role> roleList = new List<Role>();
+            Query Qref = database.Collection("Role");
             QuerySnapshot snap = await Qref.GetSnapshotAsync();
 
             foreach (DocumentSnapshot docsnap in snap)
             {
                 if (docsnap.Exists)
                 {
-                    Product product = docsnap.ConvertTo<Product>();
-                    product.ProductID = docsnap.Id;
-                    productList.Add(product);
+                    Role role = docsnap.ConvertTo<Role>();
+                    role.RoleID = docsnap.Id;
+                    roleList.Add(role);
                 }
             }
-            return Ok(productList);
+            return Ok(roleList);
         }
 
+        // GET api/<RoleController>/5
         [HttpGet("{name}")]
-        public async Task<ActionResult> GetByName(string name)
+        public async Task<ActionResult> Get(string name)
         {
             try
             {
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                CollectionReference coll = database.Collection("Product");
-                List<Product> productList = new List<Product>();
-                Query Qref = database.Collection("Product");
+                CollectionReference coll = database.Collection("Role");
+                List<Role> roleList = new List<Role>();
+                Query Qref = database.Collection("Role");
                 QuerySnapshot snap = await Qref.GetSnapshotAsync();
 
                 foreach (DocumentSnapshot docsnap in snap)
                 {
                     if (docsnap.Exists)
                     {
-                        Product product = docsnap.ConvertTo<Product>();
-                        product.ProductID = docsnap.Id;
-                        productList.Add(product);
+                        Role role = docsnap.ConvertTo<Role>();
+                        role.RoleID = docsnap.Id;
+                        roleList.Add(role);
                     }
                 }
-                if(name == null || name.Equals("") || name.Length == 0)
+                if (name == null || name.Equals("") || name.Length == 0)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    return Ok(productList.Where(x => x.ProductName.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0));
+                    return Ok(roleList.Where(x => x.RoleName.Equals(name)));
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                    return BadRequest(ex.Message);
-            }          
+                return BadRequest(ex.Message);
+            }
         }
 
+        // POST api/<RoleController>
         [HttpPost]
-        public IActionResult Post([FromBody]Product product)
+        public IActionResult Post([FromBody] Role role)
         {
             try
             {
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                CollectionReference coll = database.Collection("Product");
+                CollectionReference coll = database.Collection("Role");
                 //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
-                    { "ProductName", product.ProductName},
-                    { "ProductLink", product.ProductLink},
-                    { "ProductDescription", product.ProductDescription},
-                    { "Price", product.Price},
-                    { "Note", product.Note}
+                    { "RoleName", role.RoleName},
+                    { "RoleDescription", role.RoleDescription}
                 };
                 coll.AddAsync(data);
                 return Ok();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }   
+            }
         }
 
+        // PUT api/<RoleController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id,[FromBody] Product product)
+        public async Task<ActionResult> Put(string id, [FromBody] Role role)
         {
             try
             {
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                DocumentReference docRef = database.Collection("Product").Document(id);
+                DocumentReference docRef = database.Collection("Role").Document(id);
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
-                    { "ProductName", product.ProductName},
-                    { "ProductLink", product.ProductLink},
-                    { "ProductDescription", product.ProductDescription},
-                    { "Price", product.Price},
-                    { "Note", product.Note}
+                    { "RoleName", role.RoleName},
+                    { "RoleDescription", role.RoleDescription}
                 };
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)
                 {
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();
-                    Product ret = snap.ConvertTo<Product>();
-                    ret.ProductID = id;
+                    Role ret = snap.ConvertTo<Role>();
+                    ret.RoleID = id;
                     return Ok(ret);
                 }
                 else
                 {
                     return BadRequest(docRef);
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
+        // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
@@ -141,10 +139,11 @@ namespace FPTUMerchAPI.Controllers
                 string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                DocumentReference docRef = database.Collection("Product").Document(id);
+                DocumentReference docRef = database.Collection("Role").Document(id);
                 docRef.DeleteAsync();
                 return Ok();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

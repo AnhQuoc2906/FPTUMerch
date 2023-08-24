@@ -14,73 +14,87 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
         // GET: api/<OrdersController>
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            List<Orders> ordersList = new List<Orders>();
-            Query Qref = database.Collection("Order");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                List<Orders> ordersList = new List<Orders>();
+                Query Qref = database.Collection("Order");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    Orders order = docsnap.ConvertTo<Orders>();
-                    order.OrderID = docsnap.Id;
-                    order.orderDetails = new List<OrderDetail>();
-                    Query coll = database.Collection("Order").Document(docsnap.Id).Collection("OrderDetail");
-                    QuerySnapshot queryColl = await coll.GetSnapshotAsync();
-                    foreach(DocumentSnapshot docsnap2 in queryColl)
+                    if (docsnap.Exists)
                     {
-                        if(docsnap2.Exists)
+                        Orders order = docsnap.ConvertTo<Orders>();
+                        order.OrderID = docsnap.Id;
+                        order.orderDetails = new List<OrderDetail>();
+                        Query coll = database.Collection("Order").Document(docsnap.Id).Collection("OrderDetail");
+                        QuerySnapshot queryColl = await coll.GetSnapshotAsync();
+                        foreach (DocumentSnapshot docsnap2 in queryColl)
                         {
-                            OrderDetail orderDetail = docsnap2.ConvertTo<OrderDetail>();
-                            orderDetail.OrderDetailID = docsnap2.Id;
-                            orderDetail.OrderID = docsnap.Id;
-                            order.orderDetails.Add(orderDetail);
+                            if (docsnap2.Exists)
+                            {
+                                OrderDetail orderDetail = docsnap2.ConvertTo<OrderDetail>();
+                                orderDetail.OrderDetailID = docsnap2.Id;
+                                orderDetail.OrderID = docsnap.Id;
+                                order.orderDetails.Add(orderDetail);
+                            }
                         }
+                        ordersList.Add(order);
                     }
-                    ordersList.Add(order);
                 }
+                return Ok(ordersList);
             }
-            return Ok(ordersList);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // GET api/<OrdersController>/5
         [HttpGet("{OrderId}")]
         public async Task<ActionResult> Get(string OrderId)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            Orders order = new Orders();
-            DocumentReference docRef = database.Collection("Order").Document(OrderId);
-            DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
-            if(docSnap.Exists)
+            try
             {
-                order = docSnap.ConvertTo<Orders>();
-                order.OrderID = docSnap.Id;
-                order.orderDetails = new List<OrderDetail>();
-                Query coll = database.Collection("Order").Document(docSnap.Id).Collection("OrderDetail");
-                QuerySnapshot queryColl = await coll.GetSnapshotAsync();
-                foreach (DocumentSnapshot docsnap2 in queryColl)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                Orders order = new Orders();
+                DocumentReference docRef = database.Collection("Order").Document(OrderId);
+                DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
+                if (docSnap.Exists)
                 {
-                    if (docsnap2.Exists)
+                    order = docSnap.ConvertTo<Orders>();
+                    order.OrderID = docSnap.Id;
+                    order.orderDetails = new List<OrderDetail>();
+                    Query coll = database.Collection("Order").Document(docSnap.Id).Collection("OrderDetail");
+                    QuerySnapshot queryColl = await coll.GetSnapshotAsync();
+                    foreach (DocumentSnapshot docsnap2 in queryColl)
                     {
-                        OrderDetail orderDetail = docsnap2.ConvertTo<OrderDetail>();
-                        orderDetail.OrderDetailID = docsnap2.Id;
-                        orderDetail.OrderID = docSnap.Id;
-                        order.orderDetails.Add(orderDetail);
+                        if (docsnap2.Exists)
+                        {
+                            OrderDetail orderDetail = docsnap2.ConvertTo<OrderDetail>();
+                            orderDetail.OrderDetailID = docsnap2.Id;
+                            orderDetail.OrderID = docSnap.Id;
+                            order.orderDetails.Add(orderDetail);
+                        }
                     }
+                    return Ok(order);
                 }
-                return Ok(order);
+                else
+                {
+                    return NotFound();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -90,16 +104,15 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 string documentID = Guid.NewGuid().ToString();
                 DocumentReference docRef = database.Collection("Order").Document(documentID);
-                var specified = DateTime.SpecifyKind(DateTime.Now,DateTimeKind.Utc);
+                var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
 
                 /*CHECK IF DISCOUNT CODE CORRECT*/
-                if(Order.DiscountCodeID != null && Order.DiscountCodeID != "" && Order.DiscountCodeID.Length != 0)
+                if (Order.DiscountCodeID != null && Order.DiscountCodeID != "" && Order.DiscountCodeID.Length != 0)
                 {
                     DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(Order.DiscountCodeID);
                     DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
@@ -107,8 +120,18 @@ namespace FPTUMerchAPI.Controllers
                     {
                         return BadRequest("The Discount Code is not exist");
                     }
+                    else
+                    {
+                        DiscountCode discountCode = docSnapDiscountCode.ConvertTo<DiscountCode>();
+                        Dictionary<string, object> updateDiscountCode = new Dictionary<string, object>()
+                        {
+                            { "Status",discountCode.Status },
+                            { "NumberOfTimes", discountCode.NumberOfTimes + 1}
+                        };
+                        await docRefDiscountCode.SetAsync(updateDiscountCode);
+                    }
                 }
-                
+
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
                     { "DiscountCodeID", Order.DiscountCodeID},
@@ -149,7 +172,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Order").Document(OrderId);
@@ -167,7 +189,8 @@ namespace FPTUMerchAPI.Controllers
                 };
                 docRef.SetAsync(data);
                 return Ok();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -175,26 +198,28 @@ namespace FPTUMerchAPI.Controllers
 
         // DELETE api/<OrdersController>/5
         [HttpDelete("{OrderId}")]
-        public async Task<ActionResult> Delete(string OrderId)
+        public async Task<ActionResult> DeleteOrder(string OrderId)
         {
-            return Ok();
-        }
-
-        [NonAction]
-        public string generateRandomCode() // Dùng để tạo ra mã giảm giá gồm 12 ký tự
-        {
-            Random rand = new Random();
-            int stringlength = 20;
-            int randvalue;
-            string str = "";
-            char letter;
-            for (int i = 0; i < stringlength; i++)
+            try
             {
-                randvalue = rand.Next(0, 26);
-                letter = Convert.ToChar(randvalue + 65);
-                str += letter;
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                DocumentReference docRef = database.Collection("Order").Document(OrderId);
+                DocumentSnapshot snap = await docRef.GetSnapshotAsync();
+                if (snap.Exists)
+                {
+                    docRef.DeleteAsync();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
-            return str;
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

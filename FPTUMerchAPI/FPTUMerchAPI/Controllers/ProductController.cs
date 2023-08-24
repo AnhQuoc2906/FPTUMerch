@@ -11,27 +11,34 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            List<Product> productList = new List<Product>();
-            Query Qref = database.Collection("Product");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                List<Product> productList = new List<Product>();
+                Query Qref = database.Collection("Product");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    Product product = docsnap.ConvertTo<Product>();
-                    product.ProductID = docsnap.Id;
-                    productList.Add(product);
+                    if (docsnap.Exists)
+                    {
+                        Product product = docsnap.ConvertTo<Product>();
+                        product.ProductID = docsnap.Id;
+                        productList.Add(product);
+                    }
                 }
+                return Ok(productList);
             }
-            return Ok(productList);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         [HttpGet("{name}")]
@@ -39,7 +46,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Product");
@@ -56,7 +62,7 @@ namespace FPTUMerchAPI.Controllers
                         productList.Add(product);
                     }
                 }
-                if(name == null || name.Equals("") || name.Length == 0)
+                if (name == null || name.Equals("") || name.Length == 0)
                 {
                     return NotFound();
                 }
@@ -64,18 +70,18 @@ namespace FPTUMerchAPI.Controllers
                 {
                     return Ok(productList.Where(x => x.ProductName.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0));
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                    return BadRequest(ex.Message);
-            }          
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Product product)
+        public IActionResult Post([FromBody] Product product)
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Product");
@@ -90,18 +96,18 @@ namespace FPTUMerchAPI.Controllers
                 };
                 coll.AddAsync(data);
                 return Ok();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }   
+            }
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id,[FromBody] Product product)
+        public async Task<ActionResult> Put(string id, [FromBody] Product product)
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Product").Document(id);
@@ -126,7 +132,8 @@ namespace FPTUMerchAPI.Controllers
                 {
                     return BadRequest(docRef);
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -137,7 +144,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Product").Document(id);

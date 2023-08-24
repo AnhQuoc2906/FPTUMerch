@@ -22,7 +22,7 @@ namespace BusinessObjects
         public int Amount { get; set; }
         [FirestoreProperty]
         //Get the size or any additional information
-        public string Note { get; set; }
+        public string? Note { get; set; }
         [FirestoreProperty]
         public DateTime? CreateDate { get; set; }
     }

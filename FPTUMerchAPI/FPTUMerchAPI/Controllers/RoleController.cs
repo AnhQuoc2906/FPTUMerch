@@ -8,27 +8,35 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
         // GET: api/<RoleController>
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            List<Role> roleList = new List<Role>();
-            Query Qref = database.Collection("Role");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                List<Role> roleList = new List<Role>();
+                Query Qref = database.Collection("Role");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    Role role = docsnap.ConvertTo<Role>();
-                    role.RoleID = docsnap.Id;
-                    roleList.Add(role);
+                    if (docsnap.Exists)
+                    {
+                        Role role = docsnap.ConvertTo<Role>();
+                        role.RoleID = docsnap.Id;
+                        roleList.Add(role);
+                    }
                 }
+                return Ok(roleList);
             }
-            return Ok(roleList);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // GET api/<RoleController>/5
@@ -37,7 +45,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Role");
@@ -75,7 +82,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Role");
@@ -100,7 +106,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Role").Document(id);
@@ -135,7 +140,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Role").Document(id);

@@ -12,7 +12,7 @@ namespace BusinessObjects
     public class DiscountCode
     {
         [FirestoreProperty]
-        public string DiscountCodeID { get; set; }
+        public string? DiscountCodeID { get; set; }
         [FirestoreProperty]
         public bool Status { get; set; }
         [FirestoreProperty]

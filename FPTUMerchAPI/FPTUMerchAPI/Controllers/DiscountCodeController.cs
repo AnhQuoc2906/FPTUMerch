@@ -12,28 +12,35 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class DiscountCodeController : ControllerBase
     {
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
         // GET: api/<DiscountCodeController>
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            CollectionReference coll = database.Collection("DiscountCode");
-            List<DiscountCode> discountCodeList = new List<DiscountCode>();
-            Query Qref = database.Collection("DiscountCode");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                CollectionReference coll = database.Collection("DiscountCode");
+                List<DiscountCode> discountCodeList = new List<DiscountCode>();
+                Query Qref = database.Collection("DiscountCode");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    DiscountCode discountCode = docsnap.ConvertTo<DiscountCode>();
-                    discountCode.DiscountCodeID = docsnap.Id;
-                    discountCodeList.Add(discountCode);
+                    if (docsnap.Exists)
+                    {
+                        DiscountCode discountCode = docsnap.ConvertTo<DiscountCode>();
+                        discountCode.DiscountCodeID = docsnap.Id;
+                        discountCodeList.Add(discountCode);
+                    }
                 }
+                return Ok(discountCodeList);
             }
-            return Ok(discountCodeList);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET api/<DiscountCodeController>/5
@@ -42,7 +49,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("DiscountCode");
@@ -81,7 +87,6 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 string discountCode = generateRandomCode();
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference coll = database.Collection("DiscountCode").Document(discountCode);
@@ -92,7 +97,7 @@ namespace FPTUMerchAPI.Controllers
                     { "NumberOfTimes", 0}
                 };
                 coll.SetAsync(data);
-                return Ok("DiscountCodeID: " + discountCode + " "+ data.ToJson());
+                return Ok("DiscountCodeID: " + discountCode + " " + data.ToJson());
             }
             catch (Exception ex)
             {
@@ -101,12 +106,45 @@ namespace FPTUMerchAPI.Controllers
         }
 
         // PUT api/<DiscountCodeController>/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(string id, [FromBody] DiscountCode discountCode)
+        {
+            try
+            {
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                DocumentReference docRef = database.Collection("DiscountCode").Document(id);
+                DocumentSnapshot snap = await docRef.GetSnapshotAsync();
+                if (snap.Exists)
+                {
+                    Dictionary<string, object> data = new Dictionary<string, object>()
+                    {
+                        { "Status",discountCode.Status },
+                        { "NumberOfTimes", discountCode.NumberOfTimes}
+                    };
+                    await docRef.SetAsync(data);
+                    snap = await docRef.GetSnapshotAsync();
+                    DiscountCode ret = snap.ConvertTo<DiscountCode>();
+                    ret.DiscountCodeID = id;
+                    return Ok(ret);
+                }
+                else
+                {
+                    return BadRequest(docRef);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPut("useCode/{id}")]
         public async Task<ActionResult> UseCode(string id)
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
@@ -137,11 +175,10 @@ namespace FPTUMerchAPI.Controllers
         }
 
         [HttpPut("updateStatus/{id}")]
-        public async Task<ActionResult> UpdateStatus(string id,[FromBody] bool status)
+        public async Task<ActionResult> UpdateStatus(string id, [FromBody] bool status)
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
@@ -177,7 +214,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
@@ -206,10 +242,10 @@ namespace FPTUMerchAPI.Controllers
             int randvalue;
             string str = "";
             char letter;
-            for(int i=0;i< stringlength; i++)
+            for (int i = 0; i < stringlength; i++)
             {
                 randvalue = rand.Next(0, 26);
-                letter = Convert.ToChar(randvalue+65);
+                letter = Convert.ToChar(randvalue + 65);
                 str += letter;
             }
             return str;

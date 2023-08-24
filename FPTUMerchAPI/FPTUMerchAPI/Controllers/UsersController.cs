@@ -11,36 +11,43 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
         // GET: api/<UsersController>
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            List<Users> usersList = new List<Users>();
-            Query Qref = database.Collection("Users");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                List<Users> usersList = new List<Users>();
+                Query Qref = database.Collection("Users");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    Users user = docsnap.ConvertTo<Users>();
-                    user.UserID = docsnap.Id;
-                    usersList.Add(user);
+                    if (docsnap.Exists)
+                    {
+                        Users user = docsnap.ConvertTo<Users>();
+                        user.UserID = docsnap.Id;
+                        usersList.Add(user);
+                    }
                 }
+                return Ok(usersList);
             }
-            return Ok(usersList);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult> Get(string id)
+        public async Task<ActionResult> GetByUserId(string id)
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 List<Users> usersList = new List<Users>();
@@ -74,30 +81,37 @@ namespace FPTUMerchAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> GetByEmailAndPassword([FromBody] UserAuthentication userCheck)
         {
-            string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-            FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            CollectionReference coll = database.Collection("Users");
-            List<Users> usersList = new List<Users>();
-            Query Qref = database.Collection("Users");
-            QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
-            foreach (DocumentSnapshot docsnap in snap)
+            try
             {
-                if (docsnap.Exists)
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                CollectionReference coll = database.Collection("Users");
+                List<Users> usersList = new List<Users>();
+                Query Qref = database.Collection("Users");
+                QuerySnapshot snap = await Qref.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot docsnap in snap)
                 {
-                    Users user = docsnap.ConvertTo<Users>();
-                    if(userCheck.Email == user.Email && userCheck.Password == user.Password)
+                    if (docsnap.Exists)
                     {
-                        return Ok("This Account Exists");
-                    }
-                    else
-                    {
-                        continue;
+                        Users user = docsnap.ConvertTo<Users>();
+                        if (userCheck.Email == user.Email && userCheck.Password == user.Password)
+                        {
+                            return Ok("This Account Exists");
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                 }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // POST api/<UsersController>
@@ -106,7 +120,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Users");
@@ -160,7 +173,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Users").Document(id);
@@ -199,7 +211,6 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Users").Document(id);

@@ -11,7 +11,6 @@ namespace BusinessObjects
     [FirestoreData]
     public class Role
     {
-        [FirestoreProperty]
         public string? RoleID { get; set; }
         [FirestoreProperty]
         public string RoleName { get; set; }

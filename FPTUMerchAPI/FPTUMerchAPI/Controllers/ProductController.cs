@@ -18,7 +18,6 @@ namespace FPTUMerchAPI.Controllers
             string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-            CollectionReference coll = database.Collection("Product");
             List<Product> productList = new List<Product>();
             Query Qref = database.Collection("Product");
             QuerySnapshot snap = await Qref.GetSnapshotAsync();
@@ -134,7 +133,7 @@ namespace FPTUMerchAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
@@ -142,9 +141,18 @@ namespace FPTUMerchAPI.Controllers
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Product").Document(id);
-                docRef.DeleteAsync();
-                return Ok();
-            } catch(Exception ex)
+                DocumentSnapshot snap = await docRef.GetSnapshotAsync();
+                if (snap.Exists)
+                {
+                    docRef.DeleteAsync();
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

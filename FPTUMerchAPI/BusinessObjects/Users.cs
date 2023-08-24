@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Cloud.Firestore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,14 +9,20 @@ using System.Threading.Tasks;
 
 namespace BusinessObjects
 {
+    [FirestoreData]
     public class Users
     {
-        [Key] public string? UserID { get; set; }
+        [Key] 
+        public string? UserID { get; set; }
+        [FirestoreProperty]
         public string FullName { get; set; }
+        [FirestoreProperty]
         public string Email { get; set; }
+        [FirestoreProperty]
         public string Password { get; set; }
+        [FirestoreProperty]
         public string? Note { get; set; }
-        [ForeignKey("Role")]public string RoleId { get; set; }
-        public Role Role { get; set; }
+        [FirestoreProperty]
+        [ForeignKey("Role")]public string RoleID { get; set; }
     }
 }

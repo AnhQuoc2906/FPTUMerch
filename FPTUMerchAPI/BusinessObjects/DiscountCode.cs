@@ -14,7 +14,7 @@ namespace BusinessObjects
         [FirestoreProperty]
         public string? DiscountCodeID { get; set; }
         [FirestoreProperty]
-        public bool Status { get; set; }
+        public bool Status { get; set; }// FALSE: MÃ CHƯA KÍCH HOẠT, TRUE: MÃ ĐÃ KÍCH HOẠT
         [FirestoreProperty]
         public int NumberOfTimes { get; set; }
     }

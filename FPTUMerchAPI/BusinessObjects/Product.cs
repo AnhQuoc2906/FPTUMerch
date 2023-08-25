@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Google.Rpc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,10 @@ namespace BusinessObjects
         public string ProductLink { get; set; }
         [FirestoreProperty]
         public float Price { get; set; }
+        //[FirestoreProperty]
+        //public int Quantity { get; set; }
+        //[FirestoreProperty]
+        //public bool? IsActive { get; set; } 
         [FirestoreProperty]
         public string? Note { get; set; }
     }

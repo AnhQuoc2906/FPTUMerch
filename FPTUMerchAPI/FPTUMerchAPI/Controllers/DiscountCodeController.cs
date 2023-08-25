@@ -119,7 +119,7 @@ namespace FPTUMerchAPI.Controllers
                 {
                     Dictionary<string, object> data = new Dictionary<string, object>()
                     {
-                        { "Status",discountCode.Status },
+                        { "Status",discountCode.Status},
                         { "NumberOfTimes", discountCode.NumberOfTimes}
                     };
                     await docRef.SetAsync(data);
@@ -152,16 +152,24 @@ namespace FPTUMerchAPI.Controllers
                 if (snap.Exists)
                 {
                     DiscountCode discountCode = snap.ConvertTo<DiscountCode>();
-                    Dictionary<string, object> data = new Dictionary<string, object>()
+                    /*ONLY UPDATE WHEN STATUS = TRUE*/
+                    if (discountCode.Status == false)
                     {
-                        { "Status",discountCode.Status },
-                        { "NumberOfTimes", discountCode.NumberOfTimes + 1}
-                    };
-                    await docRef.SetAsync(data);
-                    snap = await docRef.GetSnapshotAsync();
-                    DiscountCode ret = snap.ConvertTo<DiscountCode>();
-                    ret.DiscountCodeID = id;
-                    return Ok(ret);
+                        return BadRequest("The Discount Code is not activated yet");
+                    }
+                    else
+                    {
+                        Dictionary<string, object> data = new Dictionary<string, object>()
+                        {
+                            { "Status",discountCode.Status },
+                            { "NumberOfTimes", discountCode.NumberOfTimes + 1}
+                        };
+                        await docRef.SetAsync(data);
+                        snap = await docRef.GetSnapshotAsync();
+                        DiscountCode ret = snap.ConvertTo<DiscountCode>();
+                        ret.DiscountCodeID = id;
+                        return Ok(ret);
+                    }
                 }
                 else
                 {
@@ -189,7 +197,7 @@ namespace FPTUMerchAPI.Controllers
                     Dictionary<string, object> data = new Dictionary<string, object>()
                     {
                         {"Status", status},
-                        { "NumberOfTimes", discountCode.NumberOfTimes }
+                        {"NumberOfTimes", discountCode.NumberOfTimes }
                     };
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();

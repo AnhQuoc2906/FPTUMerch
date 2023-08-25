@@ -78,14 +78,13 @@ namespace FPTUMerchAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Product product)
+        public async Task<ActionResult> Post([FromBody] Product product)
         {
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Product");
-                //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
                     { "ProductName", product.ProductName},
@@ -94,6 +93,21 @@ namespace FPTUMerchAPI.Controllers
                     { "Price", product.Price},
                     { "Note", product.Note}
                 };
+                //Check if product name already exists
+                Query productQuery = database.Collection("Product");
+                QuerySnapshot productSnap = await productQuery.GetSnapshotAsync();
+                foreach(DocumentSnapshot docSnap in productSnap)
+                {
+                    if (docSnap.Exists)
+                    {
+                        Product productCheck = docSnap.ConvertTo<Product>();
+                        productCheck.ProductID = docSnap.Id;
+                        if(productCheck.ProductName.IndexOf(product.ProductName, StringComparison.OrdinalIgnoreCase) >= 0){
+                            return Conflict(productCheck);
+                        }
+                    }
+                }
+                //-------------------------------------------
                 coll.AddAsync(data);
                 return Ok();
             }

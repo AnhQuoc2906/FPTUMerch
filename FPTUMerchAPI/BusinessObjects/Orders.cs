@@ -24,7 +24,7 @@ namespace BusinessObjects
         [FirestoreProperty]
         public string DeliveryAddress { get; set; }
         [FirestoreProperty]
-        public float TotalPrice { get; set; }
+        public float? TotalPrice { get; set; }
         [FirestoreProperty]
         public DateTime? CreateDate { get; set; }
         [FirestoreProperty]

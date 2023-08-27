@@ -85,37 +85,48 @@ namespace FPTUMerchAPI.Controllers
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 CollectionReference coll = database.Collection("Product");
-                Dictionary<string, object> data = new Dictionary<string, object>()
+                if (product.Quantity < 0)
                 {
-                    { "ProductName", product.ProductName},
-                    { "ProductLink", product.ProductLink},
-                    { "ProductDescription", product.ProductDescription},
-                    { "Price", product.Price},
-                    { "Note", product.Note}
-                };
-                //Check if product name already exists
-                Query productQuery = database.Collection("Product");
-                QuerySnapshot productSnap = await productQuery.GetSnapshotAsync();
-                foreach(DocumentSnapshot docSnap in productSnap)
+                    return BadRequest("The product quantity cannot be lower than 1");
+                }
+                else
                 {
-                    if (docSnap.Exists)
+                    Dictionary<string, object> data = new Dictionary<string, object>()
                     {
-                        Product productCheck = docSnap.ConvertTo<Product>();
-                        productCheck.ProductID = docSnap.Id;
-                        if(productCheck.ProductName.IndexOf(product.ProductName, StringComparison.OrdinalIgnoreCase) >= 0){
-                            return Conflict(productCheck);
+                        { "ProductName", product.ProductName},
+                        { "ProductLink", product.ProductLink},
+                        { "ProductDescription", product.ProductDescription},
+                        { "Quantity", product.Quantity},
+                        { "CurrentQuantity", product.Quantity},
+                        { "IsActive", true},
+                        { "Price", product.Price},
+                        { "Note", product.Note}
+                    };
+                    //Check if product name already exists
+                    Query productQuery = database.Collection("Product");
+                    QuerySnapshot productSnap = await productQuery.GetSnapshotAsync();
+                    foreach (DocumentSnapshot docSnap in productSnap)
+                    {
+                        if (docSnap.Exists)
+                        {
+                            Product productCheck = docSnap.ConvertTo<Product>();
+                            productCheck.ProductID = docSnap.Id;
+                            if (productCheck.ProductName.IndexOf(product.ProductName, StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                return Conflict(productCheck);
+                            }
                         }
                     }
+                    //-------------------------------------------
+                    coll.AddAsync(data);
+                    return Ok();
+                    }
                 }
-                //-------------------------------------------
-                coll.AddAsync(data);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }       
 
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(string id, [FromBody] Product product)
@@ -125,17 +136,29 @@ namespace FPTUMerchAPI.Controllers
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 DocumentReference docRef = database.Collection("Product").Document(id);
-                Dictionary<string, object> data = new Dictionary<string, object>()
-                {
-                    { "ProductName", product.ProductName},
-                    { "ProductLink", product.ProductLink},
-                    { "ProductDescription", product.ProductDescription},
-                    { "Price", product.Price},
-                    { "Note", product.Note}
-                };
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)
                 {
+                    bool status;
+                    if (product.CurrentQuantity > 0)
+                    { // If the product still in stock
+                        status = true;
+                    }
+                    else
+                    { // If the product not in stock
+                        status = false;
+                    }
+                    Dictionary<string, object> data = new Dictionary<string, object>()
+                    {
+                        { "ProductName", product.ProductName},
+                        { "ProductLink", product.ProductLink},
+                        { "ProductDescription", product.ProductDescription},
+                        { "Quantity", product.Quantity},
+                        { "CurrentQuantity", product.CurrentQuantity},
+                        { "IsActive", status},
+                        { "Price", product.Price},
+                        { "Note", product.Note}
+                    };
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();
                     Product ret = snap.ConvertTo<Product>();
@@ -144,7 +167,7 @@ namespace FPTUMerchAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest(docRef);
+                    return BadRequest("The product ID is not exist, please try again");
                 }
             }
             catch (Exception ex)

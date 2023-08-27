@@ -31,8 +31,8 @@ namespace BusinessObjects
         public string? Note { get; set; }
         [FirestoreProperty]
         //TRUE: Not cancelled, FALSE: cancelled
-        public bool Status { get; set; }
+        public bool? Status { get; set; }
         [FirestoreProperty]
-        public List<OrderDetail>? orderDetails { get; set; }
+        public List<OrderDetail> orderDetails { get; set; }
     }
 }

@@ -21,10 +21,12 @@ namespace BusinessObjects
         public string ProductLink { get; set; }
         [FirestoreProperty]
         public float Price { get; set; }
-        //[FirestoreProperty]
-        //public int Quantity { get; set; }
-        //[FirestoreProperty]
-        //public bool? IsActive { get; set; } 
+        [FirestoreProperty]
+        public int Quantity { get; set; } // Số lượng hàng ban đầu
+        [FirestoreProperty]
+        public int? CurrentQuantity { get; set; } // Số lượng hàng hiện tại
+        [FirestoreProperty]
+        public bool? IsActive { get; set; } // TRUE: Còn hàng, FALSE: Hết hàng
         [FirestoreProperty]
         public string? Note { get; set; }
     }

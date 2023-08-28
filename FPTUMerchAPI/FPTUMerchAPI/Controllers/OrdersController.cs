@@ -257,10 +257,11 @@ namespace FPTUMerchAPI.Controllers
                             else
                             {
                                 Dictionary<string, object> updateDiscountCode = new Dictionary<string, object>()
-                            {
-                                { "Status",discountCode.Status },
-                                { "NumberOfTimes", discountCode.NumberOfTimes + 1}
-                            };
+                                {
+                                    { "Status",discountCode.Status },
+                                    { "NumberOfTimes", discountCode.NumberOfTimes + 1},
+                                    { "KPI", discountCode.KPI}
+                                };
                                 await docRefDiscountCode.SetAsync(updateDiscountCode);
                                 totalPrice = totalPrice * 9 / 10;
                             }
@@ -320,7 +321,6 @@ namespace FPTUMerchAPI.Controllers
                 if (docSnap.Exists)
                 {
                     Orders orderTotalPrice = docSnap.ConvertTo<Orders>();
-                    totalPrice = orderTotalPrice.TotalPrice;
                     /*UPDATE ORDER BASIC DETAILS*/
                     Dictionary<string, object> data = new Dictionary<string, object>()
                     {
@@ -328,11 +328,11 @@ namespace FPTUMerchAPI.Controllers
                         { "OrdererPhoneNumber", order.OrdererPhoneNumber},
                         { "OrdererEmail", order.OrdererEmail},
                         { "DeliveryAddress", order.DeliveryAddress},
-                        { "TotalPrice", totalPrice},
+                        { "TotalPrice", orderTotalPrice.TotalPrice},
                         { "CreateDate", specified.ToTimestamp()},
                         { "Note", order.Note },
                         { "Status", orderTotalPrice.Status},
-                        { "Status", order.Status}
+                        { "PaidStatus", orderTotalPrice.PaidStatus}
                     };
                     docRef.SetAsync(data);
                     return Ok();
@@ -355,7 +355,72 @@ namespace FPTUMerchAPI.Controllers
         {
             try
             {
-                return Ok();
+                Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                DocumentReference docRef = database.Collection("Order").Document(OrderId);
+                var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
+                if (docSnap.Exists)
+                {
+                    Orders order = docSnap.ConvertTo<Orders>();
+                    /*UPDATE ORDER BASIC DETAILS*/
+                    Dictionary<string, object> data = new Dictionary<string, object>()
+                    {
+                        { "DiscountCodeID", order.DiscountCodeID },
+                        { "OrdererName", order.OrdererName},
+                        { "OrdererPhoneNumber", order.OrdererPhoneNumber},
+                        { "OrdererEmail", order.OrdererEmail},
+                        { "DeliveryAddress", order.DeliveryAddress},
+                        { "TotalPrice", order.TotalPrice},
+                        { "CreateDate", specified.ToTimestamp()},
+                        { "Note", order.Note },
+                        { "Status", order.Status},
+                    };
+                    if (order.PaidStatus == true)
+                    {
+                        data.Add("PaidStatus", false);
+                    }
+                    else if (order.PaidStatus == false)
+                    {
+                        data.Add("PaidStatus", true);
+                    }
+                    else
+                    {
+                        data.Add("PaidStatus", null);
+                    }
+                    //UPDATE KPI FOR SALER
+                    DocumentReference docRefDiscountID = database.Collection("DiscountCode").Document(order.DiscountCodeID);
+                    DocumentSnapshot docSnapDiscountID = await docRefDiscountID.GetSnapshotAsync();
+                    if (docSnapDiscountID.Exists)
+                    {
+                        DiscountCode discountCode = docSnapDiscountID.ConvertTo<DiscountCode>();
+                        discountCode.DiscountCodeID = docSnapDiscountID.Id;
+                        Dictionary<string, object> discountCodeUpdate = new Dictionary<string, object>()
+                        {
+                            { "Status", discountCode.Status},
+                            { "NumberOfTimes", discountCode.NumberOfTimes},
+                        };
+                        if (order.PaidStatus == true)
+                        {
+                            discountCodeUpdate.Add("KPI", discountCode.KPI - 1);
+                        }
+                        else if (order.PaidStatus == false)
+                        {
+                            discountCodeUpdate.Add("KPI", discountCode.KPI + 1);
+                        }
+                        else
+                        {
+                            discountCodeUpdate.Add("KPI", discountCode.KPI);
+                        }
+                        docRefDiscountID.SetAsync(discountCodeUpdate);
+                    }
+                    docRef.SetAsync(data);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("The order not exist");
+                }
             } catch(Exception ex)
             {
                 return BadRequest(ex.Message);

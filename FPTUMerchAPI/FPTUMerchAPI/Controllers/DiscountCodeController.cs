@@ -94,7 +94,8 @@ namespace FPTUMerchAPI.Controllers
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
                     { "Status", false}, // FALSE: MÃ CHƯA KÍCH HOẠT, TRUE: MÃ ĐÃ KÍCH HOẠT
-                    { "NumberOfTimes", 0}
+                    { "NumberOfTimes", 0},
+                    { "KPI", 0 }
                 };
                 coll.SetAsync(data);
                 return Ok("DiscountCodeID: " + discountCode + " " + data.ToJson());
@@ -120,7 +121,8 @@ namespace FPTUMerchAPI.Controllers
                     Dictionary<string, object> data = new Dictionary<string, object>()
                     {
                         { "Status",discountCode.Status},
-                        { "NumberOfTimes", discountCode.NumberOfTimes}
+                        { "NumberOfTimes", discountCode.NumberOfTimes},
+                        { "KPI", discountCode.KPI }
                     };
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();
@@ -138,7 +140,6 @@ namespace FPTUMerchAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpPut("useCode/{id}")]
         public async Task<ActionResult> UseCode(string id)
@@ -162,7 +163,8 @@ namespace FPTUMerchAPI.Controllers
                         Dictionary<string, object> data = new Dictionary<string, object>()
                         {
                             { "Status",discountCode.Status },
-                            { "NumberOfTimes", discountCode.NumberOfTimes + 1}
+                            { "NumberOfTimes", discountCode.NumberOfTimes + 1},
+                            { "KPI", discountCode.KPI }
                         };
                         await docRef.SetAsync(data);
                         snap = await docRef.GetSnapshotAsync();
@@ -197,7 +199,8 @@ namespace FPTUMerchAPI.Controllers
                     Dictionary<string, object> data = new Dictionary<string, object>()
                     {
                         {"Status", status},
-                        {"NumberOfTimes", discountCode.NumberOfTimes }
+                        {"NumberOfTimes", discountCode.NumberOfTimes },
+                        {"KPI", discountCode.KPI }
                     };
                     await docRef.SetAsync(data);
                     snap = await docRef.GetSnapshotAsync();
@@ -207,7 +210,7 @@ namespace FPTUMerchAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest(docRef);
+                    return BadRequest("The Discount code is not exist");
                 }
             }
             catch (Exception ex)

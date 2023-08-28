@@ -23,6 +23,8 @@ namespace BusinessObjects
         [FirestoreProperty]
         public string? Note { get; set; }
         [FirestoreProperty]
+        public string DiscountCodeID { get; set; }// Each user (A.K.A saler) will have 1 discountcode to distribute to customer
+        [FirestoreProperty]
         [ForeignKey("Role")]public string RoleID { get; set; }
     }
 }

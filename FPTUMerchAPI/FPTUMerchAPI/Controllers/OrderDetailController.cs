@@ -14,6 +14,7 @@ namespace FPTUMerchAPI.Controllers
     public class OrderDetailController : ControllerBase
     {
         string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+
         // GET: api/<OrderDetailController>
         [HttpGet]
         public async Task<ActionResult> Get()
@@ -113,116 +114,181 @@ namespace FPTUMerchAPI.Controllers
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
                 var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
-                float? finalPrice = 0;
-                // Check if product exist
-                DocumentReference docRefProduct = database.Collection("Product").Document(orderDetail.ProductID);
-                DocumentSnapshot docSnapProduct = await docRefProduct.GetSnapshotAsync();
-                if (!docSnapProduct.Exists) {
-                    return BadRequest("The product is not correct, please try again.");
-                }
-                else
+                //----------------------------------------------------------------------------
+                Query qRefProduct = database.Collection("Product");
+                QuerySnapshot qSnapProduct = await qRefProduct.GetSnapshotAsync();
+                bool check = true;
+                string tmpOrderDetailId = "";
+                float? totalPrice = 0;
+                int tmpOrderDetailAmount = 0;
+                //UPDATE ORDER DETAIL
+                foreach(var docSnapProduct in qSnapProduct) //CHECK IF PRODUCT EXIST
                 {
-                    DocumentReference docRef = database.Collection("Order").Document(OrderId); //Get Order's basic information
-                    // Create new Order Detail
-                    CollectionReference collRef = docRef.Collection("OrderDetail");
-                    Dictionary<string, object> data = new Dictionary<string, object>()
-                    {
-                        {"ProductID", orderDetail.ProductID },
-                        {"Amount", orderDetail.Amount},
-                        {"Note", orderDetail.Note},
-                        {"CreateDate", specified.ToTimestamp()}
-                    };
-                    // Check if OrderID is correct
-                    DocumentSnapshot docSnapCheck = await docRef.GetSnapshotAsync();
-                    if(!docSnapCheck.Exists)
-                    {
-                        return BadRequest("The order ID is not correct, please try again");
-                    }
-                    else
-                    {
-                        //Get OrderDetail in the OrderID information
-                        Query qRef = docRef.Collection("OrderDetail");
-                        QuerySnapshot qSnap = await qRef.GetSnapshotAsync();
-                        foreach (var item in qSnap)
+                    Product product = docSnapProduct.ConvertTo<Product>();
+                    product.ProductID = docSnapProduct.Id;
+                    if(orderDetail.ProductID == product.ProductID) //1. CHECK IF PRODUCT EXIST
+                    {//TRUE
+                        Dictionary<string, object> newOrderDetail = new Dictionary<string, object>() {
+                            { "ProductID", orderDetail.ProductID },
+                            { "Amount", orderDetail.Amount },
+                            { "Note", orderDetail.Note },
+                            { "CreateDate", specified.ToTimestamp() }
+                        };
+                        Query qRefOrderDetail = database.Collection("Order").Document(OrderId).Collection("OrderDetail"); //Get OrderDetails by OrderID
+                        QuerySnapshot qSnapOrderDetail = await qRefOrderDetail.GetSnapshotAsync();
+                        //CHECK IF ORDER EXIST:
+                        DocumentReference docRefCheckOrder = database.Collection("Order").Document(OrderId);
+                        DocumentSnapshot docSnapCheckOrder = await docRefCheckOrder.GetSnapshotAsync();
+                        if (!docSnapCheckOrder.Exists)
                         {
-                            DocumentReference docRefOrderDetail = collRef.Document(item.Id);
-                            DocumentSnapshot docSnapOrderDetail = await docRefOrderDetail.GetSnapshotAsync();
-                            if (docSnapOrderDetail.Exists)
-                            {
-                                OrderDetail orderDetail1 = docSnapOrderDetail.ConvertTo<OrderDetail>();
-                                orderDetail1.OrderDetailID = item.Id;
-                                if (orderDetail1.ProductID == orderDetail.ProductID) //If there is an order detail's product ID in that order
-                                                                                     //has the same productID of the new order detail
+                            return BadRequest("This orderID not exist, please try again");
+                        }
+                        else
+                        {
+                            if (qSnapOrderDetail.Count > 0)
+                            { // IF ORDER ALREADY HAS DETAILS
+                                foreach (var docSnapOrderDetail in qSnapOrderDetail)
                                 {
-                                    await docRefOrderDetail.SetAsync(data);
+                                    OrderDetail existOrderDetail = docSnapOrderDetail.ConvertTo<OrderDetail>();
+                                    existOrderDetail.OrderDetailID = docSnapOrderDetail.Id;
+                                    if (existOrderDetail.ProductID == orderDetail.ProductID) //1.1 CHECK IF PRODUCT ALREADY EXIST IN ORDER
+                                    { // 1.1.1: EXIST IN ORDER
+                                        check = true;
+                                        tmpOrderDetailId = existOrderDetail.OrderDetailID;
+                                        tmpOrderDetailAmount = existOrderDetail.Amount;
+                                        break;
+                                    }
+                                    else
+                                    { // 1.1.2: NOT EXIST IN ORDER
+                                        check = false;
+                                        continue;
+                                    }
+                                }
+                                Dictionary<string, object> updateProduct = new Dictionary<string, object>()
+                                    {
+                                        { "ProductName", product.ProductName},
+                                        { "ProductLink", product.ProductLink},
+                                        { "ProductDescription", product.ProductDescription},
+                                        { "Quantity", product.Quantity},
+                                        //{ "CurrentQuantity", currentProduct.CurrentQuantity},
+                                        { "Price", product.Price},
+                                        { "Note", product.Note}
+                                    };
+                                if (check == true)
+                                { // 1.1.1: EXIST IN ORDER
+                                    DocumentReference docRefOrderDetail = database.Collection("Order").Document(OrderId)
+                                        .Collection("OrderDetail").Document(tmpOrderDetailId);
+                                    Product currentProduct = docSnapProduct.ConvertTo<Product>();
+                                    int? oldCurrentQuantity = currentProduct.CurrentQuantity;
+                                    currentProduct.CurrentQuantity = currentProduct.CurrentQuantity + tmpOrderDetailAmount - orderDetail.Amount;
+                                    updateProduct.Add("CurrentQuantity", currentProduct.CurrentQuantity);
+                                    if (product.CurrentQuantity > 0)
+                                    {
+                                        updateProduct.Add("IsActive", true);
+                                    }
+                                    else
+                                    {
+                                        updateProduct.Add("IsActive", false);
+                                    }
+                                    docRefOrderDetail.SetAsync(newOrderDetail);
+                                    DocumentReference docRefProduct = database.Collection("Product").Document(docSnapProduct.Id);
+                                    docRefProduct.SetAsync(updateProduct);
                                     break;
                                 }
                                 else
                                 {
-                                    await collRef.AddAsync(data);
+                                    CollectionReference collRefOrderDetail = database.Collection("Order").Document(OrderId).Collection("OrderDetail");
+                                    collRefOrderDetail.AddAsync(newOrderDetail);
+                                    updateProduct.Add("CurrentQuantity", product.CurrentQuantity -= orderDetail.Amount);
+                                    if (product.CurrentQuantity > 0)
+                                    {
+                                        updateProduct.Add("IsActive", true);
+                                    }
+                                    else
+                                    {
+                                        updateProduct.Add("IsActive", false);
+                                    }
+                                    DocumentReference docRefProduct = database.Collection("Product").Document(docSnapProduct.Id);
+                                    docRefProduct.SetAsync(updateProduct);
+                                    break;
                                 }
-                            }
-                        }
-                        //---------------------------------------
-                        //Calculate final price of order
-                        qSnap = await qRef.GetSnapshotAsync();
-                        foreach (var item in qSnap)
-                        {
-                            OrderDetail od = item.ConvertTo<OrderDetail>();
-                            Query docRefProducts = database.Collection("Product");
-                            QuerySnapshot docSnapProducts = await docRefProducts.GetSnapshotAsync();
-                            foreach (var item2 in docSnapProducts)
-                            {
-                                Product productCheck = item2.ConvertTo<Product>();
-                                productCheck.ProductID = item2.Id;
-                                if (od.ProductID == productCheck.ProductID)
-                                {
-                                    finalPrice += od.Amount * productCheck.Price;
-                                }
-                            }
-                        }
-                        //---------------------------------------
-                        DocumentSnapshot docSnap = await docRef.GetSnapshotAsync();
-                        if (docSnap.Exists)
-                        {
-                            Orders order = docSnap.ConvertTo<Orders>();
-                            if (order.DiscountCodeID == null || order.DiscountCodeID.Length == 0 || order.DiscountCodeID == "")
-                            {// Case: If no discountID was added
-                                Product product = docSnapProduct.ConvertTo<Product>();
-                                //Calculate new price and update time in Order
-                                Dictionary<string, object> dataOrder = new Dictionary<string, object>() {
-                                { "DiscountCodeID", order.DiscountCodeID},
-                                { "OrdererName", order.OrdererName},
-                                { "OrdererPhoneNumber", order.OrdererPhoneNumber},
-                                { "OrdererEmail", order.OrdererEmail},
-                                { "DeliveryAddress", order.DeliveryAddress},
-                                { "TotalPrice", finalPrice},
-                                { "CreateDate", specified.ToTimestamp()},
-                                { "Note", order.Note },
-                                { "Status", order.Status}
-                            };
-                                docRef.SetAsync(dataOrder);
                             }
                             else
-                            {// Case: If there is discountID was added
-                                Product product = docSnapProduct.ConvertTo<Product>();
-                                //Calculate new price and update time in Order
-                                Dictionary<string, object> dataOrder = new Dictionary<string, object>() {
-                                { "OrdererName", order.OrdererName},
-                                { "OrdererPhoneNumber", order.OrdererPhoneNumber},
-                                { "OrdererEmail", order.OrdererEmail},
-                                { "DeliveryAddress", order.DeliveryAddress},
-                                { "TotalPrice", finalPrice * 9 /10},
-                                { "CreateDate", specified.ToTimestamp()},
-                                { "Note", order.Note },
-                                { "Status", order.Status}
-                            };
-                                docRef.SetAsync(dataOrder);
+                            { // IF ORDER DON'T HAVE ANY ORDER DETAILS
+                                CollectionReference collRefOrderDetail = database.Collection("Order").Document(OrderId).Collection("OrderDetail");
+                                collRefOrderDetail.AddAsync(newOrderDetail);
+                                Dictionary<string, object> updateProduct = new Dictionary<string, object>()
+                                    {
+                                    { "ProductName", product.ProductName},
+                                    { "ProductLink", product.ProductLink},
+                                    { "ProductDescription", product.ProductDescription},
+                                    { "Quantity", product.Quantity},
+                                    { "CurrentQuantity", product.CurrentQuantity -= orderDetail.Amount},
+                                    { "Price", product.Price},
+                                    { "Note", product.Note}
+                                };
+                                if (product.CurrentQuantity > 0)
+                                {
+                                    updateProduct.Add("IsActive", true);
+                                }
+                                else
+                                {
+                                    updateProduct.Add("IsActive", false);
+                                }
+                                DocumentReference docRefProduct = database.Collection("Product").Document(docSnapProduct.Id);
+                                docRefProduct.SetAsync(updateProduct);
+                                break;
                             }
                         }
-                        return Ok();
+                        //---------------------------------------------------------------
                     }
                 }
+                //CALCULATE THE PRODUCT AND UPDATE THE TOTAL PRICE OF ORDER
+                DocumentReference docRefOrderUpdate = database.Collection("Order").Document(OrderId);
+                Query collRefOrder = docRefOrderUpdate.Collection("OrderDetail");
+                QuerySnapshot collSnapOrder = await collRefOrder.GetSnapshotAsync();
+                foreach(var docSnapOrderDetail in collSnapOrder) // Với mỗi order detail trong order mới sửa
+                {
+                    OrderDetail newOrderDetail = docSnapOrderDetail.ConvertTo<OrderDetail>();
+                    newOrderDetail.OrderDetailID = docSnapOrderDetail.Id;
+                    foreach (var docSnapProduct in qSnapProduct)
+                    {
+                        Product product = docSnapProduct.ConvertTo<Product>();
+                        product.ProductID = docSnapProduct.Id;
+                        if(newOrderDetail.ProductID == product.ProductID)
+                        {
+                            totalPrice += product.Price * newOrderDetail.Amount;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                DocumentSnapshot docSnapOrderUpdate = await docRefOrderUpdate.GetSnapshotAsync();
+                if (docSnapOrderUpdate.Exists)
+                {
+                    Orders order = docSnapOrderUpdate.ConvertTo<Orders>();
+                    Dictionary<string, object> updateOrder = new Dictionary<string, object>() {
+                        { "DiscountCodeID", order.DiscountCodeID},
+                        { "OrdererName", order.OrdererName},
+                        { "OrdererPhoneNumber", order.OrdererPhoneNumber},
+                        { "OrdererEmail", order.OrdererEmail},
+                        { "DeliveryAddress", order.DeliveryAddress},
+                        { "CreateDate", specified.ToTimestamp()},
+                        { "Note", order.Note },
+                        { "Status", order.Status}
+                    };
+                    if (order.DiscountCodeID != null)
+                    {
+                        totalPrice = totalPrice * 9 / 10;
+                    }
+                    updateOrder.Add("TotalPrice", totalPrice);
+                    docRefOrderUpdate.SetAsync(updateOrder);
+                }
+
+                return Ok();
             }
             catch (Exception ex)
             {

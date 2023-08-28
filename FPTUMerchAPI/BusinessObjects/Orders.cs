@@ -32,6 +32,8 @@ namespace BusinessObjects
         [FirestoreProperty]
         //TRUE: Not cancelled, FALSE: cancelled
         public bool? Status { get; set; }
+        //TRUE: Already Paid, FALSE: Not Paid
+        public bool? PaidStatus { get; set; }
         [FirestoreProperty]
         public List<OrderDetail> orderDetails { get; set; }
     }

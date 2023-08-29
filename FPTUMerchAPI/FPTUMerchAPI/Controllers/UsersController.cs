@@ -1,6 +1,8 @@
 ﻿using BusinessObjects;
+using FireSharp.Extensions;
 using Google.Cloud.Firestore;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 using System.Xml.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -122,43 +124,130 @@ namespace FPTUMerchAPI.Controllers
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
                 FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                CollectionReference coll = database.Collection("Users");
-                //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
-                DocumentReference docRef = database.Collection("Role").Document(user.RoleID);
-                DocumentSnapshot snap = await docRef.GetSnapshotAsync();
-                if (!snap.Exists)
+                Query qRefUser = database.Collection("Users");
+                QuerySnapshot qSnapUser = await qRefUser.GetSnapshotAsync();
+                bool roleCheck = true; //Check if the role is correct
+                bool ableToCreate = true; // Check if the account can be create 
+                foreach(DocumentSnapshot docSnapUser in qSnapUser)
                 {
-                    return BadRequest("The role ID not correct or not exist, please try again");
-                }
-                else
-                {
-                    Query Qref = database.Collection("Users");
-                    QuerySnapshot Qsnap = await Qref.GetSnapshotAsync();
-                    foreach (DocumentSnapshot docsnap in Qsnap)
-                    {
-                        if (docsnap.Exists)
-                        {
-                            Users userCheck = docsnap.ConvertTo<Users>();
-                            if (userCheck.Email.IndexOf(user.Email, StringComparison.OrdinalIgnoreCase) >= 0) //Kiểm tra email tồn tại không?
+                    if (docSnapUser.Exists)
+                    { // If there is an account/some accounts in the database
+                        //1) Check if email already exist in the database
+                        Users userCheck = docSnapUser.ConvertTo<Users>();
+                        userCheck.UserID = docSnapUser.Id;
+                        if (userCheck.Email == user.Email)
+                        {// 1.2) If the new user email already exist
+                            return Conflict("The user email already exist");
+                        }
+                        else
+                        {// 1.1) If the new user email not exist yet
+                            Query qRefRole = database.Collection("Role");
+                            QuerySnapshot qSnapRole = await qRefRole.GetSnapshotAsync();
+                            foreach (DocumentSnapshot docSnapRole in qSnapRole)
                             {
-                                return BadRequest("The email already exist, please try again");
+                                Role role = docSnapRole.ConvertTo<Role>();
+                                role.RoleID = docSnapRole.Id;
+                                if(role.RoleID == user.RoleID)
+                                { // 1.1.1)If the role is correct
+                                    roleCheck = true;
+                                    break;
+                                }
+                                else
+                                { // 1.1.2) If the role is incorrect
+                                    roleCheck = false;
+                                    continue;
+                                }
+                            }
+                            if (!roleCheck)
+                            {
+                                return BadRequest("RoleID not exist");
                             }
                             else
                             {
-                                continue;
+                                DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(user.DiscountCodeID);
+                                DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
+                                if (!docSnapDiscountCode.Exists)
+                                {// If the discount code of the new user isn't exist
+                                    return BadRequest("DiscountID not exist");
+                                }
+                                else
+                                {
+                                    //1.1.1.1) Check if the discountCodeID already have the user assign to it
+                                    if (userCheck.DiscountCodeID == user.DiscountCodeID)
+                                    {
+                                        return BadRequest("DiscountID already assign to a user, please try again");
+                                    }
+                                    else
+                                    {
+                                        ableToCreate = true;
+                                        continue;
+                                    }
+                                }
                             }
                         }
                     }
-                    Dictionary<string, object> data = new Dictionary<string, object>()
-                    {
-                        { "FullName", user.FullName},
-                        { "Email", user.Email},
-                        { "Password", user.Password},
-                        { "Note", user.Note},
-                        { "RoleID", user.RoleID}
+                }
+                if(qSnapUser.Count == 0)
+                { // If there is 0 account in the database
+                        Query qRefRole = database.Collection("Role");
+                        QuerySnapshot qSnapRole = await qRefRole.GetSnapshotAsync();
+                        foreach (DocumentSnapshot docSnapRole in qSnapRole)
+                        {
+                            Role role = docSnapRole.ConvertTo<Role>();
+                            role.RoleID = docSnapRole.Id;
+                            if (role.RoleID == user.RoleID)
+                            { // 1.1.1)If the role is correct
+                                roleCheck = true;
+                                break;
+                            }
+                            else
+                            { // 1.1.2) If the role is incorrect
+                                roleCheck = false;
+                                continue;
+                            }
+                        }
+                        if (!roleCheck)
+                        {
+                            return BadRequest("RoleID not exist");
+                        }
+                        else
+                        {
+                            if (user.DiscountCodeID == null || user.DiscountCodeID.Length ==0 || user.DiscountCodeID == "")
+                            {
+                                return BadRequest("DiscountID cannot be null");
+                            }
+                            else
+                            {
+                                DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(user.DiscountCodeID);
+                                DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
+                                if (!docSnapDiscountCode.Exists)
+                                {// If the discount code of the new user isn't exist
+                                    return BadRequest("DiscountID not exist");
+                                }
+                                else
+                                {
+                                    ableToCreate = true;
+                                }
+                            }
+                        }
+                }
+                if (ableToCreate)
+                {
+                    CollectionReference collRefUser = database.Collection("Users");
+                    Dictionary<string, object> newUser = new Dictionary<string, object>() {
+                        {"FullName", user.FullName },
+                        {"Email", user.Email },
+                        {"Password", user.Password },
+                        {"Note", user.Note },
+                        {"DiscountCodeID", user.DiscountCodeID },
+                        {"RoleID", user.RoleID }
                     };
-                    coll.AddAsync(data);
-                    return Ok();
+                    collRefUser.AddAsync(newUser);
+                    return Ok(newUser.ToJson());
+                }
+                else
+                {
+                    return BadRequest("Something wrong, please try again");
                 }
             }
             catch (Exception ex)
@@ -168,8 +257,8 @@ namespace FPTUMerchAPI.Controllers
         }
 
         // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id, [FromBody] Users user)
+        [HttpPut("{userId}")]
+        public async Task<ActionResult> Put(string userId, [FromBody] Users user)
         {
             try
             {

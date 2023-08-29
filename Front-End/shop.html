@@ -357,7 +357,7 @@
 						<div class=" shop-sidebar left-side">
 							<div class="sidebar-widget sidebar-search">
 								<input type="text" placeholder="Tìm sản phẩm" id="productName">
-								<button type="submit" id="getProductByName"><i class="fas fa-search"></i></button>
+								<button type="submit" id="getProductByName" onclick="getProductByName()"><i class="fas fa-search"></i></button>
 							</div>
 							<div class="sidebar-widget category-widget">
 								<h6>Loại Sản phẩm</h6>
@@ -439,157 +439,8 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="home" role="tabpanel"
 									aria-labelledby="home-tab">
-									<div class="row">
-										<div class="col-sm-6 col-xl-4"> <!--Áo thun-->
-											<div class="sin-product style-two">
-												<div class="pro-img">
-													<img src="media/images/product/sp1.jpg" alt="">
-												</div>
-												<div class="mid-wrapper">
-													<h5 class="pro-title">
-														<a href="product.html">Áo thun</a>
-													</h5>
-													<div class="color-variation">
-														<ul>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-														</ul>
-													</div>
-													<p>Nam / <span>100.000đ</span></p>
-												</div>
-												<div class="icon-wrapper">
-													<div class="pro-icon">
-														<ul>
-															<li><a href="#" class="trigger"><i
-																		class="flaticon-eye"></i></a></li>
-														</ul>
-													</div>
-													<div class="add-to-cart">
-														<a href="#">add to cart</a>
-													</div>
-												</div>
-											</div>
-											<!-- /.sin-product -->
-										</div>
-										<!-- /.col- -->
-
-										<div class="col-sm-6 col-xl-4"> <!--Dây đeo thẻ-->
-											<div class="sin-product style-two">
-												<div class="pro-img">
-													<img src="media/images/product/sp3.jpg" alt="">
-												</div>
-												<div class="mid-wrapper">
-													<h5 class="pro-title"><a href="product.html">Dây đeo thẻ</a>
-													</h5>
-													<div class="color-variation">
-														<ul>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-														</ul>
-													</div>
-													<p>Phụ kiện / <span>50.000đ</span></p>
-												</div>
-												<div class="icon-wrapper">
-													<div class="pro-icon">
-														<ul>
-															<li><a href="#"><i
-																		class="flaticon-valentines-heart"></i></a>
-															</li>
-															<li><a href="#"><i class="flaticon-compare"></i></a>
-															</li>
-															<li><a href="#" class="trigger"><i
-																		class="flaticon-eye"></i></a></li>
-														</ul>
-													</div>
-													<div class="add-to-cart">
-														<a href="#">add to cart</a>
-													</div>
-												</div>
-											</div>
-											<!-- /.sin-product -->
-										</div>
-										<!-- /.col- -->
-
-										<div class="col-sm-6 col-xl-4"> <!--Vớ-->
-											<div class="sin-product style-two">
-												<div class="pro-img">
-													<img src="media/images/product/sp4.jpg" alt="">
-												</div>
-												<div class="mid-wrapper">
-													<h5 class="pro-title"><a href="product.html">Vớ</a></h5>
-													<div class="color-variation">
-														<ul>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-														</ul>
-													</div>
-													<p>Phụ kiện / <span>25.000đ</span></p>
-												</div>
-												<div class="icon-wrapper">
-													<div class="pro-icon">
-														<ul>
-															<li><a href="#"><i
-																		class="flaticon-valentines-heart"></i></a>
-															</li>
-															<li><a href="#"><i class="flaticon-compare"></i></a>
-															</li>
-															<li><a href="#" class="trigger"><i
-																		class="flaticon-eye"></i></a></li>
-														</ul>
-													</div>
-													<div class="add-to-cart">
-														<a href="#">add to cart</a>
-													</div>
-												</div>
-											</div>
-											<!-- /.sin-product -->
-										</div>
-										<!-- /.col- -->
-
-										<div class="col-sm-6 col-xl-4"> <!--Huy hiệu-->
-											<div class="sin-product style-two">
-												<div class="pro-img">
-													<img src="media/images/product/sp5.jpg" alt="">
-												</div>
-												<span class="new-tag">NEW!</span>
-												<div class="mid-wrapper">
-													<h5 class="pro-title"><a href="product.html">Huy hiệu</a></h5>
-													<div class="color-variation">
-														<ul>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-															<li><i class="fas fa-circle"></i></li>
-														</ul>
-													</div>
-													<p>Phụ kiện / <span>10.000đ</span></p>
-												</div>
-												<div class="icon-wrapper">
-													<div class="pro-icon">
-														<ul>
-															<li><a href="#"><i
-																		class="flaticon-valentines-heart"></i></a>
-															</li>
-															<li><a href="#"><i class="flaticon-compare"></i></a>
-															</li>
-															<li><a href="#" class="trigger"><i
-																		class="flaticon-eye"></i></a></li>
-														</ul>
-													</div>
-													<div class="add-to-cart">
-														<a href="#">add to cart</a>
-													</div>
-												</div>
-											</div>
-											<!-- /.sin-product -->
-										</div>
-										<!-- /.col- -->
+									<!--DANH SÁCH PRODUCT-->
+									<div class="row" id="product">
 									</div>
 									<!-- /.row -->
 								</div>
@@ -996,7 +847,7 @@
 	<script src="dependencies/slick-carousel/js/slick.js"></script>
 	<script src="dependencies/headroom/js/headroom.js"></script>
 	<script src="dependencies/jquery-ui/js/jquery-ui.min.js"></script>
-	<script src="dependencies/script.js"></script>
+	<script src="dependencies/FPTUMerch_JS/shop.js"></script>
 	<!--Google map api -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
 	<!-- Site Scripts -->

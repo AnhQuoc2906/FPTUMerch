@@ -12,7 +12,7 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class DiscountCodeController : ControllerBase
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerch.json";
         // GET: api/<DiscountCodeController>
         [HttpGet]
         public async Task<ActionResult> Get()
@@ -20,7 +20,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 CollectionReference coll = database.Collection("DiscountCode");
                 List<DiscountCode> discountCodeList = new List<DiscountCode>();
                 Query Qref = database.Collection("DiscountCode");
@@ -50,7 +50,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 CollectionReference coll = database.Collection("DiscountCode");
                 List<DiscountCode> discountCodeList = new List<DiscountCode>();
                 Query Qref = database.Collection("DiscountCode");
@@ -88,7 +88,7 @@ namespace FPTUMerchAPI.Controllers
             {
                 string discountCode = generateRandomCode();
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference coll = database.Collection("DiscountCode").Document(discountCode);
                 //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
                 Dictionary<string, object> data = new Dictionary<string, object>()
@@ -113,7 +113,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)
@@ -147,7 +147,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)
@@ -190,7 +190,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)
@@ -226,7 +226,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("DiscountCode").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)

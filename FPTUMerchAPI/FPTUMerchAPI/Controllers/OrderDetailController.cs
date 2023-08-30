@@ -13,7 +13,7 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class OrderDetailController : ControllerBase
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerch.json";
 
         // GET: api/<OrderDetailController>
         [HttpGet]
@@ -22,7 +22,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<OrderDetail> orderDetailList = new List<OrderDetail>();
                 Query QrefOrder = database.Collection("Order");
                 QuerySnapshot snap = await QrefOrder.GetSnapshotAsync();
@@ -54,7 +54,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<OrderDetail> orderDetailList = new List<OrderDetail>();
                 Query qRef = database.Collection("Order").Document(OrderId).Collection("OrderDetail");
                 QuerySnapshot qSnap = await qRef.GetSnapshotAsync();
@@ -81,7 +81,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<OrderDetail> orderDetailList = new List<OrderDetail>();
                 Query QrefOrder = database.Collection("Order");
                 QuerySnapshot snap = await QrefOrder.GetSnapshotAsync();
@@ -112,7 +112,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 //----------------------------------------------------------------------------
                 Query qRefProduct = database.Collection("Product");
@@ -303,7 +303,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 string orderID = "";
                 List<OrderDetail> orderDetailList = new List<OrderDetail>();
@@ -427,7 +427,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 Query QrefOrder = database.Collection("Order");
                 QuerySnapshot qSnapOrder = await QrefOrder.GetSnapshotAsync();
                 var specified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);

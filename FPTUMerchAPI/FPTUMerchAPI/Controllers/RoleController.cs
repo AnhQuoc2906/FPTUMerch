@@ -8,7 +8,7 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerch.json";
         // GET: api/<RoleController>
         [HttpGet]
         public async Task<ActionResult> Get()
@@ -16,7 +16,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<Role> roleList = new List<Role>();
                 Query Qref = database.Collection("Role");
                 QuerySnapshot snap = await Qref.GetSnapshotAsync();
@@ -46,7 +46,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 CollectionReference coll = database.Collection("Role");
                 List<Role> roleList = new List<Role>();
                 Query Qref = database.Collection("Role");
@@ -83,7 +83,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 CollectionReference coll = database.Collection("Role");
                 //Custom ID: CollectionReference coll2 = database.Collection("New_Collection_CustomID").Document("id1");
                 Dictionary<string, object> data = new Dictionary<string, object>()
@@ -107,7 +107,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("Role").Document(id);
                 Dictionary<string, object> data = new Dictionary<string, object>()
                 {
@@ -141,7 +141,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("Role").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)

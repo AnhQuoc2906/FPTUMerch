@@ -13,7 +13,7 @@ namespace FPTUMerchAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerchtest.json";
+        string path = AppDomain.CurrentDomain.BaseDirectory + @"fptumerch.json";
         // GET: api/<UsersController>
         [HttpGet]
         public async Task<ActionResult> Get()
@@ -21,7 +21,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<Users> usersList = new List<Users>();
                 Query Qref = database.Collection("Users");
                 QuerySnapshot snap = await Qref.GetSnapshotAsync();
@@ -51,7 +51,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 List<Users> usersList = new List<Users>();
                 Query Qref = database.Collection("Users");
                 QuerySnapshot snap = await Qref.GetSnapshotAsync();
@@ -86,7 +86,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 CollectionReference coll = database.Collection("Users");
                 List<Users> usersList = new List<Users>();
                 Query Qref = database.Collection("Users");
@@ -123,11 +123,12 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 Query qRefUser = database.Collection("Users");
                 QuerySnapshot qSnapUser = await qRefUser.GetSnapshotAsync();
                 bool roleCheck = true; //Check if the role is correct
                 bool ableToCreate = true; // Check if the account can be create 
+                string roleName = "";
                 foreach(DocumentSnapshot docSnapUser in qSnapUser)
                 {
                     if (docSnapUser.Exists)
@@ -150,6 +151,7 @@ namespace FPTUMerchAPI.Controllers
                                 if(role.RoleID == user.RoleID)
                                 { // 1.1.1)If the role is correct
                                     roleCheck = true;
+                                    roleName = role.RoleName;
                                     break;
                                 }
                                 else
@@ -166,22 +168,33 @@ namespace FPTUMerchAPI.Controllers
                             {
                                 DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(user.DiscountCodeID);
                                 DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
-                                if (!docSnapDiscountCode.Exists)
-                                {// If the discount code of the new user isn't exist
-                                    return BadRequest("DiscountID not exist");
-                                }
-                                else
-                                {
-                                    //1.1.1.1) Check if the discountCodeID already have the user assign to it
-                                    if (userCheck.DiscountCodeID == user.DiscountCodeID)
-                                    {
-                                        return BadRequest("DiscountID already assign to a user, please try again");
+                                if (roleName == "Saler")
+                                { // If the new user has the role "Saler"
+                                    if (!docSnapDiscountCode.Exists)
+                                    {// If the discount code of the new user isn't exist
+                                        return BadRequest("DiscountID not exist");
                                     }
                                     else
                                     {
-                                        ableToCreate = true;
-                                        continue;
+                                        //1.1.1.1) Check if the discountCodeID already have the user assign to it
+                                        if (userCheck.DiscountCodeID == user.DiscountCodeID)
+                                        {
+                                            return BadRequest("DiscountID already assign to a user, please try again");
+                                        }
+                                        else
+                                        {
+                                            ableToCreate = true;
+                                            continue;
+                                        }
                                     }
+                                } else if(roleName == "Admin")
+                                {// If the new user has the role "Admin"
+                                    ableToCreate = true;
+                                    continue;
+                                }
+                                else
+                                {
+                                    throw new Exception();
                                 }
                             }
                         }
@@ -198,6 +211,7 @@ namespace FPTUMerchAPI.Controllers
                             if (role.RoleID == user.RoleID)
                             { // 1.1.1)If the role is correct
                                 roleCheck = true;
+                                roleName = role.RoleName;
                                 break;
                             }
                             else
@@ -220,9 +234,16 @@ namespace FPTUMerchAPI.Controllers
                             {
                                 DocumentReference docRefDiscountCode = database.Collection("DiscountCode").Document(user.DiscountCodeID);
                                 DocumentSnapshot docSnapDiscountCode = await docRefDiscountCode.GetSnapshotAsync();
-                                if (!docSnapDiscountCode.Exists)
-                                {// If the discount code of the new user isn't exist
-                                    return BadRequest("DiscountID not exist");
+                                if(roleName == "Saler")
+                                {
+                                    if (!docSnapDiscountCode.Exists)
+                                    {// If the discount code of the new user isn't exist
+                                        return BadRequest("DiscountID not exist");
+                                    }
+                                    else
+                                    {
+                                        ableToCreate = true;
+                                    }
                                 }
                                 else
                                 {
@@ -239,9 +260,15 @@ namespace FPTUMerchAPI.Controllers
                         {"Email", user.Email },
                         {"Password", user.Password },
                         {"Note", user.Note },
-                        {"DiscountCodeID", user.DiscountCodeID },
                         {"RoleID", user.RoleID }
                     };
+                    if(roleName == "Admin")
+                    {// If the new user has the role "Admin"
+                        newUser.Add("DiscountCodeID", null);
+                    } else if(roleName == "Saler")
+                    {// If the new user has the role "Saler"
+                        newUser.Add("DiscountCodeID", user.RoleID);
+                    }
                     collRefUser.AddAsync(newUser);
                     return Ok(newUser.ToJson());
                 }
@@ -263,30 +290,8 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
-                DocumentReference docRef = database.Collection("Users").Document(id);
-                DocumentSnapshot snap = await docRef.GetSnapshotAsync();
-                if (snap.Exists)
-                {
-                    Users userUpdate = snap.ConvertTo<Users>();
-                    Dictionary<string, object> data = new Dictionary<string, object>()
-                    {
-                        { "FullName", user.FullName},
-                        { "Email", userUpdate.Email},
-                        { "Password", user.Password},
-                        { "Note", user.Note},
-                        { "RoleID", userUpdate.RoleID}
-                    };
-                    await docRef.SetAsync(data);
-                    snap = await docRef.GetSnapshotAsync();
-                    Users ret = snap.ConvertTo<Users>();
-                    ret.UserID = id;
-                    return Ok(ret);
-                }
-                else
-                {
-                    return BadRequest(docRef);
-                }
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -301,7 +306,7 @@ namespace FPTUMerchAPI.Controllers
             try
             {
                 Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-                FirestoreDb database = FirestoreDb.Create("fptumerchtest");
+                FirestoreDb database = FirestoreDb.Create("fptumerch-abcde");
                 DocumentReference docRef = database.Collection("Users").Document(id);
                 DocumentSnapshot snap = await docRef.GetSnapshotAsync();
                 if (snap.Exists)

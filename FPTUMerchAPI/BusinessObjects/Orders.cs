@@ -35,6 +35,9 @@ namespace BusinessObjects
         [FirestoreProperty]
         //TRUE: Already Paid, FALSE: Not Paid
         public bool? PaidStatus { get; set; }
+        //TRUE: Already Shipped, FALSE: Not Shipped Yet
+        [FirestoreProperty]
+        public bool? ShippingStatus { get; set; }
         [FirestoreProperty]
         public List<OrderDetail> orderDetails { get; set; }
     }

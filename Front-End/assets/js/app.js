@@ -291,6 +291,45 @@ var THEMEIM = THEMEIM || {};
       });
 
 
+      $('.trigger01').on('click', function(e) {
+        e.preventDefault();
+        var mask = '<div class="mask-overlay">';
+
+        $('.quickview-wrapper01').toggleClass('open');
+        $(mask).hide().appendTo('body').fadeIn('fast');
+        $('.mask-overlay, .close-qv').on('click', function() {
+          $('.quickview-wrapper01').removeClass('open');
+          $('.mask-overlay').remove();
+        });
+      });
+
+
+      $('.trigger02').on('click', function(e) {
+        e.preventDefault();
+        var mask = '<div class="mask-overlay">';
+
+        $('.quickview-wrapper02').toggleClass('open');
+        $(mask).hide().appendTo('body').fadeIn('fast');
+        $('.mask-overlay, .close-qv').on('click', function() {
+          $('.quickview-wrapper02').removeClass('open');
+          $('.mask-overlay').remove();
+        });
+      });
+
+
+      $('.trigger03').on('click', function(e) {
+        e.preventDefault();
+        var mask = '<div class="mask-overlay">';
+
+        $('.quickview-wrapper03').toggleClass('open');
+        $(mask).hide().appendTo('body').fadeIn('fast');
+        $('.mask-overlay, .close-qv').on('click', function() {
+          $('.quickview-wrapper03').removeClass('open');
+          $('.mask-overlay').remove();
+        });
+      });
+
+
       //Product plus minus
 
       $(".cart-plus-minus-button").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');

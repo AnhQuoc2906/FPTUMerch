@@ -1,4 +1,4 @@
-
+//LAPTOP ENTITIES
 let listCart = document.querySelector('.listCart');
 let singleCart = document.querySelector('single-cart');
 let totalPrice = document.querySelector('.totalPrice');
@@ -8,79 +8,7 @@ let products = [];
 let cartDrop = document.querySelector('.cart-drop');
 let cartTop = document.querySelector('.cart-top');
 
-//Show all individual products
-fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/GetByProductType/1", {
-    method: "GET"
-}).then(res => {
-    return res.json();
-}).then(data => {
-    let data1 = '';
-    data.map((values) => {
-        data1 += `<div class=" col-md-4 ">
-        <div class="sin-product style-two">
-            <div class="pro-img">
-                <img src="media/images/${values.productLink}.jpg" alt="">
-            </div>
-            <div class="mid-wrapper">
-                <h5 class="textproduct"><a href="product.html">${values.productName}</a></h5>
-                <p>${values.price.toLocaleString()} VND </p>
-            </div>
-            <div class="icon-wrapper">
-                <div class="pro-icon">
-                    <ul>
-                        <li><a class="trigger" href="#c1"><i class="flaticon-eye"></i>
-                                <h5 class="preview">XEM TRƯỚC</h5>
-                            </a></li>
-                    </ul>
-                </div>
-                <div class="add-to-cart">
-                    <a href="#" onclick="addToCart('${values.productID}')">Thêm vào giỏ hàng</a>
-                </div>
-            </div>
-        </div>
-    </div>`;
-    });
-    document.getElementById("product-individual").innerHTML = data1;
-}).catch(error => {
-    console.log(error);
-});
-
-//Show all combo products
-fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/GetByProductType/2", {
-    method: "GET"
-}).then(res => {
-    return res.json();
-}).then(data => {
-    let data1 = '';
-    data.map((values) => {
-        data1 += `<div class=" col-md-4 ">
-        <div class="sin-product style-two">
-            <div class="pro-img">
-                <img src="media/images/${values.productLink}.jpg" alt="">
-            </div>
-            <div class="mid-wrapper">
-                <h5 class="textproduct"><a href="product.html">${values.productName}</a></h5>
-                <p>${values.price.toLocaleString()} VND </p>
-            </div>
-            <div class="icon-wrapper">
-                <div class="pro-icon">
-                    <ul>
-                        <li><a class="trigger" href="#c1"><i class="flaticon-eye"></i>
-                                <h5 class="preview">XEM TRƯỚC</h5>
-                            </a></li>
-                    </ul>
-                </div>
-                <div class="add-to-cart">
-                    <a href="#" onclick="addToCart('${values.productID}')">Thêm vào giỏ hàng</a>
-                </div>
-            </div>
-        </div>
-    </div>`;
-    });
-    document.getElementById("product-combo").innerHTML = data1;
-}).catch(error => {
-    console.log(error);
-});
+//MOBILE ENTITIES
 
 //Get all products and store in products variable
 fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get", {
@@ -135,7 +63,7 @@ function reloadCart() {
     };
     if (quantity && totalPrice) {
         quantity.innerHTML = listCarts.length;
-        totalPrice.innerHTML = currentTotalPrice.toLocaleString() + " Đ";
+        totalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
     };
     cartTop.innerHTML = "";
     listCarts.forEach((value) => {
@@ -143,7 +71,7 @@ function reloadCart() {
             let newDiv = document.createElement('div');
             newDiv.innerHTML = `<div class="single-cart">
                 <div class="cart-img">
-                    <img alt="" src="media/images/${value.productLink}.jpg">
+                    <img alt="" src="media/images/${value.productLink}.jpg" style="max-width:100px">
                 </div>
                 <div class="cart-title">
                     <p><a href="">${value.productName}</a></p>
@@ -157,15 +85,3 @@ function reloadCart() {
         }
     })
 }
-
-$('.trigger').on('click', function(e) {
-    e.preventDefault();
-    var mask = '<div class="mask-overlay">';
-
-    $('.quickview-wrapper').toggleClass('open');
-    $(mask).hide().appendTo('body').fadeIn('fast');
-    $('.mask-overlay, .close-qv').on('click', function() {
-      $('.quickview-wrapper').removeClass('open');
-      $('.mask-overlay').remove();
-    });
-  });

@@ -2750,7 +2750,8 @@ a.btn-two::after {
 }
 
 .single-testimonial .tes-img img {
-  border-radius: 100%;
+  
+  margin-top: -20px;
 }
 
 .single-testimonial .tes-content {
@@ -3202,6 +3203,7 @@ p.sub-title {
 
 .list-pro-det .rating {
   float: none;
+  margin-bottom: 50px;
 }
 
 .list-pro-det .rating a {
@@ -3216,7 +3218,6 @@ p.sub-title {
 .list-pro-det span {
   float: none;
   font-size: 26px;
-  margin-top: 8px;
   display: inline-block;
   margin-bottom: 20px;
   color: #525353;
@@ -3226,6 +3227,7 @@ p.sub-title {
 .list-pro-det a.btn-two {
   background: #d19e66;
   margin-left: 8px;
+  margin-top: 50px;
 }
 
 .list-pro-det a.btn-two:after {
@@ -5485,9 +5487,12 @@ p.sub-title {
 }
 
 .footer-bottom {
-  border-top: 1px solid #c6c5c5;
-  padding: 40px 0;
-  /* margin-top: 75px; */
+    border-top: 1px solid #c6c5c5;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
 }
 
 .footer-bottom p {

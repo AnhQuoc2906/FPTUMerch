@@ -77,40 +77,41 @@
 				</div>
 				
 			</div> -->
-		<!--top-bar end-->
+			<!--top-bar end-->
 
-		<!-- Main Menu
+			<!-- Main Menu
 		============================================= -->
 
 
-		<div class="container-fluid custom-container menu-rel-container">
-			<div class="row">
-				<!-- Logo
+			<div class="container-fluid custom-container menu-rel-container">
+				<div class="row">
+					<!-- Logo
 				============================================= -->
-				<div class="col-lg-6 col-xl-2">
-					<div class="logo">
-						<a href="index.html">
-							<img src="media/images/logo.png" alt="">
-						</a>
+					<div class="col-lg-6 col-xl-2">
+						<div class="logo">
+							<a href="index.html">
+								<img src="media/images/logo.png" alt="">
+							</a>
+						</div>
 					</div>
-				</div>
-				<!--Col end-->
+					<!--Col end-->
 
-				<!-- Main menu
+					<!-- Main menu
 				============================================= -->
 
 					<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 						<div class="mainmenu style-two">
 							<ul id="navigation">
 								<li><a href="#">TRANG CHỦ</a></li>
-								<li><a href="chinhsach.html">CHÍNH SÁCH</a></li>								
-								<li><a href="sanpham.html">SẢN PHẨM</a></li>
-								<li><a href="shop.html">VỀ CHÚNG TÔI</a></li>
-								<li class="has-child"><a href="contact.html">LIÊN HỆ</a>
+								<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>
+								<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
+								<li><a href="shop.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
+								<li class="has-child"><a href="contact.html" onclick="passData()">LIÊN HỆ</a>
 									<ul class="sub-menu">
-										<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
-										
-										
+										<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
+												rel="noopener noreferrer">FACEBOOK</a></li>
+
+
 									</ul>
 								</li>
 							</ul>
@@ -120,33 +121,33 @@
 
 
 
-				<div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
-					<div class="header-right-menu">
-						<ul class="listCart">
-							<li class="top-cart">
-								<a href="javascript:void(0)" class="total"> <!--Total of item in bag-->
-									<i class="flaticon-bag"></i><span class="quantity">0</span>
-								</a>
-								<div class="cart-drop">
-									<div class="cart-top"></div>
-									<div class="cart-bottom">
-										<div class="cart-sub-total">
-											<p>TỔNG<span class="totalPrice">0 VND</span></p>
-										</div>
-										<div class="cart-checkout">
-											<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+					<div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
+						<div class="header-right-menu">
+							<ul class="listCart">
+								<li class="top-cart">
+									<a href="javascript:void(0)" class="total"> <!--Total of item in bag-->
+										<i class="flaticon-bag"></i><span class="quantity">0</span>
+									</a>
+									<div class="cart-drop">
+										<div class="cart-top"></div>
+										<div class="cart-bottom">
+											<div class="cart-sub-total">
+												<p>TỔNG<span class="totalPrice">0 VND</span></p>
+											</div>
+											<div class="cart-checkout">
+												<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-						</ul>
+								</li>
+							</ul>
+						</div>
 					</div>
+					<!--Col end-->
 				</div>
-				<!--Col end-->
+				<!--Row end-->
 			</div>
-			<!--Row end-->
-		</div>
-		<!--container end-->
+			<!--container end-->
 		</header>
 		<!--Header end-->
 
@@ -178,36 +179,15 @@
 					</div>
 					<div class="col-4">
 						<div class="top-cart">
-							<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (2)</a>
+							<a href="javascript:void(0)">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+								(<a class="quantity-mobile">0</a>)</a>
 							<div class="cart-drop">
-								<div class="single-cart">
-									<div class="cart-img">
-										<img alt="" src="media/images/product/car1.jpg">
-									</div>
-									<div class="cart-title">
-										<p><a href="">Aliquam Consequat</a></p>
-									</div>
-									<div class="cart-price">
-										<p>1 x $500</p>
-									</div>
-									<a href="#"><i class="fa fa-times"></i></a>
-								</div>
-								<div class="single-cart">
-									<div class="cart-img">
-										<img alt="" src="media/images/product/car2.jpg">
-									</div>
-									<div class="cart-title">
-										<p><a href="">Quisque In Arcuc</a></p>
-									</div>
-									<div class="cart-price">
-										<p>1 x $200</p>
-									</div>
-									<a href="#"><i class="fa fa-times"></i></a>
-								</div>
+								<div class="cart-top-mobile"></div>
 								<div class="cart-bottom">
-									
+
 									<div class="cart-sub-total">
-										<p>TỔNG <span>$244.00</span></p>
+										<p>TỔNG <span class="totalPriceMobile">0 VND</span></p>
 									</div>
 									<div class="cart-checkout">
 										<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
@@ -233,18 +213,18 @@
 						</a></li>
 					<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 					<li>
-						<a href="#" class="link">TRANG CHỦ</a>
+						<a href="#" class="link" onclick="passData()">TRANG CHỦ</a>
 					</li>
 					<li>
-						<a href="chinhsach.html" class="link">CHÍNH SÁCH</a>
-					</li>
-
-					<li>
-						<a href="sanpham.html" class="link">SẢN PHẨM</a>
+						<a href="chinhsach.html" class="link" onclick="passData()">CHÍNH SÁCH</a>
 					</li>
 
 					<li>
-						<a href="#" class="link">VỀ CHÚNG TÔI</i></a>
+						<a href="sanpham.html" class="link" onclick="passData()">SẢN PHẨM</a>
+					</li>
+
+					<li>
+						<a href="#" class="link" onclick="passData()">VỀ CHÚNG TÔI</i></a>
 					</li>
 					<li>
 						<a href="#" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
@@ -267,8 +247,8 @@
 
 
 		<section class="slider-wrapper">
-			<!-- <div class="slider-start slider-2 owl-carousel owl-theme"> -->	
-					<img class="item" src="media/images/bannertest.png" alt="">
+			<!-- <div class="slider-start slider-2 owl-carousel owl-theme"> -->
+			<img class="item" src="media/images/bannertest.png" alt="">
 			<!-- </div> -->
 
 		</section>
@@ -289,34 +269,19 @@
 				<div class="row">
 					<div class="col-xl-12 ">
 						<div class="pro-tab-filter style-two">
-							<!-- <ul class="pro-tab-button">
-								<li class="filter active" data-filter="*">ALL</li>
-								<li class="filter" data-filter=".two">Accessories</li>
-								<li class="filter" data-filter=".three">Men's clothing</li>
-								<li class="filter" data-filter=".four">Kids clothing</li>
-								<li class="filter" data-filter=".five">Women dresses</li>
-							</ul> -->
 							<div class="container">
 								<div class="row" id="product-individual">
 									<!-- single product -->
 									<div class=" col-md-4 ">
 										<div class="sin-product style-two">
-											<div class="pro-img">
+											<div class="pro-img trigger-image">
 												<img src="media/images/producttest.jpg" alt="">
 											</div>
 											<div class="mid-wrapper">
 												<h5 class="textproduct"><a href="product.html">ÁO THUN FPTYOU</a></h5>
-												<!-- <div class="color-variation">
-													<ul>
-														<li><i class="fas fa-circle"></i></li>
-														<li><i class="fas fa-circle"></i></li>
-														<li><i class="fas fa-circle"></i></li>
-														<li><i class="fas fa-circle"></i></li>
-													</ul>
-												</div> -->
 												<p>230.000 VND </p>
 											</div>
-											<div class="icon-wrapper">
+											<div class="icon-wrapper ">
 												<div class="pro-icon">
 													<ul>
 														<li><a class="trigger" href="#c1"><i class="flaticon-eye"></i>
@@ -324,8 +289,9 @@
 															</a></li>
 													</ul>
 												</div>
-												<div class="add-to-cart">
-													<a href="#" onclick="addToCart('QlBzrkLBm8dtqksMyJx7')">Thêm vào giỏ hàng</a>
+												<div class="add-to-cart triggerButton">
+													<a href="#" onclick="addToCart('QlBzrkLBm8dtqksMyJx7')">Thêm vào giỏ
+														hàng</a>
 												</div>
 											</div>
 										</div>
@@ -333,7 +299,7 @@
 									<!-- single product -->
 									<div class=" col-md-4">
 										<div class="sin-product style-two">
-											<div class="pro-img">
+											<div class="pro-img trigger-image01">
 												<img src="media/images/producttest.jpg" alt="">
 											</div>
 
@@ -349,7 +315,7 @@
 															</a></li>
 													</ul>
 												</div>
-												<div class="add-to-cart">
+												<div class="add-to-cart triggerButton01">
 													<a href="#">Thêm vào giỏ hàng</a>
 												</div>
 											</div>
@@ -358,7 +324,7 @@
 									<!-- single product -->
 									<div class=" col-md-4">
 										<div class="sin-product style-two">
-											<div class="pro-img">
+											<div class="pro-img trigger-image02">
 												<img src="media/images/producttest.jpg" alt="">
 											</div>
 
@@ -368,14 +334,14 @@
 												<p>45.000 VND</p>
 											</div>
 											<div class="icon-wrapper">
-												<div class="pro-icon">
+												<div class="pro-icon trigger02">
 													<ul>
-														<li><a class="trigger02" href="#"><i class="flaticon-eye"></i>
+														<li><a href="#"><i class="flaticon-eye"></i>
 																<h5 class="preview">XEM TRƯỚC</h5>
 															</a></li>
 													</ul>
 												</div>
-												<div class="add-to-cart">
+												<div class="add-to-cart triggerButton02">
 													<a href="#">Thêm vào giỏ hàng</a>
 												</div>
 											</div>
@@ -419,7 +385,7 @@
 									<!-- single product -->
 									<div class=" col-md-4 mx-auto ">
 										<div class="sin-product style-two">
-											<div class="pro-img">
+											<div class="pro-img trigger-image03">
 												<img src="media/images/combo.jpg" alt="">
 											</div>
 											<span class="new-tag">NEW!</span>
@@ -428,14 +394,14 @@
 												<p>260.000 VND</p>
 											</div>
 											<div class="icon-wrapper">
-												<div class="pro-icon">
+												<div class="pro-icon trigger03">
 													<ul>
-														<li><a class="trigger03" href="#"><i class="flaticon-eye"></i>
+														<li><a class="" href="#"><i class="flaticon-eye"></i>
 																<h5 class="preview">XEM TRƯỚC</h5>
 															</a></li>
 													</ul>
 												</div>
-												<div class="add-to-cart">
+												<div class="add-to-cart trigger-image03">
 													<a href="#">Thêm vào giỏ hàng</a>
 												</div>
 											</div>
@@ -505,7 +471,7 @@
 
 							<div class="single-testimonial">
 								<div class="tes-img">
-									<img  style="margin-top: 0px;" src="media/images/phanhoi4.JPG" alt="">
+									<img style="margin-top: 0px;" src="media/images/phanhoi4.JPG" alt="">
 								</div>
 								<div class="tes-content">
 									<p>Autem vel eum iriure dolor in hendrerit ivulputate velit esse molestie consequat
@@ -536,9 +502,9 @@
 			<div class="container-fluid custom-container">
 				<div class="footer-bottom">
 					<p>Copyright © <span>2023</span> All rights reserved by <a href="#">Cóc Sài Gòn</a></p>
-						
-						<!-- /.col-xl-6 -->
-						<!-- <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
+
+					<!-- /.col-xl-6 -->
+					<!-- <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
 							<div class="footer-payment-icon">
 								<ul>
 									<li><a href="#"><img src="media/images/p1.png" alt=""></a></li>
@@ -548,7 +514,7 @@
 								</ul>
 							</div>
 						</div> -->
-						<!-- /.col-xl-6 -->
+					<!-- /.col-xl-6 -->
 					<!-- /.row -->
 				</div>
 			</div>
@@ -559,9 +525,9 @@
 		<!-- Back to top
 	============================================= -->
 
-	<div class="backtotop">
-		<i class="fa fa-angle-up backtotop_btn"></i>
-	</div>
+		<div class="backtotop">
+			<i class="fa fa-angle-up backtotop_btn"></i>
+		</div>
 
 
 
@@ -672,12 +638,12 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">ÁO THUN FPTYOU</a></h5>
 							<span class="price">230.000 VND</span>
 							<div class="size-variation" style="margin-top: 20px;">
 								<span>size :</span>
-								<select name="size-value">
+								<select name="size-value" id="sizeShirt">
 									<option value="">S</option>
 									<option value="">M</option>
 									<option value="">L</option>
@@ -691,9 +657,11 @@
 							<div class="add-tocart-wrap">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyShirt">
 								</div>
-								<a href="#" class="add-to-cart" onclick="addToCart('Xey3FcLjFp1H6d3Y2ipP')"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+								<a href="#" class="add-to-cart add-to-cart-shirt"
+									onclick="addToCart('Xey3FcLjFp1H6d3Y2ipP')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
 									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
@@ -710,7 +678,7 @@
 
 							</p>
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -793,12 +761,12 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">VỚ PASSED</a></h5>
 							<span class="price">19.000 VND</span>
 							<div class="size-variation">
-								<span>color :</span>
-								<select name="size-value">
+								<span>Màu :</span>
+								<select name="size-value" id="colorSocks">
 									<option value="">Trắng</option>
 									<option value="">Đen</option>
 								</select>
@@ -807,9 +775,11 @@
 							<div class="add-tocart-wrap">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtySocks">
 								</div>
-								<a href="#" class="add-to-cart" onclick="addToCart('9ExxjhRgHpmWneTgUpbI')"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+								<a href="#" class="add-to-cart add-to-cart-socks"
+									onclick="addToCart('9ExxjhRgHpmWneTgUpbI')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
 									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
@@ -827,7 +797,7 @@
 
 
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -911,7 +881,7 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">DÂY ĐEO THẺ</a></h5>
 							<span class="price">45.000 VND</span>
 
@@ -919,10 +889,12 @@
 							<div class="add-tocart-wrap" style="margin-top: 40px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyStrap">
 								</div>
-								<a href="#" class="add-to-cart" onclick="addToCart('MfFhWpybUBWxY6qMhqnN')"><i class="flaticon-shopping-purse-icon"></i>Add to
-									Cart</a>
+								<a href="#" class="add-to-cart add-to-cart-strap"
+									onclick="addToCart('MfFhWpybUBWxY6qMhqnN')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
@@ -939,7 +911,7 @@
 							</p>
 
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -1023,12 +995,12 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">COMBO FULL KIT</a></h5>
 							<span class="price">260.000 VND</span>
 							<div class="size-variation">
 								<span>size áo:</span>
-								<select name="size-value">
+								<select name="size-value" id="sizeShirtCombo">
 									<option value="">S</option>
 									<option value="">M</option>
 									<option value="">L</option>
@@ -1042,7 +1014,7 @@
 
 							<div class="size-variation" style="margin-top: 15px;">
 								<span>màu vớ:</span>
-								<select name="size-value">
+								<select name="size-value" id="colorSocksCombo">
 									<option value="">Trắng</option>
 									<option value="">Đen</option>
 								</select>
@@ -1050,7 +1022,7 @@
 
 							<div class="size-variation" style="margin-top: 15px;">
 								<span>mẫu huy hiệu:</span>
-								<select name="size-value">
+								<select name="size-value" id="badgeCombo">
 									<option value="">PASSED</option>
 									<option value="">BE WARRIORS BREAK BARRIERS</option>
 								</select>
@@ -1059,9 +1031,11 @@
 							<div class="add-tocart-wrap" style="margin-top: 40px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyCombo">
 								</div>
-								<a href="#" class="add-to-cart" onclick="addToCart('QClgRMkJsWXVfeIp5eYR')"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+								<a href="#" class="add-to-cart add-to-cart-combo"
+									onclick="addToCart('QClgRMkJsWXVfeIp5eYR')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
 									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
@@ -1076,7 +1050,7 @@
 								• Huy hiệu (được tự chọn mẫu).</p>
 
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->

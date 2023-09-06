@@ -1,4 +1,4 @@
-const listCarts = JSON.parse(sessionStorage.getItem('listCarts'));
+let listCarts = JSON.parse(sessionStorage.getItem('listCarts'));
 let cartTop = document.querySelector('.cart-top'); // Show the cart information
 let quantity = document.querySelector('.quantity');  // How many kinds of products are there
 let totalPrice = document.querySelector('.totalPrice');
@@ -18,7 +18,9 @@ let quantityMobile = document.querySelector('.quantity-mobile'); // How many kin
 let cartTopMobile = document.querySelector('.cart-top-mobile'); // Show the cart information
 let totalPriceMobile = document.querySelector('.total-price-mobile');
 
-console.log(listCarts);
+if (JSON.parse(sessionStorage.getItem('listCarts')) == null) {
+    listCarts = [];
+}
 cartTop.innerHTML = "";
 //UPDATE CURRENT CART
 listCarts.forEach((value, index) => {

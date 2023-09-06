@@ -1,4 +1,4 @@
-const listCarts = JSON.parse(sessionStorage.getItem('listCarts'));
+let listCarts = JSON.parse(sessionStorage.getItem('listCarts'));
 let cartTop = document.querySelector('.cart-top'); // Show the cart information
 let quantity = document.querySelector('.quantity');
 let totalPrice = document.querySelector('.totalPrice');
@@ -10,6 +10,9 @@ let totalPriceMobile = document.querySelector('.total-price-mobile');
 
 console.log(listCarts);
 cartTop.innerHTML = "";
+if (JSON.parse(sessionStorage.getItem('listCarts')) == null) {
+    listCarts = [];
+}
 //UPDATE CURRENT CART
 listCarts.forEach((value, index) => {
     if (value != null) {

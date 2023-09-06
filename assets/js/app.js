@@ -278,7 +278,7 @@ var THEMEIM = THEMEIM || {};
 
 
 
-      $('.trigger').on('click', function(e) {
+      $('.trigger, .triggerButton, .trigger-image, .trigger-title').on('click', function(e) {
         e.preventDefault();
         var mask = '<div class="mask-overlay">';
 
@@ -291,7 +291,7 @@ var THEMEIM = THEMEIM || {};
       });
 
 
-      $('.trigger01').on('click', function(e) {
+      $('.trigger01, .triggerButton01, .trigger-image01, .trigger-title01').on('click', function(e) {
         e.preventDefault();
         var mask = '<div class="mask-overlay">';
 
@@ -303,8 +303,7 @@ var THEMEIM = THEMEIM || {};
         });
       });
 
-
-      $('.trigger02').on('click', function(e) {
+      $('.trigger02, .triggerButton02, .trigger-image02, .trigger-title02').on('click', function(e) {
         e.preventDefault();
         var mask = '<div class="mask-overlay">';
 
@@ -316,8 +315,7 @@ var THEMEIM = THEMEIM || {};
         });
       });
 
-
-      $('.trigger03').on('click', function(e) {
+      $('.trigger03, .triggerButton03, .trigger-image03,.trigger-title03').on('click', function(e) {
         e.preventDefault();
         var mask = '<div class="mask-overlay">';
 
@@ -739,3 +737,4 @@ var THEMEIM = THEMEIM || {};
   $(window).on('scroll', THEMEIM.documentOnScroll.init);
 
 })(jQuery);
+

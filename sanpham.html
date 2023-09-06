@@ -6,11 +6,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Comercio - Fashion Shop Ecommerce HTML Template</title>
+	<title>FPTU MERCH 2023</title>
 
 	<!-- Fav Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/fav-icons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/img/fav-icons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="assets/img/fav-icons/favicon-16x16.png">
 
 	<!-- Dependency Styles -->
@@ -73,11 +72,11 @@
 				<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 					<div class="mainmenu style-two">
 						<ul id="navigation">
-							<li><a href="main.html">TRANG CHỦ</a></li>
-							<li><a href="chinhsach.html">CHÍNH SÁCH</a></li>								
-							<li><a href="sanpham.html">SẢN PHẨM</a></li>
-							<li><a href="shop.html">VỀ CHÚNG TÔI</a></li>
-							<li class="has-child"><a href="contact.html">LIÊN HỆ</a>
+							<li><a href="index.html" onclick="passData()">TRANG CHỦ</a></li>
+							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>								
+							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
+							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
+							<li class="has-child"><a href="##">LIÊN HỆ</a>
 								<ul class="sub-menu">
 									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
 									
@@ -93,39 +92,16 @@
 				<div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
 					<div class="header-right-menu">
 						<ul>
-							<li class="top-cart"><a href="javascript:void(0)"><i class="flaticon-bag"></i><span>2</span></a>
+							<li class="top-cart"><a href="javascript:void(0)"><i class="flaticon-bag"></i><span class="quantity">0</span></a>
 
 								<div class="cart-drop">
-									<div class="single-cart">
-										<div class="cart-img">
-											<img alt="" src="media/images/product/car1.jpg">
-										</div>
-										<div class="cart-title">
-											<p><a href="">Aliquam Consequat</a></p>
-										</div>
-										<div class="cart-price">
-											<p>1 x $500</p>
-										</div>
-										<a href="#"><i class="fa fa-times"></i></a>
-									</div>
-									<div class="single-cart">
-										<div class="cart-img">
-											<img alt="" src="media/images/product/car2.jpg">
-										</div>
-										<div class="cart-title">
-											<p><a href="">Quisque In Arcuc</a></p>
-										</div>
-										<div class="cart-price">
-											<p>1 x $200</p>
-										</div>
-										<a href="#"><i class="fa fa-times"></i></a>
-									</div>
+									<div class="cart-top"></div>
 									<div class="cart-bottom">
 										<div class="cart-sub-total">
-											<p>TỔNG<span>$244.00</span></p>
+											<p>TỔNG<span class="totalPrice">0 VND</span></p>
 										</div>
 										<div class="cart-checkout">
-											<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+											<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
 										</div>
 									</div>
 								</div>
@@ -169,39 +145,16 @@
 				</div>
 				<div class="col-4">
 					<div class="top-cart">
-						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (2)</a>
+						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (<a class="quantity-mobile">0</a>)</a>
 						<div class="cart-drop">
-							<div class="single-cart">
-								<div class="cart-img">
-									<img alt="" src="media/images/product/car1.jpg">
-								</div>
-								<div class="cart-title">
-									<p><a href="">Aliquam Consequat</a></p>
-								</div>
-								<div class="cart-price">
-									<p>1 x $500</p>
-								</div>
-								<a href="#"><i class="fa fa-times"></i></a>
-							</div>
-							<div class="single-cart">
-								<div class="cart-img">
-									<img alt="" src="media/images/product/car2.jpg">
-								</div>
-								<div class="cart-title">
-									<p><a href="">Quisque In Arcuc</a></p>
-								</div>
-								<div class="cart-price">
-									<p>1 x $200</p>
-								</div>
-								<a href="#"><i class="fa fa-times"></i></a>
-							</div>
+							<div class="cart-top-mobile"></div>
 							<div class="cart-bottom">
 								
 								<div class="cart-sub-total">
-									<p>TỔNG <span>$244.00</span></p>
+									<p>TỔNG <span class="total-price-mobile">0 VND</span></p>
 								</div>
 								<div class="cart-checkout">
-									<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
 								</div>
 							</div>
 						</div>
@@ -224,21 +177,21 @@
 					</a></li>
 				<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 				<li>
-					<a href="main.html" class="link">TRANG CHỦ</a>
+					<a href="index.html" class="link" onclick="passData()">TRANG CHỦ</a>
 				</li>
 				<li>
-					<a href="chinhsach.html" class="link">CHÍNH SÁCH</a>
-				</li>
-
-				<li>
-					<a href="sanpham.html" class="link">SẢN PHẨM</a>
+					<a href="chinhsach.html" class="link" onclick="passData()">CHÍNH SÁCH</a>
 				</li>
 
 				<li>
-					<a href="#" class="link">VỀ CHÚNG TÔI</i></a>
+					<a href="sanpham.html" class="link" onclick="passData()">SẢN PHẨM</a>
+				</li>
+
+				<li>
+					<a href="vechungtoi.html" class="link">VỀ CHÚNG TÔI</i></a>
 				</li>
 				<li>
-					<a href="#" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
+					<a href="##" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
 					<ul class="submenu">
 						<li><a href="https://www.facebook.com/cocsaigonfuhcm">FACEBOOK</a></li>
 					</ul>
@@ -260,7 +213,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="bc-inner">
-							<p><a href="main.html">TRANG CHỦ  |</a> SẢN PHẨM</p>
+							<p><a href="index.html">TRANG CHỦ  |</a> SẢN PHẨM</p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -279,19 +232,19 @@
 				<div class="row">
 					<div class="order-2 order-lg-1 col-lg-3 col-xl-3">
 						<div class=" shop-sidebar">
-							<div class="sidebar-widget sidebar-search">
-								<input type="text" placeholder="Tìm Kiếm Sản Phẩm....">
-								<button type="submit"><i class="fas fa-search"></i></button>
-							</div>
+							<form class="sidebar-widget sidebar-search" action="#" controller="#">
+								<input type="text" placeholder="Tìm Kiếm Sản Phẩm...." id="searchItem">
+								<button type="submit" onclick="searchByName()"><i class="fas fa-search"></i></button>
+							</form>
 							
 							<div class="sidebar-widget product-widget">
 								<h6>BEST SELLERS</h6>
 								<div class="wid-pro">
-									<div class="sp-img">
-										<img src="media/images/product/sb1.jpg" alt="">
+									<div class="sp-img trigger-image03">
+										<img src="media/images/combo.jpg" alt="" style="max-width:88px">
 									</div>
 									<div class="small-pro-details">
-										<h5 class="title"><a href="#">COMBO ƯU ĐÃI</a></h5>
+										<h5 class="title"><a href="#" class="trigger03">COMBO FULL KIT</a></h5>
 										<span>260.000 VND</span> <br>
 										<span class="pre-price">294.000 VND</span>
 										<div class="rating">
@@ -310,30 +263,7 @@
 						</div>
 					</div>
 					<!-- /.col-xl-3 -->
-					<div class="order-1 order-lg-2 col-lg-9 col-xl-9">
-						<div class="shop-sorting-area row">
-							<div class="col-4 col-sm-4 col-md-6">
-								<ul class="nav nav-tabs shop-btn" id="myTab" role="tablist">
-									<li class="nav-item">
-										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="flaticon-list"></i></a>
-									</li>
-								</ul>
-							</div>
-							<!-- /.col-xl-6 -->
-							<!-- <div class="col-12 col-sm-8 col-md-6">
-								<div class="sort-by">	
-									<span>Bộ lọc :</span>
-									<select class="orderby" name="orderby">
-								<option value="menu_order">Default sorting</option>
-								<option value="popularity">Sort by popularity</option>
-								<option value="rating">Sort by average rating</option>
-								<option value="date">Sort by newness</option>
-								<option selected="selected">Best Selling</option>
-							</select>
-								</div>
-							</div> -->
-							<!-- /.col-xl-6 -->
-						</div>
+					<div class="order-1 order-lg-2 col-lg-9 col-xl-9 ">
 						<!-- /.shop-sorting-area -->
 						<div class="shop-content shop-four-grid">
 							<div class="tab-content" id="myTabContent">
@@ -341,22 +271,22 @@
 								<!-- /.tab-pane -->
 								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 									<div class="row no-gutters">
-										<div class="col-xl-12">
+										<div class="col-xl-12 search">
 											<div class="sin-product list-pro">
 												<div class="row">
-													<div class="col-md-5 col-lg-6 col-xl-4">
-														<div class="pro-img">
-															<img src="media/images/product/lp1.jpg" alt="">
+													<div class="col-md-5 col-lg-6 col-xl-4 ">
+														<div class="pro-img trigger-image">
+															<img src="media/images/producttest.jpg" alt="">
 														</div>
-														<div class="pro-icon">
+														<div class="pro-icon trigger">
 															<ul>
-																<li><a class="trigger" href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
+																<li><a href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
 															</ul>
 														</div>
 													</div>
 													<div class="col-md-7 col-lg-6 col-xl-8">
 														<div class="list-pro-det">
-															<h5 class="pro-title"><a href="#">ÁO THUN FPTYOU</a></h5>
+															<h5 class="pro-title trigger-title"><a href="#">ÁO THUN FPTYOU</a></h5>
 															<span>230.000 VND</span>
 															<div class="rating">
 																<ul>
@@ -367,9 +297,7 @@
 																	<li><a href="#"><i class="fas fa-star"></i></a></li>
 																</ul>
 															</div>
-															<p>Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat vel illdolore eu olestie consequat feugiat nulla facilisis at vero eros.Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-																vel illum dolore eu olestie consequat feugiat nulla facilisis at vero eros.</p>
-															<a class="btn-two" href="#">Add to cart</a>
+															<a class="btn-two triggerButton" href="#">Thêm vào giỏ hàng</a>
 														</div>
 													</div>
 												</div>
@@ -380,18 +308,18 @@
 											<div class="sin-product list-pro">
 												<div class="row">
 													<div class="col-md-5 col-lg-6 col-xl-4">
-														<div class="pro-img">
-															<img src="media/images/product/lp2.jpg" alt="">
+														<div class="pro-img trigger-image01">
+															<img src="media/images/producttest.jpg" alt="">
 														</div>
-														<div class="pro-icon">
+														<div class="pro-icon trigger01">
 															<ul>
-																<li><a class="trigger01" href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
+																<li><a href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
 															</ul>
 														</div>
 													</div>
 													<div class="col-md-7 col-lg-6 col-xl-8">
 														<div class="list-pro-det">
-															<h5 class="pro-title"><a href="product.html">VỚ PASSED</a></h5>
+															<h5 class="pro-title trigger-title01"><a href="product.html">VỚ PASSED</a></h5>
 															<span>19.000 VND</span>
 															<div class="rating">
 																<ul>
@@ -402,9 +330,7 @@
 																	<li><a href="#"><i class="fas fa-star"></i></a></li>
 																</ul>
 															</div>
-															<p>Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat vel illdolore eu olestie consequat feugiat nulla facilisis at vero eros.Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-																vel illum dolore eu olestie consequat feugiat nulla facilisis at vero eros.</p>
-															<a class="btn-two" href="#">Add to cart</a>
+															<a class="btn-two triggerButton01" href="#">Thêm vào giỏ hàng</a>
 														</div>
 													</div>
 												</div>
@@ -415,18 +341,18 @@
 											<div class="sin-product list-pro">
 												<div class="row">
 													<div class="col-md-5 col-lg-6 col-xl-4">
-														<div class="pro-img">
-															<img src="media/images/product/lp3.jpg" alt="">
+														<div class="pro-img trigger-image02">
+															<img src="media/images/producttest.jpg" alt="">
 														</div>
-														<div class="pro-icon">
+														<div class="pro-icon trigger02">
 															<ul>
-																<li><a class="trigger02" href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
+																<li><a href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
 															</ul>
 														</div>
 													</div>
 													<div class="col-md-7 col-lg-6 col-xl-8">
 														<div class="list-pro-det">
-															<h5 class="pro-title"><a href="product.html">DÂY ĐEO THẺ</a></h5>
+															<h5 class="pro-title trigger-title02"><a href="product.html">DÂY ĐEO THẺ</a></h5>
 															<span>45.000 VND</span>
 															<div class="rating">
 																<ul>
@@ -437,9 +363,7 @@
 																	<li><a href="#"><i class="fas fa-star"></i></a></li>
 																</ul>
 															</div>
-															<p>Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat vel illdolore eu olestie consequat feugiat nulla facilisis at vero eros.Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-																vel illum dolore eu olestie consequat feugiat nulla facilisis at vero eros.</p>
-															<a class="btn-two" href="#">Add to cart</a>
+															<a class="btn-two triggerButton02" href="#">Thêm vào giỏ hàng</a>
 														</div>
 													</div>
 												</div>
@@ -450,19 +374,19 @@
 											<div class="sin-product list-pro">
 												<div class="row">
 													<div class="col-md-5 col-lg-6 col-xl-4">
-														<div class="pro-img">
-															<img src="media/images/product/lp1.jpg" alt="">
+														<div class="pro-img trigger-image03">
+															<img src="media/images/combo.jpg" alt="">
 														</div>
 														<span class="new-tag">NEW!</span>
-														<div class="pro-icon">
+														<div class="pro-icon trigger03">
 															<ul>
-																<li><a class="trigger03" href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
+																<li><a href="#"><i class="flaticon-eye"></i><h5 class="preview">XEM TRƯỚC</h5></a></li>
 															</ul>
 														</div>
 													</div>
 													<div class="col-md-7 col-lg-6 col-xl-8">
 														<div class="list-pro-det">
-															<h5 class="pro-title"><a href="product.html">COMBO ƯU ĐÃI</a></h5>
+															<h5 class="pro-title trigger-title03"><a href="#">COMBO FULL KIT</a></h5>
 															<span>260.000 VND</span>
 															<div class="rating">
 																<ul>
@@ -473,9 +397,7 @@
 																	<li><a href="#"><i class="fas fa-star"></i></a></li>
 																</ul>
 															</div>
-															<p>Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat vel illdolore eu olestie consequat feugiat nulla facilisis at vero eros.Autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat
-																vel illum dolore eu olestie consequat feugiat nulla facilisis at vero eros.</p>
-															<a class="btn-two" href="#">Add to cart</a>
+															<a class="btn-two triggerButton03" href="#">Thêm vào giỏ hàng</a>
 														</div>
 													</div>
 												</div>
@@ -508,12 +430,10 @@
 		<footer class="footer-widget-area style-two">
 			<div class="container-fluid custom-container">
 				<div class="footer-bottom">
-					<div class="row">
-						<div class="col-md-12 col-lg-6 col-xl-6 order-2 order-lg-1">
-							<p>Copyright © <span>2023</span> All rights reserved by <a href="#">Cóc Sài Gòn</a></p>
-						</div>
+					<p>Copyright © <span>2023</span> All rights reserved by <a href="#">Cóc Sài Gòn</a></p>
+						
 						<!-- /.col-xl-6 -->
-						<div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
+						<!-- <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
 							<div class="footer-payment-icon">
 								<ul>
 									<li><a href="#"><img src="media/images/p1.png" alt=""></a></li>
@@ -522,9 +442,8 @@
 									<li><a href="#"><img src="media/images/p4.png" alt=""></a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 						<!-- /.col-xl-6 -->
-					</div>
 					<!-- /.row -->
 				</div>
 			</div>
@@ -547,13 +466,13 @@
 		<!--=========================-->
 
 		<!-- Quick View Sp 1-->
-		<div class="modal quickview-wrapper" >
+		<div class="modal quickview-wrapper">
 			<div class="quickview">
 				<div class="row">
 					<div class="col-12">
 						<span class="close-qv">
-					<i class="flaticon-close"></i>
-				</span>
+							<i class="flaticon-close"></i>
+						</span>
 					</div>
 					<div class="col-md-6">
 						<!-- Product View Slider -->
@@ -620,29 +539,31 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">ÁO THUN FPTYOU</a></h5>
 							<span class="price">230.000 VND</span>
 							<div class="size-variation" style="margin-top: 20px;">
 								<span>size :</span>
-								<select name="size-value">
-							<option value="">S</option>
-							<option value="">M</option>
-							<option value="">L</option>
-							<option value="">XL</option>
-							<option value="">2XL</option>
-							<option value="">3XL</option>
-							<option value="">4XL</option>
-							<option value="">5XL</option>
-
-						</select>
+								<select name="size-value" id="sizeShirt">
+									<option value="">S</option>
+									<option value="">M</option>
+									<option value="">L</option>
+									<option value="">XL</option>
+									<option value="">2XL</option>
+									<option value="">3XL</option>
+									<option value="">4XL</option>
+									<option value="">5XL</option>
+								</select>
 							</div>
 							<div class="add-tocart-wrap">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyShirt">
 								</div>
-								<a href="#" class="add-to-cart"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ hàng</a>
+								<a href="#" class="add-to-cart add-to-cart-shirt"
+									onclick="addToCart('Xey3FcLjFp1H6d3Y2ipP')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
@@ -658,7 +579,7 @@
 
 							</p>
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -668,13 +589,13 @@
 		</div>
 
 		<!-- Quick View Sp 2-->
-		<div class="modal quickview-wrapper01" >
+		<div class="modal quickview-wrapper01">
 			<div class="quickview">
 				<div class="row">
 					<div class="col-12">
 						<span class="close-qv">
-					<i class="flaticon-close"></i>
-				</span>
+							<i class="flaticon-close"></i>
+						</span>
 					</div>
 					<div class="col-md-6">
 						<!-- Product View Slider -->
@@ -741,23 +662,26 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">VỚ PASSED</a></h5>
 							<span class="price">19.000 VND</span>
 							<div class="size-variation">
-								<span>color :</span>
-								<select name="size-value">
-							<option value="">Trắng</option>
-							<option value="">Đen</option>
-						</select>
+								<span>Màu :</span>
+								<select name="size-value" id="colorSocks">
+									<option value="">Trắng</option>
+									<option value="">Đen</option>
+								</select>
 							</div>
 
 							<div class="add-tocart-wrap">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtySocks">
 								</div>
-								<a href="#" class="add-to-cart"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ hàng</a>
+								<a href="#" class="add-to-cart add-to-cart-socks"
+									onclick="addToCart('9ExxjhRgHpmWneTgUpbI')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
@@ -768,12 +692,13 @@
 								• Chất liệu: Cotton, co giãn tốt <br>
 								• Logo: PASSED màu xanh lá <br>
 								• Logo được thêu trực tiếp trên bề mặt vớ <br>
-								• Có thể thoải mái giặt máy <br> 
-								• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.</p>
+								• Có thể thoải mái giặt máy <br>
+								• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.
+							</p>
 
-							
 
-						</div>
+
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -784,13 +709,13 @@
 
 		<!-- Quick View Sp 3-->
 
-		<div class="modal quickview-wrapper02" >
+		<div class="modal quickview-wrapper02">
 			<div class="quickview">
 				<div class="row">
 					<div class="col-12">
 						<span class="close-qv">
-					<i class="flaticon-close"></i>
-				</span>
+							<i class="flaticon-close"></i>
+						</span>
 					</div>
 					<div class="col-md-6">
 						<!-- Product View Slider -->
@@ -857,17 +782,20 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">DÂY ĐEO THẺ</a></h5>
 							<span class="price">45.000 VND</span>
-							
+
 
 							<div class="add-tocart-wrap" style="margin-top: 40px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyStrap">
 								</div>
-								<a href="#" class="add-to-cart"><i class="flaticon-shopping-purse-icon"></i>Add to Cart</a>
+								<a href="#" class="add-to-cart add-to-cart-strap"
+									onclick="addToCart('MfFhWpybUBWxY6qMhqnN')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
@@ -877,13 +805,14 @@
 							<p>Chi tiết sản phẩm: <br>
 								• Chất liệu: Satin <br>
 								• Logo: FPTYOU mặt trước <br>
-								• Slogan: Be warriors break barriers <br> 
+								• Slogan: Be warriors break barriers <br>
 								• Công nghệ in: Được in chuyển nhiệt trên bề mặt dây đeo <br>
-								• Vui lòng không giặt máy vì sẽ gây móp khóa gài của dây đeo thẻ <br> 
-								• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.</p>
+								• Vui lòng không giặt máy vì sẽ gây móp khóa gài của dây đeo thẻ <br>
+								• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.
+							</p>
 
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -891,16 +820,15 @@
 				<!-- /.row -->
 			</div>
 		</div>
-
 		<!-- Quick View Sp 4-->
 
-		<div class="modal quickview-wrapper03" >
+		<div class="modal quickview-wrapper03">
 			<div class="quickview">
 				<div class="row">
 					<div class="col-12">
 						<span class="close-qv">
-					<i class="flaticon-close"></i>
-				</span>
+							<i class="flaticon-close"></i>
+						</span>
 					</div>
 					<div class="col-md-6">
 						<!-- Product View Slider -->
@@ -967,12 +895,12 @@
 					<!-- /.col-xl-6 -->
 
 					<div class="col-md-6">
-						<div class="product-details">
+						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">COMBO FULL KIT</a></h5>
 							<span class="price">260.000 VND</span>
-							<div class="size-variation" >
+							<div class="size-variation">
 								<span>size áo:</span>
-								<select name="size-value">
+								<select name="size-value" id="sizeShirtCombo">
 									<option value="">S</option>
 									<option value="">M</option>
 									<option value="">L</option>
@@ -983,18 +911,18 @@
 									<option value="">5XL</option>
 								</select>
 							</div>
-							
+
 							<div class="size-variation" style="margin-top: 15px;">
 								<span>màu vớ:</span>
-								<select name="size-value">
+								<select name="size-value" id="colorSocksCombo">
 									<option value="">Trắng</option>
 									<option value="">Đen</option>
 								</select>
 							</div>
-							
+
 							<div class="size-variation" style="margin-top: 15px;">
 								<span>mẫu huy hiệu:</span>
-								<select name="size-value">
+								<select name="size-value" id="badgeCombo">
 									<option value="">PASSED</option>
 									<option value="">BE WARRIORS BREAK BARRIERS</option>
 								</select>
@@ -1003,9 +931,12 @@
 							<div class="add-tocart-wrap" style="margin-top: 40px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
-									<input type="text" value="1" name="qtybutton" class="cart-plus-minus">
+									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyCombo">
 								</div>
-								<a href="#" class="add-to-cart"><i class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ hàng</a>
+								<a href="#" class="add-to-cart add-to-cart-combo"
+									onclick="addToCart('QClgRMkJsWXVfeIp5eYR')"><i
+										class="flaticon-shopping-purse-icon"></i>Thêm vào giỏ
+									hàng</a>
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
@@ -1019,7 +950,7 @@
 								• Huy hiệu (được tự chọn mẫu).</p>
 
 
-						</div>
+						</form>
 						<!-- /.product-details -->
 					</div>
 					<!-- /.col-xl-6 -->
@@ -1054,6 +985,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/FPTUMerch_JS/sanpham.js"></script>
 
 </body>
 

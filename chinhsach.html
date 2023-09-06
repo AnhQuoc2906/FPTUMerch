@@ -6,11 +6,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Comercio - Fashion Shop Ecommerce HTML Template</title>
+	<title>FPTU MERCH 2023</title>
 
 	<!-- Fav Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/fav-icons/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/img/fav-icons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="assets/img/fav-icons/favicon-16x16.png">
 
 	<!-- Dependency Styles -->
@@ -72,11 +71,11 @@
 				<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 					<div class="mainmenu style-two">
 						<ul id="navigation">
-							<li><a href="main.html">TRANG CHỦ</a></li>
-							<li><a href="chinhsach.html">CHÍNH SÁCH</a></li>								
-							<li><a href="sanpham.html">SẢN PHẨM</a></li>
-							<li><a href="shop.html">VỀ CHÚNG TÔI</a></li>
-							<li class="has-child"><a href="contact.html">LIÊN HỆ</a>
+							<li><a href="index.html" onclick="passData()">TRANG CHỦ</a></li>
+							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>								
+							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
+							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
+							<li class="has-child"><a href="##">LIÊN HỆ</a>
 								<ul class="sub-menu">
 									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
 									
@@ -92,39 +91,16 @@
 				<div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
 					<div class="header-right-menu">
 						<ul>
-							<li class="top-cart"><a href="javascript:void(0)"><i class="flaticon-bag"></i><span>2</span></a>
+							<li class="top-cart"><a href="javascript:void(0)"><i class="flaticon-bag"></i><span class="quantity">0</span></a>
 
 								<div class="cart-drop">
-									<div class="single-cart">
-										<div class="cart-img">
-											<img alt="" src="media/images/product/car1.jpg">
-										</div>
-										<div class="cart-title">
-											<p><a href="">Aliquam Consequat</a></p>
-										</div>
-										<div class="cart-price">
-											<p>1 x $500</p>
-										</div>
-										<a href="#"><i class="fa fa-times"></i></a>
-									</div>
-									<div class="single-cart">
-										<div class="cart-img">
-											<img alt="" src="media/images/product/car2.jpg">
-										</div>
-										<div class="cart-title">
-											<p><a href="">Quisque In Arcuc</a></p>
-										</div>
-										<div class="cart-price">
-											<p>1 x $200</p>
-										</div>
-										<a href="#"><i class="fa fa-times"></i></a>
-									</div>
+									<div class="cart-top"></div>
 									<div class="cart-bottom">
 										<div class="cart-sub-total">
-											<p>TỔNG<span>$244.00</span></p>
+											<p>TỔNG<span class="totalPrice">0 VND</span></p>
 										</div>
 										<div class="cart-checkout">
-											<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+											<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
 										</div>
 									</div>
 								</div>
@@ -168,39 +144,16 @@
 				</div>
 				<div class="col-4">
 					<div class="top-cart">
-						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (2)</a>
+						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (<a class="quantity-mobile">0</a>)</a>
 						<div class="cart-drop">
-							<div class="single-cart">
-								<div class="cart-img">
-									<img alt="" src="media/images/product/car1.jpg">
-								</div>
-								<div class="cart-title">
-									<p><a href="">Aliquam Consequat</a></p>
-								</div>
-								<div class="cart-price">
-									<p>1 x $500</p>
-								</div>
-								<a href="#"><i class="fa fa-times"></i></a>
-							</div>
-							<div class="single-cart">
-								<div class="cart-img">
-									<img alt="" src="media/images/product/car2.jpg">
-								</div>
-								<div class="cart-title">
-									<p><a href="">Quisque In Arcuc</a></p>
-								</div>
-								<div class="cart-price">
-									<p>1 x $200</p>
-								</div>
-								<a href="#"><i class="fa fa-times"></i></a>
-							</div>
+							<div class="cart-top-mobile"></div>
 							<div class="cart-bottom">
 								
 								<div class="cart-sub-total">
-									<p>TỔNG <span>$244.00</span></p>
+									<p>TỔNG <span class="total-price-mobile">0 VND</span></p>
 								</div>
 								<div class="cart-checkout">
-									<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
 								</div>
 							</div>
 						</div>
@@ -223,7 +176,7 @@
 					</a></li>
 				<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 				<li>
-					<a href="main.html" class="link">TRANG CHỦ</a>
+					<a href="index.html" class="link">TRANG CHỦ</a>
 				</li>
 				<li>
 					<a href="chinhsach.html" class="link">CHÍNH SÁCH</a>
@@ -234,10 +187,10 @@
 				</li>
 
 				<li>
-					<a href="#" class="link">VỀ CHÚNG TÔI</i></a>
+					<a href="vechungtoi.html" class="link">VỀ CHÚNG TÔI</i></a>
 				</li>
 				<li>
-					<a href="#" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
+					<a href="##" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
 					<ul class="submenu">
 						<li><a href="https://www.facebook.com/cocsaigonfuhcm">FACEBOOK</a></li>
 					</ul>
@@ -259,7 +212,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="bc-inner">
-							<p><a href="main.html">TRANG CHỦ  |</a> CHÍNH SÁCH</p>
+							<p><a href="index.html">TRANG CHỦ  |</a> CHÍNH SÁCH</p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -328,12 +281,10 @@
 		<footer class="footer-widget-area style-two">
 			<div class="container-fluid custom-container">
 				<div class="footer-bottom">
-					<div class="row">
-						<div class="col-md-12 col-lg-6 col-xl-6 order-2 order-lg-1">
-							<p>Copyright © <span>2023</span> All rights reserved by <a href="#">Cóc Sài Gòn</a></p>
-						</div>
+					<p>Copyright © <span>2023</span> All rights reserved by <a href="#">Cóc Sài Gòn</a></p>
+						
 						<!-- /.col-xl-6 -->
-						<div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
+						<!-- <div class="col-md-12 col-lg-6 col-xl-6 order-1 order-lg-2">
 							<div class="footer-payment-icon">
 								<ul>
 									<li><a href="#"><img src="media/images/p1.png" alt=""></a></li>
@@ -342,9 +293,8 @@
 									<li><a href="#"><img src="media/images/p4.png" alt=""></a></li>
 								</ul>
 							</div>
-						</div>
+						</div> -->
 						<!-- /.col-xl-6 -->
-					</div>
 					<!-- /.row -->
 				</div>
 			</div>
@@ -378,6 +328,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/FPTUMerch_JS/chinhsach.js"></script>
 
 </body>
 

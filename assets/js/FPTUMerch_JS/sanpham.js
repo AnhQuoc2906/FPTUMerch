@@ -604,126 +604,127 @@ function openWrapper(object) {
         } else if (object == "QClgRMkJsWXVfeIp5eYR") {
             $('.quickview-wrapper03').toggleClass('open', isQuickViewOpen);
         }
-        }
-        if (object == "Xey3FcLjFp1H6d3Y2ipP") {
-            $('.trigger, .triggerButton, .trigger-image, .trigger-title').on('click', function (e) {
-                e.preventDefault();
-
-                // Toggle the state variable
-                isQuickViewOpen = !isQuickViewOpen;
-
-                // Toggle the quickview-wrapper
-                toggleQuickView();
-
-                // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
-                if (isQuickViewOpen) {
-                    var maskOverlay = $('.mask-overlay');
-
-                    if (maskOverlay.length === 0) {
-                        maskOverlay = $('<div class="mask-overlay">');
-                        maskOverlay.hide().appendTo('body').fadeIn('fast');
-
-                        // Add a click event handler to close the quickview-wrapper
-                        maskOverlay.on('click', function () {
-                            isQuickViewOpen = false; // Close the quickview-wrapper
-                            toggleQuickView();
-                            maskOverlay.remove();
-                        });
-                    }
-                } else {
-                    // Remove the mask-overlay element if the quickview-wrapper is closed
-                    $('.mask-overlay').remove();
-                }
-            });
-        } else if (object == "9ExxjhRgHpmWneTgUpbI") {
-            $('.trigger01, .triggerButton01, .trigger-image01, .trigger-title01').on('click', function (e) {
-                e.preventDefault();
-
-                // Toggle the state variable
-                isQuickViewOpen = !isQuickViewOpen;
-
-                // Toggle the quickview-wrapper
-                toggleQuickView();
-
-                // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
-                if (isQuickViewOpen) {
-                    var maskOverlay = $('.mask-overlay');
-
-                    if (maskOverlay.length === 0) {
-                        maskOverlay = $('<div class="mask-overlay">');
-                        maskOverlay.hide().appendTo('body').fadeIn('fast');
-
-                        // Add a click event handler to close the quickview-wrapper
-                        maskOverlay.on('click', function () {
-                            isQuickViewOpen = false; // Close the quickview-wrapper
-                            toggleQuickView();
-                            maskOverlay.remove();
-                        });
-                    }
-                } else {
-                    // Remove the mask-overlay element if the quickview-wrapper is closed
-                    $('.mask-overlay').remove();
-                }
-            });
-        } else if (object == "MfFhWpybUBWxY6qMhqnN") {
-            $('.trigger02, .triggerButton02, .trigger-image02, .trigger-title02').on('click', function (e) {
-                e.preventDefault();
-
-                // Toggle the state variable
-                isQuickViewOpen = !isQuickViewOpen;
-
-                // Toggle the quickview-wrapper
-                toggleQuickView();
-
-                // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
-                if (isQuickViewOpen) {
-                    var maskOverlay = $('.mask-overlay');
-
-                    if (maskOverlay.length === 0) {
-                        maskOverlay = $('<div class="mask-overlay">');
-                        maskOverlay.hide().appendTo('body').fadeIn('fast');
-
-                        // Add a click event handler to close the quickview-wrapper
-                        maskOverlay.on('click', function () {
-                            isQuickViewOpen = false; // Close the quickview-wrapper
-                            toggleQuickView();
-                            maskOverlay.remove();
-                        });
-                    }
-                } else {
-                    // Remove the mask-overlay element if the quickview-wrapper is closed
-                    $('.mask-overlay').remove();
-                }
-            });
-        } else if (object == "QClgRMkJsWXVfeIp5eYR") {
-            $('.trigger03, .triggerButton03, .trigger-image03, .trigger-title03').on('click', function (e) {
-                e.preventDefault();
-
-                // Toggle the state variable
-                isQuickViewOpen = !isQuickViewOpen;
-
-                // Toggle the quickview-wrapper
-                toggleQuickView();
-
-                // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
-                if (isQuickViewOpen) {
-                    var maskOverlay = $('.mask-overlay');
-
-                    if (maskOverlay.length === 0) {
-                        maskOverlay = $('<div class="mask-overlay">');
-                        maskOverlay.hide().appendTo('body').fadeIn('fast');
-
-                        // Add a click event handler to close the quickview-wrapper
-                        maskOverlay.on('click', function () {
-                            isQuickViewOpen = false; // Close the quickview-wrapper
-                            toggleQuickView();
-                            maskOverlay.remove();
-                        });
-                    }
-                } else {
-                    // Remove the mask-overlay element if the quickview-wrapper is closed
-                    $('.mask-overlay').remove();
-                }
-            });
-        }
     }
+    
+    if (object == "Xey3FcLjFp1H6d3Y2ipP") {
+        $('.trigger, .triggerButton, .trigger-image, .trigger-title').on('click', function (e) {
+            e.preventDefault();
+
+            // Toggle the state variable
+            isQuickViewOpen = !isQuickViewOpen;
+
+            // Toggle the quickview-wrapper
+            toggleQuickView();
+
+            // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
+            if (isQuickViewOpen) {
+                var maskOverlay = $('.mask-overlay');
+
+                if (maskOverlay.length === 0) {
+                    maskOverlay = $('<div class="mask-overlay">');
+                    maskOverlay.hide().appendTo('body').fadeIn('fast');
+
+                    // Add a click event handler to close the quickview-wrapper
+                    maskOverlay.on('click', function () {
+                        isQuickViewOpen = false; // Close the quickview-wrapper
+                        toggleQuickView();
+                        maskOverlay.remove();
+                    });
+                }
+            } else {
+                // Remove the mask-overlay element if the quickview-wrapper is closed
+                $('.mask-overlay').remove();
+            }
+        });
+    } else if (object == "9ExxjhRgHpmWneTgUpbI") {
+        $('.trigger01, .triggerButton01, .trigger-image01, .trigger-title01').on('click', function (e) {
+            e.preventDefault();
+
+            // Toggle the state variable
+            isQuickViewOpen = !isQuickViewOpen;
+
+            // Toggle the quickview-wrapper
+            toggleQuickView();
+
+            // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
+            if (isQuickViewOpen) {
+                var maskOverlay = $('.mask-overlay');
+
+                if (maskOverlay.length === 0) {
+                    maskOverlay = $('<div class="mask-overlay">');
+                    maskOverlay.hide().appendTo('body').fadeIn('fast');
+
+                    // Add a click event handler to close the quickview-wrapper
+                    maskOverlay.on('click', function () {
+                        isQuickViewOpen = false; // Close the quickview-wrapper
+                        toggleQuickView();
+                        maskOverlay.remove();
+                    });
+                }
+            } else {
+                // Remove the mask-overlay element if the quickview-wrapper is closed
+                $('.mask-overlay').remove();
+            }
+        });
+    } else if (object == "MfFhWpybUBWxY6qMhqnN") {
+        $('.trigger02, .triggerButton02, .trigger-image02, .trigger-title02').on('click', function (e) {
+            e.preventDefault();
+
+            // Toggle the state variable
+            isQuickViewOpen = !isQuickViewOpen;
+
+            // Toggle the quickview-wrapper
+            toggleQuickView();
+
+            // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
+            if (isQuickViewOpen) {
+                var maskOverlay = $('.mask-overlay');
+
+                if (maskOverlay.length === 0) {
+                    maskOverlay = $('<div class="mask-overlay">');
+                    maskOverlay.hide().appendTo('body').fadeIn('fast');
+
+                    // Add a click event handler to close the quickview-wrapper
+                    maskOverlay.on('click', function () {
+                        isQuickViewOpen = false; // Close the quickview-wrapper
+                        toggleQuickView();
+                        maskOverlay.remove();
+                    });
+                }
+            } else {
+                // Remove the mask-overlay element if the quickview-wrapper is closed
+                $('.mask-overlay').remove();
+            }
+        });
+    } else if (object == "QClgRMkJsWXVfeIp5eYR") {
+        $('.trigger03, .triggerButton03, .trigger-image03, .trigger-title03').on('click', function (e) {
+            e.preventDefault();
+
+            // Toggle the state variable
+            isQuickViewOpen = !isQuickViewOpen;
+
+            // Toggle the quickview-wrapper
+            toggleQuickView();
+
+            // Check if the quickview-wrapper is open and add or remove the mask-overlay accordingly
+            if (isQuickViewOpen) {
+                var maskOverlay = $('.mask-overlay');
+
+                if (maskOverlay.length === 0) {
+                    maskOverlay = $('<div class="mask-overlay">');
+                    maskOverlay.hide().appendTo('body').fadeIn('fast');
+
+                    // Add a click event handler to close the quickview-wrapper
+                    maskOverlay.on('click', function () {
+                        isQuickViewOpen = false; // Close the quickview-wrapper
+                        toggleQuickView();
+                        maskOverlay.remove();
+                    });
+                }
+            } else {
+                // Remove the mask-overlay element if the quickview-wrapper is closed
+                $('.mask-overlay').remove();
+            }
+        });
+    }
+}

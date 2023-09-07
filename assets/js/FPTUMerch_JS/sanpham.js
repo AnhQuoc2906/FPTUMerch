@@ -95,6 +95,8 @@ fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get", {
     console.log(error);
 });
 
+
+
 $('.add-to-cart-socks').on('click', function (e) {
     e.preventDefault();
 
@@ -307,7 +309,7 @@ function searchByName() {
                 <div class="row">
                     <div class="col-md-5 col-lg-6 col-xl-4 ">
                         <div class="pro-img trigger-image">
-                            <img src="media/images/${values.productLink}.jpg" alt="">
+                            <img src="media/images/producttest.jpg" alt="">
                         </div>
                         <div class="pro-icon trigger">
                             <ul>
@@ -328,7 +330,7 @@ function searchByName() {
                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <a class="btn-two triggerButton" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
+                            <a class="btn-two triggerButton" href="#" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -339,7 +341,7 @@ function searchByName() {
                 <div class="row">
                     <div class="col-md-5 col-lg-6 col-xl-4">
                         <div class="pro-img trigger-image01">
-                            <img src="media/images/${values.productLink}.jpg" alt="">
+                            <img src="media/images/producttest.jpg" alt="">
                         </div>
                         <div class="pro-icon trigger01">
                             <ul>
@@ -360,7 +362,7 @@ function searchByName() {
                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <a class="btn-two triggerButton01" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
+                            <a class="btn-two triggerButton01" href="#" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -371,7 +373,7 @@ function searchByName() {
                 <div class="row">
                     <div class="col-md-5 col-lg-6 col-xl-4">
                         <div class="pro-img trigger-image02">
-                            <img src="media/images/${values.productLink}.jpg" alt="">
+                            <img src="media/images/producttest.jpg" alt="">
                         </div>
                         <div class="pro-icon trigger02">
                             <ul>
@@ -392,7 +394,7 @@ function searchByName() {
                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <a class="btn-two triggerButton02" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
+                            <a class="btn-two triggerButton02" href="#" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -403,7 +405,7 @@ function searchByName() {
                 <div class="row">
                     <div class="col-md-5 col-lg-6 col-xl-4">
                         <div class="pro-img trigger-image03">
-                            <img src="media/images/${values.productLink}.jpg" alt="">
+                            <img src="media/images/combo.jpg" alt="">
                         </div>
                         <span class="new-tag">NEW!</span>
                         <div class="pro-icon trigger03">
@@ -425,7 +427,7 @@ function searchByName() {
                                     <li><a href="#"><i class="fas fa-star"></i></a></li>
                                 </ul>
                             </div>
-                            <a class="btn-two triggerButton03" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
+                            <a class="btn-two triggerButton03" href="#" onclick="openWrapper('${values.productID}')">Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>
@@ -446,17 +448,10 @@ function passData() {
 
 function openWrapper(object) {
     var isQuickViewOpen = false; // Track the state of the quickview-wrapper
+
     // Toggle the quickview-wrapper state
     function toggleQuickView() {
-        if(object == "Xey3FcLjFp1H6d3Y2ipP"){
-            $('.quickview-wrapper').toggleClass('open', isQuickViewOpen);
-        } else if(object == "9ExxjhRgHpmWneTgUpbI"){
-            $('.quickview-wrapper01').toggleClass('open', isQuickViewOpen);
-        } else if(object == "MfFhWpybUBWxY6qMhqnN"){
-            $('.quickview-wrapper02').toggleClass('open', isQuickViewOpen);
-        } else if(object == "QClgRMkJsWXVfeIp5eYR"){
-            $('.quickview-wrapper03').toggleClass('open', isQuickViewOpen);
-        }  
+        $('.quickview-wrapper').toggleClass('open', isQuickViewOpen);
     }
     if(object == "Xey3FcLjFp1H6d3Y2ipP"){
         $('.trigger, .triggerButton, .trigger-image, .trigger-title').on('click', function (e) {
@@ -475,8 +470,7 @@ function openWrapper(object) {
                 if (maskOverlay.length === 0) {
                     maskOverlay = $('<div class="mask-overlay">');
                     maskOverlay.hide().appendTo('body').fadeIn('fast');
-                    
-                    maskOverlay = $('.mask-overlay,.close-qv');
+    
                     // Add a click event handler to close the quickview-wrapper
                     maskOverlay.on('click', function () {
                         isQuickViewOpen = false; // Close the quickview-wrapper
@@ -506,8 +500,7 @@ function openWrapper(object) {
                 if (maskOverlay.length === 0) {
                     maskOverlay = $('<div class="mask-overlay">');
                     maskOverlay.hide().appendTo('body').fadeIn('fast');
-                    
-                    maskOverlay = $('.mask-overlay,.close-qv');
+    
                     // Add a click event handler to close the quickview-wrapper
                     maskOverlay.on('click', function () {
                         isQuickViewOpen = false; // Close the quickview-wrapper
@@ -538,7 +531,6 @@ function openWrapper(object) {
                     maskOverlay = $('<div class="mask-overlay">');
                     maskOverlay.hide().appendTo('body').fadeIn('fast');
     
-                    maskOverlay = $('.mask-overlay,.close-qv');
                     // Add a click event handler to close the quickview-wrapper
                     maskOverlay.on('click', function () {
                         isQuickViewOpen = false; // Close the quickview-wrapper
@@ -569,7 +561,6 @@ function openWrapper(object) {
                     maskOverlay = $('<div class="mask-overlay">');
                     maskOverlay.hide().appendTo('body').fadeIn('fast');
     
-                    maskOverlay = $('.mask-overlay,.close-qv');
                     // Add a click event handler to close the quickview-wrapper
                     maskOverlay.on('click', function () {
                         isQuickViewOpen = false; // Close the quickview-wrapper

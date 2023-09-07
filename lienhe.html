@@ -236,27 +236,37 @@
 						<div class="contact-form">
 							<form action="#">	
 								<div class="row">
+									
 									<div class="col-xl-12">
+										<h4>Họ Và Tên</h4>
 										<input type="text" placeholder="Họ Và Tên*">
 									</div>
 									<div class="col-xl-12">
+										<h4>Số Điện Thoại</h4>
 										<input type="text" placeholder="Số Điện Thoại*">
 									</div>
 									<div class="col-xl-12">
+										<h4>Email</h4>
 										<input type="text" placeholder="Email*">
 									</div>
-									<div class="col-xl-12 phuongthucnhanhang">
-										<h4>Phương Thức Nhận Hàng</h4>
+									<div class="col-xl-5 phuongthucnhanhang">
+										<h4>Địa Điểm Nhận Hàng</h4>
+										<div class="local">
+											<select id="local" name="local">
+												<option value="Trường Đại Học FPT TP. HCM" selected>Trường Đại Học FPT TP. HCM</option>
+												<option value="Ship Tận Nơi">Ship Tận Nơi</option>									
+											</select>
+										</div>	
+									</div>
+									<div class="col-xl-7 luuy">
+										<p>Lưu ý: Phí giao hàng 30.000đ được áp dụng cho tất cả các khu vực. Miễn phí ship khi nhận hàng trực tiếp tại ĐH FPT TP. HCM.</p>
+									</div>
+									<div id="diachi" class="col-xl-12">
+										<h4>Địa Chỉ Giao Hàng</h4>
+										<input type="text" placeholder="Địa Chỉ Giao Hàng*">
 									</div>
 									<div class="col-xl-12">
-										<input type="text" placeholder="Email*">
-									</div>
-									
-									<div class="col-xl-12">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div>
-									<div class="col-xl-12">
-										<input type="submit" value="SUBMIT">
+										<input type="submit" value="THANH TOÁN">
 									</div>
 								</div>
 							</form>
@@ -308,7 +318,19 @@
 
 	</div>
 	<!-- /#site -->
-
+	<script>
+		// Lắng nghe sự kiện khi chọn dropdown
+		document.getElementById("local").addEventListener("change", function() {
+		  var selectedOption = this.value;
+		  
+		  // Ẩn section B khi chọn A, và hiển thị nó khi chọn B
+		  if (selectedOption === "Trường Đại Học FPT TP. HCM") {
+			document.getElementById("diachi").style.display = "none";
+		  } else if (selectedOption === "Ship Tận Nơi") {
+			document.getElementById("diachi").style.display = "block";
+		  }
+		});
+		</script>
 	<!-- Dependency Scripts -->
 	<script src="dependencies/jquery/jquery.min.js"></script>
 	<script src="dependencies/popper.js/popper.min.js"></script>

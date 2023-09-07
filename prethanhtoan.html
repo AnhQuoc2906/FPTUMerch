@@ -105,7 +105,7 @@
 				<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 					<div class="mainmenu style-two">
 						<ul id="navigation">
-							<li><a href="index.html">TRANG CHỦ</a></li>
+							<li><a href="index.html" onclick="passData()">TRANG CHỦ</a></li>
 							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>
 							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
 							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
@@ -113,8 +113,6 @@
 								<ul class="sub-menu">
 									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
 											rel="noopener noreferrer">FACEBOOK</a></li>
-
-
 								</ul>
 							</li>
 						</ul>
@@ -216,7 +214,7 @@
 					</a></li>
 				<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 				<li>
-					<a href="#" class="link" onclick="passData()">TRANG CHỦ</a>
+					<a href="index.html" class="link" onclick="passData()">TRANG CHỦ</a>
 				</li>
 				<li>
 					<a href="chinhsach.html" class="link" onclick="passData()">CHÍNH SÁCH</a>
@@ -282,160 +280,31 @@
 										<th>Tổng</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<a href="#">X</a>
-										</td>
-										<td>
-											<a href="#">
-												<div class="product-image">
-													<img alt="Stylexpo" src="media/images/product/cp1.jpg">
-												</div>
-											</a>
-										</td>
-										<td>
-											<div class="product-title">
-												<a href="#">Cross Colours Camo Print Tank half mengo</a>
-											</div>
-										</td>
-										<td>
-											<div class="quantity">
-												<input type="number" min="1" >
-											</div>
-										</td>
-										<td>
-											<ul>
-												<li>
-													<div class="price-box">
-														<span class="price">230.000 VND</span>
-													</div>
-												</li>
-											</ul>
-										</td>
-										<td>
-											<div class="total-price-box">
-												<span class="price">230.000 VND</span>
-											</div>
-										</td>
+								<tbody id="body-cart-list">
 
-									</tr>
-									<!-- /.single product  -->
-									<tr>
-										<td>
-											<a href="#">X</a>
-										</td>
-										<td>
-											<a href="#">
-												<div class="product-image">
-													<img alt="Stylexpo" src="media/images/product/cp2.jpg">
-												</div>
-											</a>
-										</td>
-										<td>
-											<div class="product-title">
-												<a href="#">Cross Colours Camo Print Tank half mengo</a>
-											</div>
-										</td>
-
-										<td>
-											<div class="quantity">
-												<input type="number" min="1" >
-											</div>
-										</td>
-										<td>
-											<ul>
-												<li>
-													<div class="price-box">
-														<span class="price">19.000 VND</span>
-													</div>
-												</li>
-											</ul>
-										</td>
-										<td>
-											<div class="total-price-box">
-												<span class="price">19.000 VND</span>
-											</div>
-										</td>
-
-									</tr>
-									<!-- /.single product  -->
-									<tr>
-										<td>
-											<a href="#">X</a>
-										</td>
-										<td>
-											<a href="#">
-												<div class="product-image">
-													<img alt="Stylexpo" src="media/images/product/cp2.jpg">
-												</div>
-											</a>
-										</td>
-										<td>
-											<div class="product-title">
-												<a href="#">Cross Colours Camo Print Tank half mengo</a>
-											</div>
-										</td>
-
-										<td>
-											<div class="quantity">
-												<input type="number" min="1" >
-											</div>
-										</td>
-										<td>
-											<ul>
-												<li>
-													<div class="price-box">
-														<span class="price">45.000 VND </span>
-													</div>
-												</li>
-											</ul>
-										</td>
-										<td>
-											<div class="total-price-box">
-												<span class="price">45.000 VND</span>
-											</div>
-										</td>
-
-									</tr>
-									<!-- /.single product  -->
 								</tbody>
 							</table>
 
 						</div>
-						<!-- /.cart-table -->
-						<!-- <div class="row cart-btn-section">
-							
-
-							<div class="col-lg-6">
-								<div class="subscribe-wrapper">
-									<button class="magiamgia" style="width: 30%;" type="submit">MÃ GIẢM GIÁ</button>
-									<input placeholder="NHẬP MÃ GIẢM GIÁ" type="text">
-									<button style="border-radius: 0px 5px 5px 0px;" type="submit">ÁP DỤNG</button>
-								</div>
-							</div>
-
-							
-						</div> -->
-						<!-- /.row -->
 					</div>
 					<!-- /.col-xl-9 -->
 					<div class="col-xl-4">
 						<div class="cart-subtotal">
 							<p>ĐƠN HÀNG</p>
 							<h5>MÃ GIẢM GIÁ</h5>
+							<h6 class="announce"></h6>
 							<div >
-								<div class="subscribe-wrapper">
-									<input placeholder="NHẬP MÃ GIẢM GIÁ" type="text">
-									<button style="border-radius: 0px 5px 5px 0px;" type="submit">ÁP DỤNG</button>
-								</div>
+								<form class="subscribe-wrapper">
+									<input placeholder="NHẬP MÃ GIẢM GIÁ" type="text" id="discountCode">
+									<button style="border-radius: 0px 5px 5px 0px;" type="submit" onclick="discountCodeSubmit(event)">ÁP DỤNG</button>
+								</form>
 							</div>
 							<h6>*Mã giảm giá này được cung cấp bởi các bạn saler*</h6>
 							<ul>
-								<li><span>Đơn Hàng:</span>260.000 VND</li>
+								<li><span>Đơn Hàng:</span><b class="tempPrice">0 VND</b></li>
 								
-								<li><span>Giảm:</span>-30.000 VND</li>
-								<li><span>Tạm Tính:</span>230.000 VND</li>
+								<li><span>Giảm:</span><b class="discountPrice">0 VND</b></li>
+								<li><span>Tạm Tính:</span><b class="finalPrice">0 VND</b></li>
 							</ul>
 							<div class="note">
 								<span>Ghi Chú :</span>
@@ -652,6 +521,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/FPTUMerch_JS/prethanhtoan.js"></script>
 
 </body>
 

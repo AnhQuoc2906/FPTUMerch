@@ -73,15 +73,13 @@
 				<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 					<div class="mainmenu style-two">
 						<ul id="navigation">
-							<li><a href="index.html" onclick="passData()">TRANG CHỦ</a></li>
-							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>								
-							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
-							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
+							<li><a href="./index.html" onclick="passData()">TRANG CHỦ</a></li>
+							<li><a href="./chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>								
+							<li><a href="./sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
+							<li><a href="./vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
 							<li class="has-child"><a href="##">LIÊN HỆ</a>
 								<ul class="sub-menu">
 									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
-									
-									
 								</ul>
 							</li>
 						</ul>
@@ -243,13 +241,13 @@
 							<form action="#">
 								<div class="row">
 									<div class="col-xl-12">
-										<input type="text" placeholder="Tài khoảng đăng nhập*">
+										<input type="text" placeholder="Tài khoản*" id="email">
 									</div>
 									<div class="col-xl-12">
-										<input type="text" placeholder="Mật khẩu bí bật*">
+										<input type="text" placeholder="Mật khẩu*" id="password">
 									</div>
 									<div class="col-xl-12">
-										<input type="submit" value="ĐĂNG NHẬP">
+										<input type="submit" value="ĐĂNG NHẬP" onclick="login()">
 									</div>
 								</div>
 							</form>
@@ -321,6 +319,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/FPTUMerch_JS/login.js"></script>
 
 </body>
 

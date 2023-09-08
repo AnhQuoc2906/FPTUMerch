@@ -233,7 +233,7 @@ function reloadCart(){
 
 function passData() {
     sessionStorage.setItem('listCarts', JSON.stringify(listCarts));
-}
+}   
 
 function changeQuantity(index, quantity) {
     if (quantity == 0) {

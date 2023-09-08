@@ -73,36 +73,14 @@
 				<div class="col-lg-12 col-xl-7 order-lg-3 order-xl-2 menu-container">
 					<div class="mainmenu style-two">
 						<ul id="navigation">
-							<li><a href="./index.html" onclick="passData()">TRANG CHỦ</a></li>
-							<li><a href="./chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>								
-							<li><a href="./sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
-							<li><a href="./vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
+							<li><a href="./index.html">TRANG CHỦ</a></li>
+							<li><a href="./chinhsach.html">CHÍNH SÁCH</a></li>								
+							<li><a href="./sanpham.html">SẢN PHẨM</a></li>
+							<li><a href="./vechungtoi.html">VỀ CHÚNG TÔI</a></li>
 							<li class="has-child"><a href="##">LIÊN HỆ</a>
 								<ul class="sub-menu">
 									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
 								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-
-				<div class="col-lg-6 col-xl-3 order-lg-2 order-xl-3">
-					<div class="header-right-menu">
-						<ul>
-							<li class="top-cart"><a href="javascript:void(0)"><i class="flaticon-bag"></i><span class="quantity">0</span></a>
-
-								<div class="cart-drop">
-									<div class="cart-top"></div>
-									<div class="cart-bottom">
-										<div class="cart-sub-total">
-											<p>TỔNG<span class="totalPrice">0 VND</span></p>
-										</div>
-										<div class="cart-checkout">
-											<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
-										</div>
-									</div>
-								</div>
 							</li>
 						</ul>
 					</div>
@@ -141,23 +119,6 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-4">
-					<div class="top-cart">
-						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (<a class="quantity-mobile">0</a>)</a>
-						<div class="cart-drop">
-							<div class="cart-top-mobile"></div>
-							<div class="cart-bottom">
-								
-								<div class="cart-sub-total">
-									<p>TỔNG <span class="total-price-mobile">0 VND</span></p>
-								</div>
-								<div class="cart-checkout">
-									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<!-- /.row end -->
 		</div>
@@ -175,14 +136,14 @@
 					</a></li>
 				<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 				<li>
-					<a href="index.html" class="link" onclick="passData()">TRANG CHỦ</a>
+					<a href="index.html" class="link">TRANG CHỦ</a>
 				</li>
 				<li>
-					<a href="chinhsach.html" class="link" onclick="passData()">CHÍNH SÁCH</a>
+					<a href="chinhsach.html" class="link">CHÍNH SÁCH</a>
 				</li>
 
 				<li>
-					<a href="sanpham.html" class="link" onclick="passData()">SẢN PHẨM</a>
+					<a href="sanpham.html" class="link">SẢN PHẨM</a>
 				</li>
 
 				<li>
@@ -211,7 +172,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="bc-inner">
-							<p><a href="index.html">Trang Chủ  |</a> LOGIN Ở ĐÂY NÈ MẤY NÍ</p>
+							<p><a href="index.html">Trang Chủ  |</a> LOGIN</p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -238,13 +199,18 @@
 				<div class="row justify-content-center">
 					<div class="col-sm-9 col-md-8 col-lg-6 col-xl-4">
 						<div class="contact-form login-form">
-							<form action="#">
+							<div class="announce">
+								
+							</div>
+							<form action="#" controller="#">
 								<div class="row">
 									<div class="col-xl-12">
-										<input type="text" placeholder="Tài khoản*" id="email">
+										<input type="text" placeholder="Tài khoản*" id="email" 
+												required oninvalid="this.setCustomValidity('Hãy nhập Email được cấp của bạn vào nhé')">
 									</div>
 									<div class="col-xl-12">
-										<input type="text" placeholder="Mật khẩu*" id="password">
+										<input type="password" placeholder="Mật khẩu*" id="password" 
+												required oninvalid="this.setCustomValidity('Hãy nhập Password được cấp của bạn vào nhé')">
 									</div>
 									<div class="col-xl-12">
 										<input type="submit" value="ĐĂNG NHẬP" onclick="login()">

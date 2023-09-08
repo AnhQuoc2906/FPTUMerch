@@ -212,7 +212,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="bc-inner">
-							<p><a href="index.html">TRANG CHỦ  |</a> THÔNG TIN NHẬN HÀNG</p>
+							<p><a href="prethanhtoan.html">THANH TOÁN  |</a> THÔNG TIN NHẬN HÀNG</p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -266,7 +266,10 @@
 										<input type="text" placeholder="Địa Chỉ Giao Hàng*">
 									</div>
 									<div class="col-xl-12">
-										<input type="submit" value="THANH TOÁN">
+										<div class="trigger01">
+											<input type="submit" value="THANH TOÁN">
+										</div>
+										
 									</div>
 								</div>
 							</form>
@@ -317,20 +320,82 @@
 		</div>
 
 	</div>
+
+	<!-- Quick View Sp 2-->
+	<div class="modal quickview-wrapper01">
+		<div class="quickview">
+			<div class="row">
+				<div class="col-12">
+					<span class="close-qv">
+						<i class="flaticon-close"></i>
+					</span>
+				</div>
+				<div class="col-md-12 chuyenkhoan">			
+					<div class="section-heading pb-30">
+						<h3>CÁC HÌNH THỨC <span>CHUYỂN KHOẢN</span></h3>
+					</div>				
+				</div>
+				<div class="col-md-6 chon">			
+					<label><input type="radio" name="thanhtoan" value="MOMO" > MOMO</label>		
+				</div>
+				<div class="col-md-6 chon">			
+					<label><input type="radio" name="thanhtoan" value="TPBANK"> NGÂN HÀNG TP BANK</label>				
+				</div>
+				<div id="momo" class="col-md-5 bank">			
+					<img  src="media/images/MOMO.png" alt="momo">
+				</div>
+				<div  class="col-md-7">			
+					<div class="col-md-6">
+						<h6>Mã Đơn Hàng của bạn là:</h6>
+					</div>
+					<div class="col-md-6">
+						<h6>FM202300001</h6>
+					</div>
+				</div>
+				<div id="nh" class="col-md-5 bank">			
+					<img  src="media/images/TPBANK.png" alt="momo">			
+				</div>
 	<!-- /#site -->
 	<script>
-		// Lắng nghe sự kiện khi chọn dropdown
+		
 		document.getElementById("local").addEventListener("change", function() {
 		  var selectedOption = this.value;
 		  
-		  // Ẩn section B khi chọn A, và hiển thị nó khi chọn B
+		  
 		  if (selectedOption === "Trường Đại Học FPT TP. HCM") {
 			document.getElementById("diachi").style.display = "none";
 		  } else if (selectedOption === "Ship Tận Nơi") {
 			document.getElementById("diachi").style.display = "block";
 		  }
 		});
-		</script>
+	</script>
+
+
+	<script>
+		var radioButtons = document.querySelectorAll('input[type="radio"]');
+		var imageA = document.getElementById("momo");
+		var imageB = document.getElementById("nh");
+
+// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
+		radioButtons.forEach(function(radioButton) {
+    	radioButton.addEventListener("change", function() {
+        // Lấy giá trị của nút radio đã chọn
+        var selectedValue = this.value;
+
+        // Ẩn ảnh A và hiển thị ảnh B nếu chọn B, ngược lại thì hiển thị ảnh A
+        if (selectedValue === "TPBANK") {
+            imageA.style.display = "none";
+            imageB.style.display = "block";
+        } else {
+            imageA.style.display = "block";
+            imageB.style.display = "none";
+        }
+   		 });
+	});
+	</script>
+
+
+	
 	<!-- Dependency Scripts -->
 	<script src="dependencies/jquery/jquery.min.js"></script>
 	<script src="dependencies/popper.js/popper.min.js"></script>

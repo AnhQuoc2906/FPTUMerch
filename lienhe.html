@@ -212,7 +212,7 @@
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="bc-inner">
-							<p><a href="index.html">TRANG CHỦ  |</a> THÔNG TIN NHẬN HÀNG</p>
+							<p><a href="prethanhtoan.html">THANH TOÁN  |</a> THÔNG TIN NHẬN HÀNG</p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -236,27 +236,40 @@
 						<div class="contact-form">
 							<form action="#">	
 								<div class="row">
+									
 									<div class="col-xl-12">
+										<h4>Họ Và Tên</h4>
 										<input type="text" placeholder="Họ Và Tên*">
 									</div>
 									<div class="col-xl-12">
+										<h4>Số Điện Thoại</h4>
 										<input type="text" placeholder="Số Điện Thoại*">
 									</div>
 									<div class="col-xl-12">
+										<h4>Email</h4>
 										<input type="text" placeholder="Email*">
 									</div>
-									<div class="col-xl-12 phuongthucnhanhang">
-										<h4>Phương Thức Nhận Hàng</h4>
+									<div class="col-xl-5 phuongthucnhanhang">
+										<h4>Địa Điểm Nhận Hàng</h4>
+										<div class="local">
+											<select id="local" name="local">
+												<option value="Trường Đại Học FPT TP. HCM" selected>Trường Đại Học FPT TP. HCM</option>
+												<option value="Ship Tận Nơi">Ship Tận Nơi</option>									
+											</select>
+										</div>	
+									</div>
+									<div class="col-xl-7 luuy">
+										<p>Lưu ý: Phí giao hàng 30.000đ được áp dụng cho tất cả các khu vực. Miễn phí ship khi nhận hàng trực tiếp tại ĐH FPT TP. HCM.</p>
+									</div>
+									<div id="diachi" class="col-xl-12">
+										<h4>Địa Chỉ Giao Hàng</h4>
+										<input type="text" placeholder="Địa Chỉ Giao Hàng*">
 									</div>
 									<div class="col-xl-12">
-										<input type="text" placeholder="Email*">
-									</div>
-									
-									<div class="col-xl-12">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div>
-									<div class="col-xl-12">
-										<input type="submit" value="SUBMIT">
+										<div class="trigger01">
+											<input type="submit" value="THANH TOÁN">
+										</div>
+										
 									</div>
 								</div>
 							</form>
@@ -307,8 +320,82 @@
 		</div>
 
 	</div>
-	<!-- /#site -->
 
+	<!-- Quick View Sp 2-->
+	<div class="modal quickview-wrapper01">
+		<div class="quickview">
+			<div class="row">
+				<div class="col-12">
+					<span class="close-qv">
+						<i class="flaticon-close"></i>
+					</span>
+				</div>
+				<div class="col-md-12 chuyenkhoan">			
+					<div class="section-heading pb-30">
+						<h3>CÁC HÌNH THỨC <span>CHUYỂN KHOẢN</span></h3>
+					</div>				
+				</div>
+				<div class="col-md-6 chon">			
+					<label><input type="radio" name="thanhtoan" value="MOMO" > MOMO</label>		
+				</div>
+				<div class="col-md-6 chon">			
+					<label><input type="radio" name="thanhtoan" value="TPBANK"> NGÂN HÀNG TP BANK</label>				
+				</div>
+				<div id="momo" class="col-md-5 bank">			
+					<img  src="media/images/MOMO.png" alt="momo">
+				</div>
+				<div  class="col-md-7">			
+					<div class="col-md-6">
+						<h6>Mã Đơn Hàng của bạn là:</h6>
+					</div>
+					<div class="col-md-6">
+						<h6>FM202300001</h6>
+					</div>
+				</div>
+				<div id="nh" class="col-md-5 bank">			
+					<img  src="media/images/TPBANK.png" alt="momo">			
+				</div>
+	<!-- /#site -->
+	<script>
+		
+		document.getElementById("local").addEventListener("change", function() {
+		  var selectedOption = this.value;
+		  
+		  
+		  if (selectedOption === "Trường Đại Học FPT TP. HCM") {
+			document.getElementById("diachi").style.display = "none";
+		  } else if (selectedOption === "Ship Tận Nơi") {
+			document.getElementById("diachi").style.display = "block";
+		  }
+		});
+	</script>
+
+
+	<script>
+		var radioButtons = document.querySelectorAll('input[type="radio"]');
+		var imageA = document.getElementById("momo");
+		var imageB = document.getElementById("nh");
+
+// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
+		radioButtons.forEach(function(radioButton) {
+    	radioButton.addEventListener("change", function() {
+        // Lấy giá trị của nút radio đã chọn
+        var selectedValue = this.value;
+
+        // Ẩn ảnh A và hiển thị ảnh B nếu chọn B, ngược lại thì hiển thị ảnh A
+        if (selectedValue === "TPBANK") {
+            imageA.style.display = "none";
+            imageB.style.display = "block";
+        } else {
+            imageA.style.display = "block";
+            imageB.style.display = "none";
+        }
+   		 });
+	});
+	</script>
+
+
+	
 	<!-- Dependency Scripts -->
 	<script src="dependencies/jquery/jquery.min.js"></script>
 	<script src="dependencies/popper.js/popper.min.js"></script>

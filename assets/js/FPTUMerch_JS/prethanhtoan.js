@@ -93,8 +93,8 @@ if (listCarts.length>0) {
     })    
 } else {
     document.querySelector('.cart-table').innerHTML 
-    = "Hiện bạn đang không có món hàng nào, hãy chọn ít nhất 1 món trước khi quay lại đây nhé! <br/>"
-     + "Bạn có thể mua đồ tại <a href='index.html' class='link' onclick='passData()'>TRANG CHỦ</a> hoặc <a href='sanpham.html' class='link' onclick='passData()'>SẢN PHẨM</a> nhé";
+    = "<p>Hiện bạn đang không có món hàng nào, hãy chọn ít nhất 1 món trước khi quay lại đây nhé! </p> "
+     + "<p>Bạn có thể mua đồ tại <a href='index.html' class='link' onclick='passData()'>TRANG CHỦ</a> hoặc <a href='sanpham.html' class='link' onclick='passData()'>SẢN PHẨM</a> nhé</p>";
 }
 
 function discountCodeSubmit(e) {

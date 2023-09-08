@@ -100,7 +100,7 @@
 											<p>TỔNG<span class="totalPrice">0 VND</span></p>
 										</div>
 										<div class="cart-checkout">
-											<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+											<a style="border-radius: 30px 30px 30px 30px; width: 100%" href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
 										</div>
 									</div>
 								</div>
@@ -176,18 +176,18 @@
 					</a></li>
 				<li><a href="#" class="closeme"><i class="flaticon-close"></i></a></li>
 				<li>
-					<a href="index.html" class="link" onclick="passData()">TRANG CHỦ</a>
+					<a href="index.html" class="out-link" onclick="passData()">TRANG CHỦ</a>
 				</li>
 				<li>
-					<a href="chinhsach.html" class="link" onclick="passData()">CHÍNH SÁCH</a>
-				</li>
-
-				<li>
-					<a href="sanpham.html" class="link" onclick="passData()">SẢN PHẨM</a>
+					<a href="chinhsach.html" class="out-link" onclick="passData()">CHÍNH SÁCH</a>
 				</li>
 
 				<li>
-					<a href="vechungtoi.html" class="link">VỀ CHÚNG TÔI</i></a>
+					<a href="sanpham.html" class="out-link" onclick="passData()">SẢN PHẨM</a>
+				</li>
+
+				<li>
+					<a href="vechungtoi.html" class="out-link">VỀ CHÚNG TÔI</i></a>
 				</li>
 				<li>
 					<a href="##" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
@@ -344,18 +344,58 @@
 				<div id="momo" class="col-md-5 bank">			
 					<img  src="media/images/MOMO.png" alt="momo">
 				</div>
-				<div  class="col-md-7">			
-					<div class="col-md-6">
-						<h6>Mã Đơn Hàng của bạn là:</h6>
+				<div  class="col-md-7 ttchuyenkhoang">			
+					<div class="col-md-12">
+						<h6><span>Mã Đơn Hàng: </span>FM202300001</h6>
 					</div>
-					<div class="col-md-6">
-						<h6>FM202300001</h6>
+					<div class="col-md-12">
+						<h6><span>Tổng: </span>265.000 VND</h6>
+					</div>
+					<div class="col-md-12">
+						<h6 class="noidung">- Nội dung chuyển khoản: Mã đơn hàng <br>
+							- Vui lòng điền đúng mã đơn và thanh toán đúng số tiền hiển thị, không làm tròn nếu có số lẻ. <br>
+							- Email xác nhận đặt hàng sẽ được gửi trong 24h kể từ khi đặt hàng thành công.</h6>
 					</div>
 				</div>
 				<div id="nh" class="col-md-5 bank">			
 					<img  src="media/images/TPBANK.png" alt="momo">			
 				</div>
+				<div class="col-md-12 hoanthanh">
+					<button id="popup-button">HOÀN TẤT THANH TOÁN</button>
+    				<div id="popup" class="popup">
+        				<div class="popup-content">
+            				<span class="popup-close" id="popup-close">&times;</span>
+            				<p>Cảm ơn bạn đã tin dùng FPTU Merch
+							</p>
+        				</div>
+   					 </div>
+
+				</div>
 	<!-- /#site -->
+
+
+
+	<SCript>
+		const popupButton = document.getElementById("popup-button");
+		const popup = document.getElementById("popup");
+		const popupClose = document.getElementById("popup-close");
+
+		popupButton.addEventListener("click", function() {
+    	popup.style.display = "block";
+		});
+
+		popupClose.addEventListener("click", function() {
+    	popup.style.display = "none";
+		});
+
+		popup.addEventListener("click", function(event) {
+    	if (event.target === popup) {
+        popup.style.display = "none";
+    		}
+		});
+	</SCript>
+
+
 	<script>
 		
 		document.getElementById("local").addEventListener("change", function() {

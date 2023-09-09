@@ -1,8 +1,8 @@
-let user = JSON.parse(sessionStorage.getItem('currentUser')); // LẤY THÔNG TIN NGƯỜI DÙNG
+let user = JSON.parse(localStorage.getItem('currentUser')); // LẤY THÔNG TIN NGƯỜI DÙNG
 let userName = document.querySelector('.user-name'); // SET USER NAME Ở TRÊN WEBSITE
 let orderList = document.querySelector('#OrderList');
 
-if (JSON.parse(sessionStorage.getItem('currentUser') == null)) { //Chỉ cấp quyền cho người dùng đã đăng nhập
+if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quyền cho người dùng đã đăng nhập
     document.querySelector('.account-table').innerHTML = `
         <p style="color:red">HIỆN TẠI BẠN CHƯA ĐĂNG NHẬP, VUI LÒNG QUAY TRỞ LẠI TRANG ĐĂNG NHẬP <a href="./login.html?" style="color: blue">TẠI ĐÂY</a></p>`
     document.querySelector('.user-welcome').innerHTML = "";
@@ -95,7 +95,7 @@ if (JSON.parse(sessionStorage.getItem('currentUser') == null)) { //Chỉ cấp q
 }
 
 function logout() {
-    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser');
     window.location.href = "./login.html?";
 }
 
@@ -105,8 +105,8 @@ function productInfo(key) {
     })
         .then(res => res.json())
         .then(data => {
-            sessionStorage.setItem('order',JSON.stringify(data));
-            console.log(JSON.stringify(data));
+            localStorage.setItem('order',JSON.stringify(data));
+            console.log(data);
         })
         .catch(error => {
             console.log(error);

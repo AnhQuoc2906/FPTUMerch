@@ -60,10 +60,10 @@ $('.add-to-cart-combo').on('click', function (e) {
 });
 
 let listCarts = null;
-if (JSON.parse(sessionStorage.getItem('listCarts')) == null) {
+if (JSON.parse(localStorage.getItem('listCarts')) == null) {
     listCarts = [];
 } else {
-    listCarts = JSON.parse(sessionStorage.getItem('listCarts'));
+    listCarts = JSON.parse(localStorage.getItem('listCarts'));
     let currentTotalPrice = 0;
     for (let i = 0; i < listCarts.length; i++) {
         currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
@@ -274,7 +274,7 @@ function reloadCart() {
         }
     })
     
-    sessionStorage.setItem('listCarts', JSON.stringify(listCarts));
+    localStorage.setItem('listCarts', JSON.stringify(listCarts));
 };
 
 function removeFromCart(index, e) {
@@ -308,5 +308,5 @@ function changeQuantity(index, quantity) {
 }
 
 function passData() {
-    sessionStorage.setItem('listCarts', JSON.stringify(listCarts));
+    localStorage.setItem('listCarts', JSON.stringify(listCarts));
 }

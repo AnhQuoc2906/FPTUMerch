@@ -1,4 +1,4 @@
-let listCarts = JSON.parse(sessionStorage.getItem('listCarts')); // Get the temporary cart
+let listCarts = JSON.parse(localStorage.getItem('listCarts')); // Get the temporary cart
 let discountCode = document.querySelector('#discountCode'); //GET DISCOUNT CODE
 let quantity = document.querySelector('.quantity'); // How many kinds of products are there
 let cartTop = document.querySelector('.cart-top');
@@ -9,7 +9,7 @@ let discountPrice = document.querySelector('.discountPrice');
 let finalPrice = document.querySelector('.finalPrice');
 let bodyCartList = document.querySelector('#body-cart-list');
 let checkDiscountCode = false;
-if (JSON.parse(sessionStorage.getItem('listCarts')) == null) {
+if (JSON.parse(localStorage.getItem('listCarts')) == null) {
     listCarts = [];
 }
 
@@ -228,11 +228,11 @@ function reloadCart(){
             cartTop.append(newDiv);
         }
     }) 
-    sessionStorage.setItem('listCarts', JSON.stringify(listCarts));
+    localStorage.setItem('listCarts', JSON.stringify(listCarts));
 }
 
 function passData() {
-    sessionStorage.setItem('listCarts', JSON.stringify(listCarts));
+    localStorage.setItem('listCarts', JSON.stringify(listCarts));
 }   
 
 function changeQuantity(index, quantity) {

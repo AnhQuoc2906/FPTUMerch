@@ -24,7 +24,7 @@ function login(){
             announce.innerHTML = "Email hoặc mật khẩu không đúng, vui lòng thử lại";
             announce.style.color = "red";
         } else {
-            sessionStorage.setItem('currentUser', data);
+            localStorage.setItem('currentUser', data);
             let tmpUser = JSON.parse(data);
             console.log(tmpUser);
             if(tmpUser.RoleID == "ulYTvThQ88dNJrFcVRpv"){ // Nếu là admin

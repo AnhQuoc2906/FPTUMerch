@@ -1,65 +1,11 @@
-/*!
-  Theme Name: Comercio-Fashion Shop Ecommerce HTML Template
-  Theme URI:http://themeim.com/demo/comercio/
-  Author: ThemeIM
-  Version: 1.0.0
-  License: GNU General Public License v2 or later
-  License URI: http://www.gnu.org/licenses/gpl-2.0.html
-  Tags:   Bootstrap 4, e-commerce, ecommerce template, html5,responsive, Shopping template 
-  */
-/*--------------------------------------------------------------
-  >>> TABLE OF CONTENTS:
-  ----------------------------------------------------------------
-  # Base
-  # Sections
-    ## Header
-    ## Mobile Menu
-    ## Dropdown menu
-    ## Mega menu area
-    ## Header 2
-    ## Navbar Three
-    ## Slider
-    ## Slider Style two
-    ## Slider Style three
-    ## Product Banner
-    ## Product Filter
-    ## Product Filter Style 2
-    ## Product three
-    ## Features
-    ## Banner and  Product area
-    ## Banner and  Product area 2
-    ## Countdown
-    ## Small Product
-    ## category
-    ## logo_carousel
-    ## testimonial
-    ## breadcrumb
-    ## Shop Page
-    ## Product Page
-    ## Cart Page
-    ## Blog Page
-    ## Blog sidebar
-    ## Contact page
-    ## Quickview
-    ## Starting popup news letter
-    ## Subscribe
-    ## Instagram
-    ## Footer
-    ## Footer style 2
-    ## Backtotop
-    ## Responsive
 
-
-
-
-  --------------------------------------------------------------*/
-/* Font */
 @import "https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700";
 @import "https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700";
 
 @font-face {
-  font-family: 'Fptum'; 
-  src: url('media/ZEEDisplay.ttf') format('truetype');}
+  font-family: 'FPTU Merch'; 
+  src: url('../../media/Font/ZEEDisplay.woff') format('woff');
+}
 
 @-webkit-keyframes slide-down {
   0% {
@@ -102,7 +48,7 @@
   ##  Fonts
   --------------------------------------------------------------*/
 body {
-  font-family: 'Fptum';
+  font-family: 'FPTU Merch';
   color: #3f3f3f;
 }
 
@@ -213,7 +159,7 @@ p {
 }
 
 .mainmenu > ul li a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #3f3f3f;
   padding: 25px 30px;
@@ -223,15 +169,15 @@ p {
 }
 
 .mainmenu > ul li a:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .mainmenu > ul li a.active {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .mainmenu > ul li a.active:before {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .mainmenu li.has-child > a {
@@ -291,7 +237,7 @@ p {
 .header-right-one ul a {
   color: #d19e66;
   font-size: 15px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
@@ -300,7 +246,7 @@ p {
 }
 
 .custom-select {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   height: auto;
   padding: 0;
@@ -495,7 +441,7 @@ p {
 }
 
 .cart-sub-total p span {
-  color: #d19e66;
+  color: #D80806;
   font-size: 18px;
 }
 
@@ -739,7 +685,7 @@ p {
   right: 0;
   top: 0;
   font-size: 27px;
-  color: #d19e66;
+  color: #D80806;
   float: left;
   margin-top: 8px;
 }
@@ -751,7 +697,7 @@ p {
 }
 
 .mobile-open:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .closeme {
@@ -866,7 +812,7 @@ p {
   font-size: 16px;
   text-transform: capitalize;
   font-weight: 400;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
 }
 
@@ -950,7 +896,7 @@ p {
   margin-right: 35px;
   color: #383737;
   text-transform: capitalize;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   font-size: 18px;
 }
@@ -973,7 +919,7 @@ p {
   text-transform: uppercase;
   font-weight: 400 !important;
   position: relative;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   padding-left: 0;
 }
@@ -1148,7 +1094,7 @@ transform: translate(0px,-10px); */
 }
 
 .mainmenu.style-two ul li a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
 }
 
@@ -1408,7 +1354,7 @@ transform: translate(0px,-10px); */
 .slider-text p {
   font-size: 18px;
   color: #434343;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   margin-bottom: 30px;
 }
@@ -1527,7 +1473,7 @@ a.btn-one:hover {
 
 .slider-text.style-two h1 {
   font-size: 55px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   padding-bottom: 30px;
 }
@@ -1658,7 +1604,7 @@ a.btn-two::after {
   line-height: 37px;
   margin: 0;
   text-transform: uppercase;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #233e47;
   font-size: 28px;
@@ -1671,14 +1617,14 @@ a.btn-two::after {
 }
 
 .sin-banner-con h3 {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #d19e66;
   font-size: 45px;
 }
 
 .sin-banner-con p {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   font-size: 20px;
   color: #233e47;
@@ -1686,7 +1632,7 @@ a.btn-two::after {
 }
 
 .sin-banner-con span {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   font-size: 20px;
   color: #233e47;
@@ -1746,7 +1692,7 @@ a.btn-two::after {
 
 .sin-banner-con-right p {
   font-size: 20px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #fff;
   margin: 0;
@@ -1754,7 +1700,7 @@ a.btn-two::after {
 
 .sin-banner-con-right span {
   font-size: 18px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
 }
@@ -1777,9 +1723,9 @@ a.btn-two::after {
 
 .section-heading h3 {
   font-size: 2.5rem;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
-  color: #d19e66;
+  color: #D80806;
   text-transform: uppercase;
   padding-bottom: 50px;
   position: relative;
@@ -1800,7 +1746,7 @@ a.btn-two::after {
   background-image: url(../../media/images/icon/line.png);
   background-repeat: no-repeat;
   background-position: center;
-  top: 40px;
+  top: 55px;
   margin-left: -125px;
 }
 
@@ -1820,7 +1766,7 @@ a.btn-two::after {
 }
 
 .pro-tab-filter .pro-tab-button li {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   display: inline-block;
   font-size: 17px;
@@ -1846,7 +1792,7 @@ a.btn-two::after {
 }
 
 .sin-product h5.pro-title {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   float: left;
 }
@@ -1856,13 +1802,11 @@ a.btn-two::after {
   font-size: 30px;
 }
 
-.sin-product h5.pro-title a:hover {
-  color: #d19e66;
-}
+
 
 .sin-product span {
-  color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  color: #D80806;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   float: right;
   font-size: 18px;
@@ -2033,7 +1977,7 @@ a.btn-two::after {
 }
 
 .sin-product.style-two .pro-icon ul li a:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .sin-product.style-two .pro-icon ul li:after {
@@ -2073,7 +2017,7 @@ a.btn-two::after {
 }
 
 .sin-product.style-two .add-to-cart a {
-  color: #d19e66;
+  color: #D80806;
   font-size: 15px;
   padding: 10px 25px;
   background: #fff;
@@ -2081,7 +2025,7 @@ a.btn-two::after {
   text-transform: uppercase;
   -webkit-box-shadow: -0.908px 1.782px 9px 0px rgba(126, 124, 124, 0.3);
   box-shadow: -0.908px 1.782px 9px 0px rgba(126, 124, 124, 0.3);
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
@@ -2092,9 +2036,8 @@ a.btn-two::after {
 
 .sin-product.style-two .new-tag {
   color: #fff;
-  background: #66a2f4;
+  background: #D80806;
   padding: 2px 10px;
-  border-radius: 23px;
   font-size: 16px;
   position: absolute;
   top: 25px;
@@ -2103,7 +2046,7 @@ a.btn-two::after {
 
 .sin-product.style-two .mid-wrapper > span {
   color: #7b7b7b;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   float: left;
   font-size: 16px;
@@ -2116,15 +2059,15 @@ a.btn-two::after {
   display: inline;
   width: 100%;
   text-align: left;
-  color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  color: #D80806;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   font-size: 16px;
 }
 
 .sin-product.style-two .mid-wrapper p span {
-  color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  color: #D80806;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   float: none;
   font-size: 16px;
@@ -2175,7 +2118,7 @@ a.btn-two::after {
 
 .sin-product.style-three .mid-wrapper span {
   color: #7b7b7b;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   float: left;
   font-size: 18px;
@@ -2327,7 +2270,7 @@ a.btn-two::after {
 
 .sin-product.style-three .mid-wrapper p span {
   color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   float: none;
   font-size: 18px;
@@ -2352,7 +2295,7 @@ a.btn-two::after {
 }
 
 .sin-feature {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   padding: 15px;
   position: relative;
@@ -2526,7 +2469,7 @@ a.btn-two::after {
 
 .pb-info p {
   font-size: 20px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
@@ -2534,7 +2477,7 @@ a.btn-two::after {
 
 .pb-info h6 {
   font-size: 30px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #d19e66;
 }
@@ -2563,7 +2506,7 @@ a.btn-two::after {
 
 .small-sec-title h6 {
   font-size: 22px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #d19e66;
   text-transform: uppercase;
@@ -2612,7 +2555,7 @@ a.btn-two::after {
 
 .small-pro-details .title {
   font-size: 18px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   margin: 0;
 }
@@ -2629,7 +2572,7 @@ a.btn-two::after {
 .small-pro-details span {
   font-size: 16px;
   color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   display: block;
 }
@@ -2638,7 +2581,7 @@ a.btn-two::after {
   font-size: 14px;
   color: #565454;
   text-transform: uppercase;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
 }
 
@@ -2661,7 +2604,7 @@ a.btn-two::after {
 .sin-category .cat-name a {
   color: #233e47;
   font-size: 22px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   text-transform: uppercase;
   padding: 17px 32px;
@@ -2675,7 +2618,7 @@ a.btn-two::after {
   line-height: 29px;
   font-size: 22px;
   text-align: center;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
 }
 
@@ -2770,7 +2713,7 @@ a.btn-two::after {
 }
 
 .single-testimonial .tes-content p {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   font-style: italic;
   position: relative;
@@ -2790,7 +2733,7 @@ a.btn-two::after {
 }
 
 .single-testimonial .tes-content span {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   text-transform: uppercase;
   position: relative;
@@ -2804,7 +2747,7 @@ a.btn-two::after {
   height: 2px;
   top: 10px;
   left: 0;
-  background: #d19e66;
+  background: #D80806;
 }
 
 .testimonial-carousel.owl-carousel.owl-drag .owl-item {
@@ -2816,7 +2759,7 @@ a.btn-two::after {
 }
 
 .testimonial-carousel.owl-theme .owl-dots .owl-dot.active span {
-  background: #d19e66;
+  background: #D80806;
   width: 18px;
   height: 10px;
 }
@@ -2849,20 +2792,20 @@ a.btn-two::after {
 
 .bc-inner p {
   font-size: 16px;
-  color: #ff501a;
-  font-family: 'fptum', sans-serif;
+  color: #D80806;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   text-transform: uppercase;
 }
 
 .bc-inner p a {
   color: #3f3f3f;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
 }
 
 .bc-inner p a:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 /*--------------------------------------------------------------
@@ -2916,8 +2859,8 @@ a.btn-two::after {
 
 .sidebar-widget h6 {
   color: #2e2e2e;
-  font-size: 16px;
-  font-family: 'fptum', sans-serif;
+  font-size: 25px;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -2942,14 +2885,14 @@ a.btn-two::after {
 .category-widget ul li a {
   color: #7b7b7b;
   font-size: 16px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
 }
 
 .category-widget ul li span {
   color: #7b7b7b;
   font-size: 16px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   float: right;
 }
@@ -2986,7 +2929,7 @@ p.sub-title {
   margin-right: 5px;
   text-transform: capitalize;
   color: #464646;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
@@ -2998,7 +2941,7 @@ p.sub-title {
   text-align: center;
   width: 56%;
   word-spacing: 7px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   color: #d19e66;
   line-height: 23px;
@@ -3077,8 +3020,8 @@ p.sub-title {
 }
 
 .wid-pro .small-pro-details .title {
-  font-size: 16px;
-  font-family: 'fptum', sans-serif;
+  font-size: 25px;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -3092,9 +3035,9 @@ p.sub-title {
 }
 
 .wid-pro .small-pro-details span {
-  font-size: 16px;
+  font-size: 25px;
   color: #525353;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   display: block;
   float: left;
@@ -3105,7 +3048,7 @@ p.sub-title {
   text-decoration: line-through;
   font-weight: 400;
   color: #939393;
-  font-size: 16px;
+  font-size: 25px;
 }
 
 .wid-pro .small-pro-details > a {
@@ -3113,7 +3056,7 @@ p.sub-title {
   color: #3f3f3f;
   text-decoration: underline;
   text-transform: uppercase;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
@@ -3139,7 +3082,7 @@ p.sub-title {
 .banner-wid a {
   text-align: center;
   font-size: 16px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   color: #5e5e5e;
   text-transform: uppercase;
@@ -3216,7 +3159,7 @@ p.sub-title {
 }
 
 .list-pro-det .rating a {
-  color: #d19e66;
+  color: #D80806;
   font-size: 17px;
 }
 
@@ -3229,22 +3172,22 @@ p.sub-title {
   font-size: 26px;
   display: inline-block;
   margin-bottom: 20px;
-  color: #525353;
+  
   margin-top: 20px;
 }
 
 .list-pro-det a.btn-two {
-  background: #d19e66;
+  background: #D80806;
   margin-left: 8px;
   margin-top: 50px;
 }
 
 .list-pro-det a.btn-two:after {
-  border-color: #d19e66;
+  border-color: #D80806;
 }
 
 .list-pro-det a.btn-two:before {
-  border-color: #d19e66;
+  border-color: #D80806;
 }
 
 .list-pro-det p {
@@ -3298,7 +3241,7 @@ p.sub-title {
 
 .sin-product.list-pro .new-tag {
   color: #fff;
-  background: #66a2f4;
+  background: #D80806;
   padding: 2px 8px;
   font-size: 14px;
   position: absolute;
@@ -3397,19 +3340,28 @@ p.sub-title {
 }
 
 .product-details .pro-title a {
-  font-family: 'Fptum';
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #525353;
-  font-size: 30px;
+  font-size: 2.5rem;
   margin-bottom: 0px;
 }
+
+.product-details .pro-title p {
+  font-family: 'FPTU Merch';
+  font-weight: 600;
+  color: #9B0100;
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+}
+
 
 .product-details span {
   font-size: 16px;
   color: #636363;
   padding-bottom: 5px;
   display: inline-block;
-  text-transform: capitalize;
+  
   margin-right: 15px;
 }
 
@@ -3417,7 +3369,7 @@ p.sub-title {
   font-size: 16px;
   color: #636363;
   padding: 45px 0px 20px;
-  margin-top: 20px;
+  
 }
 
 .product-details p a {
@@ -3426,10 +3378,10 @@ p.sub-title {
 }
 
 .product-details .price {
-  font-size: 20px;
-  font-family: 'fptum', sans-serif;
+  font-size: 2.5rem;
+  font-family: 'FPTU Merch';
   font-weight: 600;
-  color: #464646;
+  color: #D80806;
   padding: 10px 0px 40px;
 }
 
@@ -3488,7 +3440,7 @@ p.sub-title {
 .add-tocart-wrap a.add-to-cart {
   height: 60px;
   width: 325px;
-  background: #d19e66;
+  background: #D80806;
   color: #fff;
   font-size: 15px;
   float: left;
@@ -3662,7 +3614,6 @@ p.sub-title {
   padding-left: 15px;
   padding-bottom: 8px;
   border: 1px solid #ccc;
-  width: 25%;
 }
 
 /*----plus minus--------*/
@@ -3803,7 +3754,7 @@ p.sub-title {
 }
 
 .raing-form input[type="submit"] {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
   background: #d19e66;
@@ -3868,7 +3819,7 @@ p.sub-title {
   --------------------------------------------------------------*/
 @media (min-width: 576px) {
   .cart-table .tables thead tr th {
-    font-family: 'fptum', sans-serif;
+    font-family: 'FPTU Merch';
     font-weight: 700;
     color: #393939;
     font-size: 16px;
@@ -3904,7 +3855,7 @@ p.sub-title {
   }
   .cart-table .tables tbody tr td .product-title a {
     font-size: 18px;
-    font-family: 'fptum', sans-serif;
+    font-family: 'FPTU Merch';
     font-weight: 500;
   }
   .tables {
@@ -3933,7 +3884,7 @@ p.sub-title {
 }
 
 .cart-btn-section a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
   background: #d19e66;
@@ -3952,7 +3903,7 @@ p.sub-title {
 }
 
 .cart-btn-right a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
   background: #3f3f3f;
@@ -3978,7 +3929,7 @@ p.sub-title {
 }
 
 .note span {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #3b3b3b;
   width: 100%;
@@ -3996,7 +3947,7 @@ p.sub-title {
 .cart-subtotal p {
   position: relative;
   font-size: 18px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #2e2e2e;
   text-align: center;
@@ -4014,6 +3965,7 @@ p.sub-title {
   font-size: 0.8rem;
   padding-top: 7px;
   color: red;
+  font-family: 'FPTU Merch';
 }
 
 .cart-subtotal p:after {
@@ -4023,7 +3975,7 @@ p.sub-title {
   margin-left: -15px;
   height: 2px;
   width: 30px;
-  background: #d19e66;
+  background: #D80806;
   bottom: -8px;
 }
 
@@ -4032,7 +3984,7 @@ p.sub-title {
   text-align: right;
   font-size: 16px;
   padding: 19px 0 7px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   color: #525353;
   border-bottom: 1px solid #c2c2c2;
@@ -4043,10 +3995,10 @@ p.sub-title {
 }
 
 .cart-subtotal a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
-  background: #d19e66;
+  background: #D80806;
   height: 50px;
   font-size: 18px;
   text-transform: uppercase;
@@ -4079,7 +4031,7 @@ p.sub-title {
 .account-details p {
   position: relative;
   font-size: 18px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #2e2e2e;
   text-align: center;
@@ -4091,7 +4043,7 @@ p.sub-title {
   text-align: center;
   font-size: 16px;
   padding: 2px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   color: #525353;
 }
@@ -4101,7 +4053,7 @@ p.sub-title {
 }
 
 .account-details a {
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   color: #fff;
   background: #d19e66;
@@ -4182,7 +4134,7 @@ p.sub-title {
   font-size: 19px;
   color: #464646;
   text-transform: uppercase;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
@@ -4587,23 +4539,23 @@ p.sub-title {
   position: relative;
   top: 0;
   height: 100%;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   background-repeat: no-repeat;
   right: 0;
   z-index: 0;
   padding-top: 200px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   background-size: cover;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
 }
 
 .contact-info h5 {
   font-size: 30px;
   color: #d19e66;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -4634,7 +4586,7 @@ p.sub-title {
 
 .single-store a {
   font-size: 20px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #525353;
   text-transform: uppercase;
@@ -4924,7 +4876,7 @@ p.sub-title {
 .popup-banner h3 {
   font-size: 30px;
   color: #3f3f3f;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   position: relative;
   padding-bottom: 15px;
@@ -5038,7 +4990,7 @@ p.sub-title {
 }
 
 .popup-banner.style-two .subscribe-wrapper button {
-  background: #d19e66;
+  background: #D80806;
   color: #fff;
   height: 55px;
   width: 250px;
@@ -5150,7 +5102,7 @@ p.sub-title {
   --------------------------------------------------------------*/
 .subscribe-text h6 {
   font-size: 22px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   color: #d19e66;
   text-transform: uppercase;
@@ -5173,13 +5125,13 @@ p.sub-title {
   margin-left: -5px;
   background: #464646;
   color: #fff;
-  
+  font-family: 'FPTU Merch';
   border-left: none;
   cursor: pointer;
 }
 
 .subscribe-wrapper button:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .subscribe-wrapper input {
@@ -5326,7 +5278,7 @@ p.sub-title {
 .sin-instagram .hover-text span {
   color: #fff;
   font-size: 22px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 700;
   display: block;
   text-transform: uppercase;
@@ -5367,7 +5319,7 @@ p.sub-title {
 .instagram-area-two .sin-instagram .hover-text span {
   color: #3f3f3f;
   font-size: 22px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
   border: 2px solid #252525;
   padding: 10px 27px;
@@ -5412,7 +5364,7 @@ p.sub-title {
   font-size: 16px;
   color: #dcdbdb;
   line-height: 28px;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   padding-right: 60px;
   padding-bottom: 10px;
@@ -5441,7 +5393,7 @@ p.sub-title {
 .footer-widget h3 {
   font-size: 18px;
   color: #fff;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 500;
   padding-bottom: 28px;
   text-transform: uppercase;
@@ -5469,11 +5421,11 @@ p.sub-title {
 }
 
 .footer-menu ul li a:hover {
-  color: #d19e66;
+  color: #D80806;
 }
 
 .footer-widget-area .footer-bottom p a {
-  color: #d19e66;
+  color: #D80806;
 }
 
 /*--------------------------------------------------------------
@@ -5481,13 +5433,13 @@ p.sub-title {
   --------------------------------------------------------------*/
 .footer-widget.style-two .time-table p {
   color: #3f3f3f;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 600;
 }
 
 .footer-widget.style-two .time-table span {
   color: #3f3f3f;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
   padding-bottom: 8px;
   display: block;
@@ -5572,13 +5524,13 @@ p.sub-title {
   font-size: 20px;
   background: #fff;
   margin: 2px;
-  color: #d19e66;
+  color: #D80806;
   text-align: center;
   border-radius: 50%;
 }
 
 .footer-widget-area .footer-bottom p span {
-  color: #d19e66;
+  color: #D80806;
 }
 
 /*--------------------------------------------------------------
@@ -5627,7 +5579,7 @@ p.sub-title {
   }
   .slider-text.style-two h1 {
     font-size: 50px;
-    font-family: 'fptum', sans-serif;
+    font-family: 'FPTU Merch';
     font-weight: 700;
   }
   .color-widget ul li {
@@ -5635,10 +5587,10 @@ p.sub-title {
     height: 45px;
   }
   .sin-product h5.pro-title a {
-    font-size: 18px;
+    font-size: 2.5rem
   }
   .list-pro-det span {
-    font-size: 21px;
+    font-size: 2.3rem;
     margin-top: 0px;
     margin-bottom: 0px;
   }
@@ -5651,7 +5603,7 @@ p.sub-title {
     margin-bottom: 5px;
   }
   .list-pro-det a.btn-two {
-    font-size: 16px;
+    font-size: 1.5rem;
     padding: 9px 36px;
   }
   .list-pro-det .color-variation {
@@ -5671,7 +5623,7 @@ p.sub-title {
   }
   .product-details p {
     font-size: 15px;
-    padding: 25px 0px 10px;
+    padding: 15px 0px 0px;
   }
   .product-des-tab {
     padding-top: 40px;
@@ -6366,7 +6318,7 @@ p.sub-title {
   .quickview .add-tocart-wrap a.add-to-cart {
     height: 45px;
     width: 169px;
-    font-size: 18px;
+    font-size: 14px;
     float: right;
     margin-right: 5px;
     padding: 8px;
@@ -6386,8 +6338,17 @@ p.sub-title {
     width: 120px;
   }
   .quickview .product-details .pro-title a {
-    font-size: 23px;
+    font-size: 2.2rem;
   }
+
+  .product-details .price{
+    font-size: 2.2rem;
+  }
+
+  .product-details .pro-title p{
+    padding-right: 70px;
+  }
+
   .quickview .product-details {
     padding-left: 0px;
     padding-top: 5px;
@@ -7032,8 +6993,13 @@ p.sub-title {
   }
   .product-details .price {
     padding: 0px 0px 10px;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
+
+  .product-details .pro-title p{
+    font-size: 0.9rem;
+  }
+
   .product-details p {
     font-size: 15px;
     padding: 25px 0px 10px;
@@ -7042,7 +7008,7 @@ p.sub-title {
     font-size: 16px;
   }
   .product-details .pro-title a {
-    font-size: 20px;
+    font-size: 1.6rem;
   }
   .add-tocart-wrap a.add-to-cart {
     height: 45px;
@@ -7553,7 +7519,7 @@ p.sub-title {
 }
 
 .textproduct{
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
   font-weight: 400;
  
 }
@@ -7574,7 +7540,7 @@ p.sub-title {
 }
 
 .price{
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .chinhsach {
@@ -7619,7 +7585,7 @@ p.sub-title {
 }
 
 .ctgioithieu p{
-  
+  text-align: left;
   padding-top: 10px;
 }
 
@@ -7683,7 +7649,7 @@ p.sub-title {
 
 .chuyenkhoan h1{
   font-weight: 700;
-  font-family: 'fptum', sans-serif;
+  font-family: 'FPTU Merch';
 }
 
 .chon{
@@ -7857,23 +7823,23 @@ button {
 }
 
 .chitietsanpham span{
-  font-size: 16px;
+  font-size: 15px;
   color: #636363;
   padding-bottom: 5px;
   display: inline-block;
-  text-transform: capitalize;
   margin-right: 0px;
   font-weight: bold;
 }
 
 .chitietsanpham h5{
   font-weight: bold;
-  font-size: 16px;
-  margin-top: 25px;
+  font-size: 1.7rem;
+  margin-top: 35px;
 }
 
 .chitietsanpham p{
   padding-top: 0px;
+  margin-top: -3px;
 }
 
 

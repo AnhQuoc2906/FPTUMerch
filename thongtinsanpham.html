@@ -210,9 +210,12 @@
 		<section class="breadcrumb-area">
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-xl-12">
+					<div class="col-xl-12 col-md-12 d-flex justify-content-between">
 						<div class="bc-inner">
-							<p><a href="##">TRANG CHỦ  |</a> THÔNG TIN CHI TIẾT</p>
+							<p><a href="##">TRANG CHỦ  |</a> SELLER</p>
+						</div>
+						<div class="user-welcome">
+							<p>Welcome <b class="user-name">User</b> | <a href="#" style="color:red" onclick="logout()">LOG OUT</a></p>
 						</div>
 					</div>
 					<!-- /.col-xl-12 -->
@@ -245,35 +248,8 @@
 										<th>Ghi Chú</th>
 									</tr>
 								</thead>
-								<tbody id="daylaID">
-									<tr>
-										<td>
-											FM202300001
-										</td>
-										<td>
-											Phan Huỳnh Thanh Bình
-										</td>
-										<td>
-											0818608030
-										</td>
-										<td>
-											binhphtse170212@fpt.edu.vn
-										</td>
-										<td>
-											Vinhome grand park
-										</td>
-                                        <td>
-											COMBO FULL KIT
-										</td>
-										<td>
-											265.000 VND
-										</td>
-										<td>
-											Không biết ghi gì
-										</td>
-
-									</tr>
-								</TBody>
+								<tbody id="orderDetail">
+								</tbody>
 							</table>
 
 						</div>
@@ -353,6 +329,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
+	<script src="assets/js/FPTUMerch_JS/thongtinsanpham.js"></script>
 
 </body>
 

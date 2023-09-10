@@ -116,7 +116,7 @@ function discountCodeSubmit(e) {
             return res.json();
         }).then(data => {
             if (data.length == 0) {
-                announce.innerHTML = "Mã bạn nhập đã sai, hãy thử lại";
+                announce.innerHTML = "Mã không hợp lệ, hãy kiểm tra lại";
                 announce.style.color = "red";
                 discountPrice.innerHTML = "0 VND";
                 finalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
@@ -270,4 +270,14 @@ function continueToLienHe() {
     console.log(orderInformation);
     localStorage.setItem('orderInformation',JSON.stringify(orderInformation));
     window.location.href = "./lienhe.html";
+}
+
+function submitCodeOver(){
+    document.getElementById("discountCodeButton").style.backgroundColor = "#000000";
+    document.getElementById("discountCodeButton").style.color = "#FFFFFF";
+}
+
+function submitCodeOut(){
+    document.getElementById("discountCodeButton").style.backgroundColor = "#3f3f3f";
+    document.getElementById("discountCodeButton").style.color = "#FFFFFF";
 }

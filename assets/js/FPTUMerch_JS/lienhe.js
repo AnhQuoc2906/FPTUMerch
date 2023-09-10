@@ -72,6 +72,7 @@ if (quantity && totalPrice) {
 };
 
 function submitInformation(){
+    let result = "";
     orderInformation.ordererName = customerName.value;
     orderInformation.ordererPhoneNumber = customerTelephone.value;
     orderInformation.ordererEmail = customerEmail.value;
@@ -81,17 +82,15 @@ function submitInformation(){
     orderInformation.payments = 1;
     fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
         method:"POST",
-        mode:"cors",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
         body: JSON.stringify(orderInformation),
     }).then(res => {
-        return res.json();
+       return res.text();
     }).then(data =>{
-        console.log(data);
-        console.log(data.status);
+        document.querySelector('.orderCode').innerHTML = data;
     }).catch(error =>{
         console.log(error);
     })
@@ -116,4 +115,12 @@ function completePayment(){
         popup.style.display = "none";
     		}
 		});
+}
+
+function mouse_over(){
+    document.getElementById("submitButton").style.backgroundColor = "black";
+}
+
+function mouse_out(){
+    document.getElementById("submitButton").style.backgroundColor = "#D80806";
 }

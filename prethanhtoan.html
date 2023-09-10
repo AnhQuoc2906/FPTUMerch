@@ -109,12 +109,8 @@
 							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
 							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
 							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>
-							<li class="has-child"><a href="##" onclick="passData()">LIÊN HỆ</a>
-								<ul class="sub-menu">
-									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
-											rel="noopener noreferrer">FACEBOOK</a></li>
-								</ul>
-							</li>
+							<li class="has-child"><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+
 						</ul>
 					</div>
 				</div>
@@ -136,7 +132,7 @@
 											<p>TỔNG<span class="totalPrice">0 VND</span></p>
 										</div>
 										<div class="cart-checkout">
-											<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+											<a href="cart.html"><i class="fa fa-shopping-cart"></i>Xem trước</a>
 										</div>
 									</div>
 								</div>
@@ -191,7 +187,7 @@
 									<p>TỔNG <span class="totalPriceMobile">0 VND</span></p>
 								</div>
 								<div class="cart-checkout">
-									<a style="border-radius: 30px 30px 30px 30px; width: 100%" href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+									<a style="border-radius: 30px 30px 30px 30px; width: 100%" href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem trước</a>
 								</div>
 							</div>
 						</div>
@@ -227,7 +223,7 @@
 					<a href="chinhsach.html" class="out-link" onclick="passData()">CHÍNH SÁCH</a>
 				</li>
 				<li>
-					<a href="#" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
+					<a href="#" class="out-link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
 					<ul class="submenu">
 						<li><a href="https://www.facebook.com/cocsaigonfuhcm">FACEBOOK</a></li>
 					</ul>
@@ -295,10 +291,10 @@
 							<div >
 								<form class="subscribe-wrapper">
 									<input placeholder="NHẬP MÃ GIẢM GIÁ" type="text" id="discountCode">
-									<button style="border-radius: 0px 5px 5px 0px;" type="submit" onclick="discountCodeSubmit(event)">ÁP DỤNG</button>
+									<button id="discountCodeButton" style="border-radius: 0px 5px 5px 0px" type="submit" onclick="discountCodeSubmit(event)" onmouseover="submitCodeOver()" onmouseout="submitCodeOut()">ÁP DỤNG</button>
 								</form>
 							</div>
-							<h6>*Mã giảm giá này được cung cấp bởi các bạn saler*</h6>
+							<h6>*Mã giảm giá này được cung cấp bởi các bạn sellers*</h6>
 							<ul>
 								<li><span>Đơn hàng:</span><b class="tempPrice">0 VND</b></li>
 								
@@ -307,7 +303,7 @@
 							</ul>
 							<div class="note">
 								<span>GHI CHÚ</span>
-								<textarea></textarea>
+								<textarea id="note"></textarea>
 							</div>
 							<a href="#" class="continueBtn" onclick="continueToLienHe()">Tiếp Tục</a>
 						</div>

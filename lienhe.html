@@ -75,13 +75,8 @@
 							<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
 							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
 							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>
-							<li class="has-child"><a href="##">LIÊN HỆ</a>
-								<ul class="sub-menu">
-									<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a></li>
-									
-									
-								</ul>
-							</li>
+							<li class="has-child"><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
+
 						</ul>
 					</div>
 				</div>
@@ -150,7 +145,7 @@
 									<p>TỔNG <span class="total-price-mobile">0 VND</span></p>
 								</div>
 								<div class="cart-checkout">
-									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem Trước</a>
+									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem trước</a>
 								</div>
 							</div>
 						</div>
@@ -186,7 +181,7 @@
 					<a href="chinhsach.html" class="out-link" onclick="passData()">CHÍNH SÁCH</a>
 				</li>
 				<li>
-					<a href="##" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
+					<a href="##" class="out-link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
 					<ul class="submenu">
 						<li><a href="https://www.facebook.com/cocsaigonfuhcm">FACEBOOK</a></li>
 					</ul>
@@ -234,23 +229,23 @@
 								<div class="row">
 									<form action="#" controller="#">
 										<div class="col-xl-12">
-											<h4>Họ Và Tên</h4>
-											<input type="text" placeholder="Họ Và Tên*" required>
+											<h4>Họ và tên</h4>
+											<input type="text" id="name" placeholder="Họ và tên*" required>
 										</div>
 										<div class="col-xl-12">
-											<h4>Số Điện Thoại</h4>
-											<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Số Điện Thoại*" required>
+											<h4>Số điện thoại</h4>
+											<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Số điện thoại*" required>
 										</div>
 										<div class="col-xl-12">
 											<h4>Email</h4>
 											<input type="email" id="email" name="email" placeholder="Email*" required>
 										</div>
 										<div class="col-xl-5 phuongthucnhanhang">
-											<h4>Địa Điểm Nhận Hàng</h4>
+											<h4>Địa điểm nhận hàng</h4>
 											<div class="local">
 												<select id="local" name="local">
-													<option value="Trường Đại Học FPT TP. HCM" selected>Trường Đại Học FPT TP. HCM</option>
-													<option value="Ship Tận Nơi">Ship Tận Nơi</option>									
+													<option value="1" selected>Trường Đại Học FPT TP. HCM</option>
+													<option value="2">Ship tận nơi</option>									
 												</select>
 											</div>	
 										</div>
@@ -258,14 +253,15 @@
 											<p>Lưu ý: Phí giao hàng 30.000đ được áp dụng cho tất cả các khu vực. Miễn phí ship khi nhận hàng trực tiếp tại ĐH FPT TP. HCM.</p>
 										</div>
 										<div id="diachi" class="col-xl-12">
-											<h4>Địa Chỉ Giao Hàng</h4>
-											<input type="text" placeholder="Địa Chỉ Giao Hàng*">
+											<h4>Địa chỉ giao hàng</h4>
+											<input type="text" placeholder="Địa chỉ giao hàng*" id="deliveryAddress">
 										</div>
 										<div class="col-xl-12">
 											<div class="trigger01">
-												<input type="submit" value="THANH TOÁN">
+												<input id="submitButton" type="submit" value="THANH TOÁN" onclick="submitInformation()" 
+												style="background-color:#D80806" 
+												onmouseover="mouse_over()" onmouseout="mouse_out()">
 											</div>
-											
 										</div>
 									</form>
 								</div>
@@ -319,7 +315,7 @@
 	</div>
 
 	<!-- Quick View Sp 2-->
-	<div class="modal quickview-wrapper01">
+	<div class="modal quickview-wrapper01" style="overflow: auto;">
 		<div class="quickview">
 			<div class="row">
 				<div class="col-12">
@@ -341,12 +337,12 @@
 				<div id="momo" class="col-md-5 bank">			
 					<img  src="media/images/MOMO.png" alt="momo">
 				</div>
-				<div  class="col-md-7 ttchuyenkhoang">			
+				<div class="col-md-7 ttchuyenkhoang">			
 					<div class="col-md-12">
-						<h6><span>Mã Đơn Hàng: </span>FM202300001</h6>
+						<h6><span>Mã Đơn Hàng: </span><b class="orderCode"></b></h6>
 					</div>
 					<div class="col-md-12">
-						<h6><span>Tổng: </span>265.000 VND</h6>
+						<h6><span>Tổng: </span><b class="orderFinalPrice"></b></h6>
 					</div>
 					<div class="col-md-12">
 						<h6 class="noidung">- Nội dung chuyển khoản: Mã đơn hàng <br>
@@ -358,7 +354,7 @@
 					<img  src="media/images/TPBANK.png" alt="momo">			
 				</div>
 				<div class="col-md-12 hoanthanh">
-					<button id="popup-button">HOÀN TẤT THANH TOÁN</button>
+					<button id="popup-button" onclick="completePayment()" style="background-color:#D80806; border:none;">HOÀN TẤT THANH TOÁN</button>
     				<div id="popup" class="popup">
         				<div class="popup-content">
             				<span class="popup-close" id="popup-close">&times;</span>
@@ -370,38 +366,13 @@
 				</div>
 	<!-- /#site -->
 
-	
-	
-	<SCript>
-		const popupButton = document.getElementById("popup-button");
-		const popup = document.getElementById("popup");
-		const popupClose = document.getElementById("popup-close");
 
-		popupButton.addEventListener("click", function() {
-    	popup.style.display = "block";
-		});
-
-		popupClose.addEventListener("click", function() {
-    	popup.style.display = "none";
-		});
-
-		popup.addEventListener("click", function(event) {
-    	if (event.target === popup) {
-        popup.style.display = "none";
-    		}
-		});
-	</SCript>
-
-
-	<script>
-		
+	<script>		
 		document.getElementById("local").addEventListener("change", function() {
-		  var selectedOption = this.value;
-		  
-		  
-		  if (selectedOption === "Trường Đại Học FPT TP. HCM") {
+		  var selectedOption = this.value;	  
+		  if (selectedOption === "1") {
 			document.getElementById("diachi").style.display = "none";
-		  } else if (selectedOption === "Ship Tận Nơi") {
+		  } else if (selectedOption === "2") {
 			document.getElementById("diachi").style.display = "block";
 		  }
 		});
@@ -413,7 +384,7 @@
 		var imageA = document.getElementById("momo");
 		var imageB = document.getElementById("nh");
 
-// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
+		// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
 		radioButtons.forEach(function(radioButton) {
     	radioButton.addEventListener("change", function() {
         // Lấy giá trị của nút radio đã chọn

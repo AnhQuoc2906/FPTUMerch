@@ -13,7 +13,7 @@ if (JSON.parse(localStorage.getItem('listCarts')) == null) {
     listCarts = JSON.parse(localStorage.getItem('listCarts'));
     let currentTotalPrice = 0;
     for (let i = 0; i < listCarts.length; i++) {
-        currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+        currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
     };
     if (quantity && totalPrice) {
         quantity.innerHTML = listCarts.length;
@@ -36,9 +36,9 @@ if (JSON.parse(localStorage.getItem('listCarts')) == null) {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -58,9 +58,9 @@ if (JSON.parse(localStorage.getItem('listCarts')) == null) {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -93,7 +93,7 @@ function removeFromCart(index, e) {
 function reloadCart() {
     let currentTotalPrice = 0;
     for (let i = 0; i < listCarts.length; i++) {
-        currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+        currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
     };
     if (quantity && totalPrice) {
         quantity.innerHTML = listCarts.length;
@@ -116,9 +116,9 @@ function reloadCart() {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -138,9 +138,9 @@ function reloadCart() {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -163,7 +163,7 @@ function changeQuantity(index, quantity) {
             reloadCart();
         }
     } else {
-        listCarts[index].quantity = quantity;
+        listCarts[index].amount = quantity;
         reloadCart();
     }
 };

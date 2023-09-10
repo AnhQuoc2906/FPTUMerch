@@ -9,6 +9,7 @@ let discountPrice = document.querySelector('.discountPrice');
 let finalPrice = document.querySelector('.finalPrice');
 let bodyCartList = document.querySelector('#body-cart-list');
 let continueBtn = document.querySelector('.continueBtn');
+let orderNote = document.querySelector('#note');
 let checkDiscountCode = false;
 if (JSON.parse(localStorage.getItem('listCarts')) == null) {
     listCarts = [];
@@ -20,7 +21,7 @@ if (listCarts.length > 0) {
     bodyCartList.innerHTML = "";
     continueBtn.style.display = "block";
     for (let i = 0; i < listCarts.length; i++) {
-        currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+        currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
     };
     if (tempPrice && totalPrice) {
         totalPrice.innerHTML += currentTotalPrice.toLocaleString() + " VND";
@@ -48,7 +49,7 @@ if (listCarts.length > 0) {
         </td>
         <td>
             <div class="quantity">
-                <input type="number" min="1" value=${item.quantity} readonly>
+                <input type="number" min="1" value=${item.amount} readonly>
             </div>
         </td>
         <td>
@@ -62,7 +63,7 @@ if (listCarts.length > 0) {
         </td>
         <td>
             <div class="total-price-box">
-                <span class="price">${(item.price * item.quantity).toLocaleString()} VND</span>
+                <span class="price">${(item.price * item.amount).toLocaleString()} VND</span>
             </div>
         </td>
 `;
@@ -80,9 +81,9 @@ if (listCarts.length > 0) {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -123,7 +124,7 @@ function discountCodeSubmit(e) {
             } else {
                 currentTotalPrice = 0;
                 for (let i = 0; i < listCarts.length; i++) {
-                    currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+                    currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
                 };
                 announce.innerHTML = "Mã hợp lệ";
                 announce.style.color = "green";
@@ -150,7 +151,7 @@ function reloadCart() {
     let currentTotalPrice = 0;
 
     for (let i = 0; i < listCarts.length; i++) {
-        currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+        currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
     }
     if (quantity && tempPrice) {
         tempPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
@@ -186,7 +187,7 @@ function reloadCart() {
         </td>
         <td>
             <div class="quantity">
-                <input type="number" min="1" id="quantityInput" value="${item.quantity}" readonly>
+                <input type="number" min="1" id="quantityInput" value="${item.amount}" readonly>
             </div>
         </td>
         <td>
@@ -200,7 +201,7 @@ function reloadCart() {
         </td>
         <td>
             <div class="total-price-box">
-                <span class="price">${(item.price * item.quantity).toLocaleString()} VND</span>
+                <span class="price">${(item.price * item.amount).toLocaleString()} VND</span>
             </div>
         </td>
     `;
@@ -217,9 +218,9 @@ function reloadCart() {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -253,17 +254,20 @@ function changeQuantity(index, quantity) {
             reloadCart();
         }
     } else {
-        listCarts[index].quantity = quantity;
+        listCarts[index].amount = quantity;
         reloadCart();
     }
 }
 
 function continueToLienHe() {
-    console.log(listCarts);
     console.log(currentTotalPrice);
-    let orderInformation = [{
+    let orderInformation = {
         discountCodeID: discountCode.value.toUpperCase(),
-    }];
+        totalPrice: currentTotalPrice,
+        orderDetails: listCarts,
+        note: orderNote.value
+    };
     console.log(orderInformation);
+    localStorage.setItem('orderInformation',JSON.stringify(orderInformation));
     window.location.href = "./lienhe.html";
 }

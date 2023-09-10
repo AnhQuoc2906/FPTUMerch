@@ -235,7 +235,7 @@
 									<form action="#" controller="#">
 										<div class="col-xl-12">
 											<h4>Họ Và Tên</h4>
-											<input type="text" placeholder="Họ Và Tên*" required>
+											<input type="text" id="name" placeholder="Họ Và Tên*" required>
 										</div>
 										<div class="col-xl-12">
 											<h4>Số Điện Thoại</h4>
@@ -249,8 +249,8 @@
 											<h4>Địa Điểm Nhận Hàng</h4>
 											<div class="local">
 												<select id="local" name="local">
-													<option value="Trường Đại Học FPT TP. HCM" selected>Trường Đại Học FPT TP. HCM</option>
-													<option value="Ship Tận Nơi">Ship Tận Nơi</option>									
+													<option value="1" selected>Trường Đại Học FPT TP. HCM</option>
+													<option value="2">Ship Tận Nơi</option>									
 												</select>
 											</div>	
 										</div>
@@ -259,13 +259,12 @@
 										</div>
 										<div id="diachi" class="col-xl-12">
 											<h4>Địa Chỉ Giao Hàng</h4>
-											<input type="text" placeholder="Địa Chỉ Giao Hàng*">
+											<input type="text" placeholder="Địa Chỉ Giao Hàng*" id="deliveryAddress">
 										</div>
 										<div class="col-xl-12">
 											<div class="trigger01">
-												<input type="submit" value="THANH TOÁN">
+												<input type="submit" value="THANH TOÁN" onclick="submitInformation()">
 											</div>
-											
 										</div>
 									</form>
 								</div>
@@ -341,7 +340,7 @@
 				<div id="momo" class="col-md-5 bank">			
 					<img  src="media/images/MOMO.png" alt="momo">
 				</div>
-				<div  class="col-md-7 ttchuyenkhoang">			
+				<div class="col-md-7 ttchuyenkhoang">			
 					<div class="col-md-12">
 						<h6><span>Mã Đơn Hàng: </span>FM202300001</h6>
 					</div>
@@ -358,7 +357,7 @@
 					<img  src="media/images/TPBANK.png" alt="momo">			
 				</div>
 				<div class="col-md-12 hoanthanh">
-					<button id="popup-button">HOÀN TẤT THANH TOÁN</button>
+					<button id="popup-button" onclick="completePayment()">HOÀN TẤT THANH TOÁN</button>
     				<div id="popup" class="popup">
         				<div class="popup-content">
             				<span class="popup-close" id="popup-close">&times;</span>
@@ -370,35 +369,10 @@
 				</div>
 	<!-- /#site -->
 
-	
-	
-	<SCript>
-		const popupButton = document.getElementById("popup-button");
-		const popup = document.getElementById("popup");
-		const popupClose = document.getElementById("popup-close");
 
-		popupButton.addEventListener("click", function() {
-    	popup.style.display = "block";
-		});
-
-		popupClose.addEventListener("click", function() {
-    	popup.style.display = "none";
-		});
-
-		popup.addEventListener("click", function(event) {
-    	if (event.target === popup) {
-        popup.style.display = "none";
-    		}
-		});
-	</SCript>
-
-
-	<script>
-		
+	<script>		
 		document.getElementById("local").addEventListener("change", function() {
-		  var selectedOption = this.value;
-		  
-		  
+		  var selectedOption = this.value;	  
 		  if (selectedOption === "Trường Đại Học FPT TP. HCM") {
 			document.getElementById("diachi").style.display = "none";
 		  } else if (selectedOption === "Ship Tận Nơi") {
@@ -413,7 +387,7 @@
 		var imageA = document.getElementById("momo");
 		var imageB = document.getElementById("nh");
 
-// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
+		// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
 		radioButtons.forEach(function(radioButton) {
     	radioButton.addEventListener("change", function() {
         // Lấy giá trị của nút radio đã chọn

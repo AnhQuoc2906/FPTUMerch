@@ -132,6 +132,7 @@ function discountCodeSubmit(e) {
                 announce.style.color = "green";
                 discountPrice.innerHTML = (parseInt(currentTotalPrice / 10)).toLocaleString() + " VND";
                 finalPrice.innerHTML = (parseInt(currentTotalPrice * 9 / 10)).toLocaleString() + " VND";
+                finalPriceInteger = currentTotalPrice * 9 / 10;
                 checkDiscountCode = true;
             }
         }).catch(error => {

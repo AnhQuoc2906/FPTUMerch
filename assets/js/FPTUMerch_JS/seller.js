@@ -50,19 +50,19 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                 </td>
                                 <td>
                                     <select id="tinhtrang" name="tinhtrang">
-                                    ${values.earningMethod == "1" ? `<option value="1" selected>Đang Xác Nhận</option>
+                                    ${values.status == "1" ? `<option value="1" selected>Đang Xác Nhận</option>
                                         <option value="2">Đã Xác Nhận</option>
                                         <option value="3">Đã Giao Hàng</option>
                                         <option value="4">Huỷ đơn</option>  ` :
-                                        values.earningMethod == "2" ? `<option value="1">Đang Xác Nhận</option>
+                                        values.status == "2" ? `<option value="1">Đang Xác Nhận</option>
                                         <option value="2" selected>Đã Xác Nhận</option>
                                         <option value="3">Đã Giao Hàng</option>
                                         <option value="4">Huỷ đơn</option>  ` :
-                                        values.earningMethod == "3" ? `<option value="1">Đang Xác Nhận</option>
+                                        values.status == "3" ? `<option value="1">Đang Xác Nhận</option>
                                         <option value="2">Đã Xác Nhận</option>
                                         <option value="3" selected>Đã Giao Hàng</option>
                                         <option value="4">Huỷ đơn</option>  ` :
-                                        values.earningMethod == "4" ? `<option value="1">Đang Xác Nhận</option>
+                                        values.status == "4" ? `<option value="1">Đang Xác Nhận</option>
                                         <option value="2">Đã Xác Nhận</option>
                                         <option value="3">Đã Giao Hàng</option>
                                         <option value="4" selected>Huỷ đơn</option>  ` :

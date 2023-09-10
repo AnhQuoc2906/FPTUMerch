@@ -82,22 +82,23 @@ function submitInformation(){
     orderInformation.totalPrice = currentTotalPrice;
     orderInformation.earningMethod = parseInt(earningMethod.options[earningMethod.selectedIndex].value);
     orderInformation.payments = 1;
-    fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
-        method:"POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(orderInformation),
-    }).then(res => {
-       return res.text();
-    }).then(data =>{
-        document.querySelector('.orderCode').innerHTML = data;
-        document.querySelector('.orderFinalPrice').innerHTML = priceForLienHe.toLocaleString() + " VND";
-    }).catch(error =>{
-        console.log(error);
-    })
-    console.log(orderInformation);
+    if(document.querySelector('.orderCode').innerHTML == "" &&  document.querySelector('.orderFinalPrice').innerHTML == ""){
+        fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(orderInformation),
+        }).then(res => {
+           return res.text();
+        }).then(data =>{
+            document.querySelector('.orderCode').innerHTML = data;
+            document.querySelector('.orderFinalPrice').innerHTML = priceForLienHe.toLocaleString() + " VND";
+        }).catch(error =>{
+            console.log(error);
+        })
+    }
 }
 
 function completePayment(){

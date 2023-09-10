@@ -7,6 +7,8 @@ let customerEmail = document.querySelector('#email');
 let earningMethod = document.querySelector('#local');
 let deliveryAddress = document.querySelector('#deliveryAddress');
 let listCarts = JSON.parse(localStorage.getItem('listCarts'));
+let priceForLienHe = localStorage.getItem('priceForLienHe');
+let orderFinalPrice = document.querySelector('.orderFinalPrice');
 
 let quantityMobile = document.querySelector('.quantity-mobile'); // How many kinds of products are there
 let cartTopMobile = document.querySelector('.cart-top-mobile'); // Show the cart information
@@ -91,6 +93,7 @@ function submitInformation(){
        return res.text();
     }).then(data =>{
         document.querySelector('.orderCode').innerHTML = data;
+        document.querySelector('.orderFinalPrice').innerHTML = priceForLienHe.toLocaleString() + " VND";
     }).catch(error =>{
         console.log(error);
     })

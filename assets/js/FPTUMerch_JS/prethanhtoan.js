@@ -16,12 +16,13 @@ if (JSON.parse(localStorage.getItem('listCarts')) == null) {
 }
 
 totalPrice.innerHTML = "";
-let currentTotalPrice = 0;
+let currentTotalPrice = 0, finalPriceInteger = 0;
 if (listCarts.length > 0) {
     bodyCartList.innerHTML = "";
     continueBtn.style.display = "block";
     for (let i = 0; i < listCarts.length; i++) {
         currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
+        finalPriceInteger = currentTotalPrice;
     };
     if (tempPrice && totalPrice) {
         totalPrice.innerHTML += currentTotalPrice.toLocaleString() + " VND";
@@ -120,6 +121,7 @@ function discountCodeSubmit(e) {
                 announce.style.color = "red";
                 discountPrice.innerHTML = "0 VND";
                 finalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
+                finalPriceInteger = currentTotalPrice;
                 checkDiscountCode = false;
             } else {
                 currentTotalPrice = 0;
@@ -152,6 +154,7 @@ function reloadCart() {
 
     for (let i = 0; i < listCarts.length; i++) {
         currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
+        finalPriceInteger = currentTotalPrice;
     }
     if (quantity && tempPrice) {
         tempPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
@@ -267,7 +270,9 @@ function continueToLienHe() {
         orderDetails: listCarts,
         note: orderNote.value
     };
+    
     console.log(orderInformation);
+    localStorage.setItem('priceForLienHe', finalPriceInteger);
     localStorage.setItem('orderInformation',JSON.stringify(orderInformation));
     window.location.href = "./lienhe.html";
 }

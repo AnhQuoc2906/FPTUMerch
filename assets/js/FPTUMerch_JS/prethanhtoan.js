@@ -265,5 +265,5 @@ function continueToLienHe() {
         discountCodeID: discountCode.value.toUpperCase(),
     }];
     console.log(orderInformation);
-    //window.location.href = "./lienhe.html";
+    window.location.href = "./lienhe.html";
 }

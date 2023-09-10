@@ -106,13 +106,8 @@
 								<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>
 								<li><a href="sanpham.html" onclick="passData()">SẢN PHẨM</a></li>
 								<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
-								<li class="has-child"><a href="##" onclick="passData()">LIÊN HỆ</a>
-									<ul class="sub-menu">
-										<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
-												rel="noopener noreferrer">FACEBOOK</a></li>
-
-
-									</ul>
+								<li><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
+									rel="noopener noreferrer" onclick="passData()">LIÊN HỆ</a>
 								</li>
 							</ul>
 						</div>
@@ -224,13 +219,14 @@
 					</li>
 
 					<li>
-						<a href="vechungtoi.html" class="out-link" onclick="passData()">VỀ CHÚNG TÔI</i></a>
+						<a href="vechungtoi.html" class="out-link" onclick="passData()">VỀ CHÚNG TÔI</a>
 					</li>
 					<li>
-						<a href="##" class="link">LIÊN HỆ<i class="fa fa-chevron-down"></i></a>
-						<ul class="submenu">
-							<li><a href="https://www.facebook.com/cocsaigonfuhcm">FACEBOOK</a></li>
-						</ul>
+						<a href="vechungtoi.html" class="out-link" onclick="passData()">LIÊN HỆ</i></a>
+					</li>
+					<li>
+						<a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank"
+						rel="noopener noreferrer" class="out-link">LIÊN HỆ</a>
 					</li>
 				</ul>
 				<!-- <div class="mobile-login">
@@ -268,7 +264,7 @@
 				<!-- /.section-heading-->
 				<div class="row">
 					<div class="col-xl-12 ">
-						<div class="pro-tab-filter style-two">
+						<div class="pro-tab-filter style-two" style="padding-top: 35px;">
 							<div class="container">
 								<div class="row" id="product-individual">
 									<!-- single product -->
@@ -388,7 +384,7 @@
 											<div class="pro-img trigger-image03">
 												<img src="media/images/combo-545x725px.jpg" alt="">
 											</div>
-											<span class="new-tag">NEW!</span>
+											<span class="new-tag">BEST SELLER</span>
 											<div class="mid-wrapper">
 												<h5 class="textproduct"><a href="product.html">COMBO FULL KIT</a></h5>
 												<p>260.000 VND</p>
@@ -577,12 +573,12 @@
 									<img src="media/images/áo-550x594px.jpg" alt="Thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/mặt-trước-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/mặt-sau-550x594px.jpg" alt="thumb">
 								</div>
-								<div class="">
+								<!-- <div class="">
 									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
@@ -593,9 +589,9 @@
 								</div>
 								<div class="">
 									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
+								</div> -->
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/bảng-size-550x594px.jpg" alt="thumb">
 								</div>
 							</div>
 
@@ -605,12 +601,12 @@
 									<img src="media/images/áo-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/mặt-trước-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/mặt-sau-550x594px.jpg" alt="thumb">
 								</div>
-								<div class="">
+								<!-- <div class="">
 									<div class="">
 										<img src="media/images/comingsoon-550x594px.jpg" alt="Thumb">
 									</div>
@@ -623,9 +619,9 @@
 								</div>
 								<div class="">
 									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
+								</div> -->
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/bảng-size-550x594px.jpg" alt="thumb">
 								</div>
 							</div>
 						</div>
@@ -633,12 +629,15 @@
 					</div>
 					<!-- /.col-xl-6 -->
 
-					<div class="col-md-6">
+					<div class="col-md-6" style="padding-right: 30px;">
 						<form class="product-details" action="POST" controller="#">
-							<h5 class="pro-title"><a href="#">ÁO THUN FPTYOU</a></h5>
+							<h5 class="pro-title">
+								<a href="#">ÁO THUN FPTYOU</a>
+								<p>BE WARRIORS BREAK BARRIERS</p>
+							</h5>
 							<span class="price">230.000 VND</span>
 							<div class="size-variation" style="margin-top: 20px;">
-								<span>size :</span>
+								<span>Size:</span>
 								<select name="size-value" id="sizeShirt">
 									<option value="">S</option>
 									<option value="">M</option>
@@ -655,7 +654,7 @@
 									Lưu ý: Đối với các size từ 3XL đến 5XL, dựa vào thông số cân nặng để chọn size phù hợp.
 								</p>
 							</div>
-							<div class="add-tocart-wrap" style="margin-top: 35px;">
+							<div class="add-tocart-wrap" style="margin-top: 10px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
 									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyShirt">
@@ -667,13 +666,13 @@
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 							<div class="chitietsanpham">
-								<h5>CHI TIẾT SẢN PHẨM: </h5>
+								<h5>CHI TIẾT SẢN PHẨM </h5>
 								<p>
 									<span>• Chất liệu:</span> Cotton 100%, co giãn tốt <br>
-									<span>• Logo:</span> FPTYOU mặt trước <br>
-									<span>• Slogan:</span> Be warriors break barriers <br>
-									<span>• Công nghệ in:</span> Được in chuyển nhiệt trên bề mặt vải <br>
-									• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.
+									<span>• Mặt trước:</span> Logo FPTYOU <br>
+									<span>• Mặt sau:</span> Slogan “BE WARRIORS BREAK BARRIERS”<br>
+									<span>• Công nghệ in:</span> In chuyển nhiệt trên bề mặt vải <br>
+									<span style="padding-right: 60px;">• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.</span>
 								</p>
 							</div>
 						</form>
@@ -763,14 +762,14 @@
 							<h5 class="pro-title"><a href="#">VỚ PASSED</a></h5>
 							<span class="price">19.000 VND</span>
 							<div class="size-variation" style="margin-top: 20px;">
-								<span>Màu :</span>
+								<span>Màu:</span>
 								<select name="size-value" id="colorSocks">
 									<option value="">Trắng</option>
 									<option value="">Đen</option>
 								</select>
 							</div>
 
-							<div class="add-tocart-wrap">
+							<div class="add-tocart-wrap" style="margin-top: 40px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
 									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtySocks">
@@ -782,14 +781,14 @@
 								<!-- <a href="#"><i class="flaticon-valentines-heart"></i></a> -->
 							</div>
 
-							<div class="chitietsanpham">
-								<h5>CHI TIẾT SẢN PHẨM: </h5>
+							<div class="chitietsanpham" style="margin-top: 40px;">
+								<h5>CHI TIẾT SẢN PHẨM </h5>
 								<p>
 									<span>• Chất liệu:</span> Cotton, co giãn tốt <br>
 									<span>• Logo:</span> PASSED màu xanh lá <br>
 									• Logo được thêu trực tiếp trên bề mặt vớ <br>
 									• Có thể thoải mái giặt máy <br>
-									• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.
+									<span style="padding-right: 75px;" >• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.</span>
 								</p>
 							</div>
 
@@ -885,7 +884,7 @@
 							<span class="price">45.000 VND</span>
 
 
-							<div class="add-tocart-wrap" style="margin-top: 40px;">
+							<div class="add-tocart-wrap" style="margin-top: 20px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
 									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyStrap">
@@ -898,14 +897,14 @@
 							</div>
 
 							<div class="chitietsanpham">
-								<h5>CHI TIẾT SẢN PHẨM: </h5>
+								<h5>CHI TIẾT SẢN PHẨM </h5>
 								<p>
 									<span>• Chất liệu:</span> Satin <br>
-									<span>• Logo:</span> FPTYOU mặt trước <br>
-									<span>• Slogan:</span> Be warriors break barriers <br>
-									<span>• Công nghệ in:</span> Được in chuyển nhiệt trên bề mặt dây đeo <br>
+									<span>• Logo:</span> FPTYOU <br>
+									<span>• Slogan:</span> “BE WARRIORS BREAK BARRIERS” <br>
+									<span>• Công nghệ in:</span> Được in chuyển nhiệt trên 2 bề mặt dây đeo <br>
 									• Vui lòng không giặt máy vì sẽ gây móp khóa gài của dây đeo thẻ <br>
-									• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.
+									<span style="padding-right: 75px;" >• Sản phẩm được thiết kế bởi Câu lạc bộ Truyền thông Cóc Sài Gòn, Đại học FPT TP. HCM.</span>
 								</p>
 							</div>
 						</form>
@@ -935,26 +934,21 @@
 									<img src="media/images/combo-550x594px.jpg" alt="Thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/áo-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/vớ-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/dây-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="Thumb">
+									<img src="media/images/pin-550x594px.jpg" alt="Thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/bảng-size-550x594px.jpg" alt="thumb">
 								</div>
-								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
-								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
+								
 							</div>
 
 							<div class="slider-nav">
@@ -963,28 +957,23 @@
 									<img src="media/images/combo-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/áo-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/vớ-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
 									<div class="">
-										<img src="media/images/comingsoon-550x594px.jpg" alt="Thumb">
+										<img src="media/images/dây-550x594px.jpg" alt="Thumb">
 									</div>
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/pin-550x594px.jpg" alt="thumb">
 								</div>
 								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
+									<img src="media/images/bảng-size-550x594px.jpg" alt="thumb">
 								</div>
-								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
-								<div class="">
-									<img src="media/images/comingsoon-550x594px.jpg" alt="thumb">
-								</div>
+								
 							</div>
 						</div>
 						<!-- /.quickview-slider -->
@@ -995,8 +984,8 @@
 						<form class="product-details" action="POST" controller="#">
 							<h5 class="pro-title"><a href="#">COMBO FULL KIT</a></h5>
 							<span class="price">260.000 VND</span>
-							<div class="size-variation">
-								<span>size áo:</span>
+							<div class="size-variation" style="margin-top: 20px;">
+								<span>Size áo:</span>
 								<select name="size-value" id="sizeShirtCombo">
 									<option value="">S</option>
 									<option value="">M</option>
@@ -1010,7 +999,7 @@
 							</div>
 
 							<div class="size-variation" style="margin-top: 15px;">
-								<span>màu vớ:</span>
+								<span>Màu vớ:</span>
 								<select name="size-value" id="colorSocksCombo">
 									<option value="">Trắng</option>
 									<option value="">Đen</option>
@@ -1018,14 +1007,14 @@
 							</div>
 
 							<div class="size-variation" style="margin-top: 15px;">
-								<span>mẫu huy hiệu:</span>
+								<span>Mẫu huy hiệu:</span>
 								<select name="size-value" id="badgeCombo">
 									<option value="">PASSED</option>
 									<option value="">BE WARRIORS BREAK BARRIERS</option>
 								</select>
 							</div>
 
-							<div class="add-tocart-wrap" style="margin-top: 40px;">
+							<div class="add-tocart-wrap" style="margin-top: 45px;">
 								<!--PRODUCT INCREASE BUTTON START-->
 								<div class="cart-plus-minus-button">
 									<input type="text" value="1" name="qtybutton" class="cart-plus-minus" id="qtyCombo">

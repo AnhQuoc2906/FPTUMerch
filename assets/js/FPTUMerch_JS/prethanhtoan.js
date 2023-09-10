@@ -8,6 +8,7 @@ let tempPrice = document.querySelector('.tempPrice');
 let discountPrice = document.querySelector('.discountPrice');
 let finalPrice = document.querySelector('.finalPrice');
 let bodyCartList = document.querySelector('#body-cart-list');
+let continueBtn = document.querySelector('.continueBtn');
 let checkDiscountCode = false;
 if (JSON.parse(localStorage.getItem('listCarts')) == null) {
     listCarts = [];
@@ -15,8 +16,9 @@ if (JSON.parse(localStorage.getItem('listCarts')) == null) {
 
 totalPrice.innerHTML = "";
 let currentTotalPrice = 0;
-if (listCarts.length>0) {
+if (listCarts.length > 0) {
     bodyCartList.innerHTML = "";
+    continueBtn.style.display = "block";
     for (let i = 0; i < listCarts.length; i++) {
         currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
     };
@@ -26,9 +28,9 @@ if (listCarts.length>0) {
         tempPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
         finalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
     };
-    listCarts.forEach((item, index) =>{
+    listCarts.forEach((item, index) => {
         let newDiv = document.createElement('tr');
-            newDiv.innerHTML = `<td>
+        newDiv.innerHTML = `<td>
             <a href="#" onclick="removeFromCart('${index}')">X</a>
         </td>
         <td>
@@ -64,7 +66,7 @@ if (listCarts.length>0) {
             </div>
         </td>
 `;
-            bodyCartList.append(newDiv);
+        bodyCartList.append(newDiv);
     })
 
     listCarts.forEach((value, index) => {
@@ -90,16 +92,16 @@ if (listCarts.length>0) {
                 </div>`;
             cartTop.append(newDiv);
         }
-    })    
+    })
 } else {
-    document.querySelector('.cart-table').innerHTML 
-    = "<p>Hiện bạn đang không có món hàng nào, hãy chọn ít nhất 1 món trước khi quay lại đây nhé! </p> "
-     + "<p>Bạn có thể mua đồ tại <a href='index.html' class='link' onclick='passData()'>TRANG CHỦ</a> hoặc <a href='sanpham.html' class='link' onclick='passData()'>SẢN PHẨM</a> nhé</p>";
+    document.querySelector('.cart-table').innerHTML
+        = "<p>Hiện bạn đang không có món hàng nào, hãy chọn ít nhất 1 món trước khi quay lại đây nhé! </p> "
+        + "<p>Bạn có thể mua đồ tại <a href='index.html' class='link' onclick='passData()' style='color:red;'>TRANG CHỦ</a> hoặc <a href='sanpham.html' class='link' onclick='passData()' style='color:red;'>SẢN PHẨM</a> nhé</p>";
+    continueBtn.style.display = "none";
 }
 
 function discountCodeSubmit(e) {
     e.preventDefault();
-    console.log(discountPrice.innerHTML);
     if (discountCode.value == "") {
         announce.innerHTML = "Bạn chưa nhập mã, hãy thử lại";
         announce.style.color = "red";
@@ -135,16 +137,16 @@ function discountCodeSubmit(e) {
     }
 }
 
-function removeFromCart(index){
+function removeFromCart(index) {
     let confirmation = confirm("Bạn có muốn xoá món hàng này?");
-    if(confirmation){
-        listCarts.splice(index,1);
+    if (confirmation) {
+        listCarts.splice(index, 1);
     }
     console.log(listCarts);
     reloadCart();
 }
 
-function reloadCart(){
+function reloadCart() {
     let currentTotalPrice = 0;
 
     for (let i = 0; i < listCarts.length; i++) {
@@ -154,19 +156,19 @@ function reloadCart(){
         tempPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
         quantity.innerHTML = listCarts.length;
         totalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
-        if(checkDiscountCode == false){
+        if (checkDiscountCode == false) {
             discountPrice.innerHTML = "0 VND";
             finalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
-        } else{
+        } else {
             discountPrice.innerHTML = (parseInt(currentTotalPrice / 10)).toLocaleString() + " VND";
-            finalPrice.innerHTML = (currentTotalPrice*9/10).toLocaleString() + " VND";
+            finalPrice.innerHTML = (currentTotalPrice * 9 / 10).toLocaleString() + " VND";
         }
     };
     bodyCartList.innerHTML = "";
     cartTop.innerHTML = "";
-    listCarts.forEach((item, index) =>{
+    listCarts.forEach((item, index) => {
         let newDiv = document.createElement('tr');
-            newDiv.innerHTML = `<td>
+        newDiv.innerHTML = `<td>
             <a href="#" onclick="removeFromCart('${index}')">X</a>
         </td>
         <td>
@@ -227,13 +229,21 @@ function reloadCart(){
                 </div>`;
             cartTop.append(newDiv);
         }
-    }) 
+    })
+    if (listCarts.length > 0) {
+        continueBtn.style.display = "block";
+    } else {
+        document.querySelector('.cart-table').innerHTML
+            = "<p>Hiện bạn đang không có món hàng nào, hãy chọn ít nhất 1 món trước khi quay lại đây nhé! </p> "
+            + "<p>Bạn có thể mua đồ tại <a href='index.html' class='link' onclick='passData()' style='color:red;'>TRANG CHỦ</a> hoặc <a href='sanpham.html' class='link' onclick='passData()' style='color:red;'>SẢN PHẨM</a> nhé</p>";
+        continueBtn.style.display = "none";
+    }
     localStorage.setItem('listCarts', JSON.stringify(listCarts));
 }
 
 function passData() {
     localStorage.setItem('listCarts', JSON.stringify(listCarts));
-}   
+}
 
 function changeQuantity(index, quantity) {
     if (quantity == 0) {
@@ -246,4 +256,14 @@ function changeQuantity(index, quantity) {
         listCarts[index].quantity = quantity;
         reloadCart();
     }
+}
+
+function continueToLienHe() {
+    console.log(listCarts);
+    console.log(currentTotalPrice);
+    let orderInformation = [{
+        discountCodeID: discountCode.value.toUpperCase(),
+    }];
+    console.log(orderInformation);
+    //window.location.href = "./lienhe.html";
 }

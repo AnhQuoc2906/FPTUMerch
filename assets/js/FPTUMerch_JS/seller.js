@@ -105,7 +105,7 @@ function productInfo(key) {
     })
         .then(res => res.json())
         .then(data => {
-            localStorage.setItem('order',JSON.stringify(data));
+            localStorage.setItem('order', JSON.stringify(data));
             console.log(data);
         })
         .catch(error => {

@@ -36,9 +36,9 @@ listCarts.forEach((value, index) => {
                 <p><a href="">${value.productName}</a></p>
             </div>
             <div class="cart-price">
-                <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                <p>${value.quantity} </p>
-                <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                <p>${value.amount} </p>
+                <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                 <p>x ${value.price.toLocaleString()}</p>
             </div>
             <div class="cart-price">
@@ -57,9 +57,9 @@ listCarts.forEach((value, index) => {
                 <p><a href="">${value.productName}</a></p>
             </div>
             <div class="cart-price">
-                <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                <p>${value.quantity} </p>
-                <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                <p>${value.amount} </p>
+                <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                 <p>x ${value.price.toLocaleString()}</p>
             </div>
             <div class="cart-price">
@@ -74,7 +74,7 @@ listCarts.forEach((value, index) => {
 //UPDATE CURRENT NUMBER OF ITEMS IN THE CART
 let currentTotalPrice = 0;
 for (let i = 0; i < listCarts.length; i++) {
-    currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+    currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
 };
 if (quantity && totalPrice) {
     quantity.innerHTML = listCarts.length;
@@ -134,21 +134,21 @@ function addToCart(key) {
                 if (listCarts[i].productID == key) {
                     if (product.productName.toUpperCase() == "ÁO THUN FPTYOU"
                         && shirtNote == listCarts[i].note) {
-                        listCarts[i].quantity = parseInt(listCarts[i].quantity) + parseInt(shirtQuantity.value, 10);
+                        listCarts[i].amount = parseInt(listCarts[i].amount) + parseInt(shirtQuantity.value, 10);
                         found = true;
                         break;
                     } else if (product.productName.toUpperCase() == "VỚ PASSED"
                         && sockNote == listCarts[i].note) {
-                        listCarts[i].quantity = parseInt(listCarts[i].quantity) + parseInt(sockQuantity.value, 10);
+                        listCarts[i].amount = parseInt(listCarts[i].amount) + parseInt(sockQuantity.value, 10);
                         found = true;
                         break;
                     } else if (product.productName.toUpperCase() == "DÂY ĐEO THẺ") {
-                        listCarts[i].quantity = parseInt(listCarts[i].quantity) + parseInt(sockQuantity.value, 10);
+                        listCarts[i].amount = parseInt(listCarts[i].amount) + parseInt(sockQuantity.value, 10);
                         found = true;
                         break;
                     } else if (product.productName.toUpperCase() == "COMBO FULL KIT"
                         && comboNote == listCarts[i].note) {
-                        listCarts[i].quantity = parseInt(listCarts[i].quantity) + parseInt(comboQuantity.value, 10);
+                        listCarts[i].amount = parseInt(listCarts[i].amount) + parseInt(comboQuantity.value, 10);
                         found = true;
                         break;
                     } else {
@@ -162,7 +162,7 @@ function addToCart(key) {
                     productName: product.productName,
                     productLink: product.productLink,
                     price: product.price,
-                    quantity: null,
+                    amount: null,
                     note: "",
                 };
                 if (shirtQuantity.value == 0 || sockQuantity.value == 0
@@ -172,15 +172,15 @@ function addToCart(key) {
                 } else {
                     if (product.productName.toUpperCase() == "ÁO THUN FPTYOU") {
                         // Create a new item object and push it to the listCarts array
-                        newItem.quantity = shirtQuantity.value;
+                        newItem.amount = shirtQuantity.value;
                         newItem.note += shirtNote;
                     } else if (product.productName.toUpperCase() == "VỚ PASSED") {
-                        newItem.quantity = sockQuantity.value;
+                        newItem.amount = sockQuantity.value;
                         newItem.note += sockNote;
                     } else if (product.productName.toUpperCase() == "DÂY ĐEO THẺ") {
-                        newItem.quantity = strapQuantity.value;
+                        newItem.amount = strapQuantity.value;
                     } else if (product.productName.toUpperCase() == "COMBO FULL KIT") {
-                        newItem.quantity = comboQuantity.value;
+                        newItem.amount = comboQuantity.value;
                         newItem.note += comboNote;
                     } else {
                         newItem = {
@@ -188,7 +188,7 @@ function addToCart(key) {
                             productName: product.productName,
                             productLink: product.productLink,
                             price: product.price,
-                            quantity: 1,
+                            amount: 1,
                         }
                     };
                     listCarts.push(newItem);
@@ -226,7 +226,7 @@ function changeQuantity(index, quantity) {
             reloadCart();
         }
     } else {
-        listCarts[index].quantity = quantity;
+        listCarts[index].amount = quantity;
         reloadCart();
     }
 }
@@ -235,7 +235,7 @@ function changeQuantity(index, quantity) {
 function reloadCart() {
     let currentTotalPrice = 0;
     for (let i = 0; i < listCarts.length; i++) {
-        currentTotalPrice += listCarts[i].price * listCarts[i].quantity; // Calculate total price
+        currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
     };
     if (quantity && totalPrice) {
         quantity.innerHTML = listCarts.length;
@@ -258,9 +258,9 @@ function reloadCart() {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">
@@ -280,9 +280,9 @@ function reloadCart() {
                     <p><a href="">${value.productName}</a></p>
                 </div>
                 <div class="cart-price">
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) - 1})">-</button>
-                    <p>${value.quantity} </p>
-                    <button onclick="changeQuantity(${index}, ${parseInt(value.quantity) + 1})">+</button>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) - 1})">-</button>
+                    <p>${value.amount} </p>
+                    <button onclick="changeQuantity(${index}, ${parseInt(value.amount) + 1})">+</button>
                     <p>x ${value.price.toLocaleString()}</p>
                 </div>
                 <div class="cart-price">

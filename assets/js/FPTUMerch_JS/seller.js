@@ -13,7 +13,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
     }).then(res => {
         return res.json();
     }).then(data => {
-        console.log(data);
+        console.log(data.sort);
         orderList.innerHTML = "";
         data.forEach((values) => {
             if (values != null) {
@@ -31,10 +31,10 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     ${values.totalPrice.toLocaleString()} VND
                                 </td>
                                 <td>
-                                ${values.payments == "1" ? "Momo" :
-                        values.payments == "2" ? "Chuyển khoản ngân hàng" :
-                            ""
-                    }
+                                    ${values.payments == "1" ? "Momo" :
+                                    values.payments == "2" ? "Chuyển khoản ngân hàng" :
+                                        ""
+                                    }
                                 </td>
                                 <td>
                                 ${values.paidStatus == true ? "Đã thanh toán" :
@@ -106,10 +106,10 @@ function productInfo(key) {
         .then(res => res.json())
         .then(data => {
             localStorage.setItem('order', JSON.stringify(data));
-            console.log(data);
+            console.log(localStorage.getItem('order'));         
+            window.location.href = './thongtinsanpham.html';
         })
         .catch(error => {
             console.log(error);
         });
-    window.location.href = './thongtinsanpham.html';
 }

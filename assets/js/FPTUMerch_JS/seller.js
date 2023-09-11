@@ -13,7 +13,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
     }).then(res => {
         return res.json();
     }).then(data => {
-        console.log(data.sort);
+        console.log(data);
         orderList.innerHTML = "";
         data.forEach((values) => {
             if (values != null) {

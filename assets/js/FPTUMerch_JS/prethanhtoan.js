@@ -130,9 +130,9 @@ function discountCodeSubmit(e) {
                 };
                 announce.innerHTML = "Mã hợp lệ";
                 announce.style.color = "green";
-                discountPrice.innerHTML = (parseInt(currentTotalPrice / 10)).toLocaleString() + " VND";
-                finalPrice.innerHTML = (parseInt(currentTotalPrice * 9 / 10)).toLocaleString() + " VND";
-                finalPriceInteger = currentTotalPrice * 9 / 10;
+                discountPrice.innerHTML = (parseInt(currentTotalPrice / 20)).toLocaleString() + " VND";
+                finalPrice.innerHTML = (parseInt(currentTotalPrice * 19 / 20)).toLocaleString() + " VND";
+                finalPriceInteger = currentTotalPrice * 19 / 20;
                 checkDiscountCode = true;
             }
         }).catch(error => {
@@ -165,8 +165,8 @@ function reloadCart() {
             discountPrice.innerHTML = "0 VND";
             finalPrice.innerHTML = currentTotalPrice.toLocaleString() + " VND";
         } else {
-            discountPrice.innerHTML = (parseInt(currentTotalPrice / 10)).toLocaleString() + " VND";
-            finalPrice.innerHTML = (currentTotalPrice * 9 / 10).toLocaleString() + " VND";
+            discountPrice.innerHTML = (parseInt(currentTotalPrice / 20)).toLocaleString() + " VND";
+            finalPrice.innerHTML = (currentTotalPrice * 19 / 20).toLocaleString() + " VND";
         }
     };
     bodyCartList.innerHTML = "";

@@ -22,7 +22,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     <a href="#" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
                                 </td>
                                 <td>
-                                    ÁO THUN FPTYOU
+                                    ${values.ordererName}
                                 </td>
                                 <td>
                                     ${values.discountCodeID}
@@ -37,48 +37,26 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     }
                                 </td>
                                 <td>
-                                ${values.paidStatus == true ? "Đã thanh toán" :
-                        values.paidStatus == false ? "Chưa thanh toán" :
-                            ""
-                    }
+                                    ${values.paidStatus == true ? "Đã thanh toán" :
+                                        values.paidStatus == false ? "Chưa thanh toán" :
+                                            ""
+                                    }
                                 </td>
                                 <td>
-                                ${values.earningMethod == "1" ? "Tại FPT" :
-                        values.earningMethod == "2" ? "Ship tận nhà" :
-                            ""
-                    }
+                                    ${values.earningMethod == "1" ? "Tại FPT" :
+                                        values.earningMethod == "2" ? "Ship tận nhà" :
+                                            ""
+                                    }   
                                 </td>
                                 <td>
-                                    <select id="tinhtrang" name="tinhtrang">
-                                    ${values.status == "1" ? `<option value="1" selected>Đang Xác Nhận</option>
-                                        <option value="2">Đã Xác Nhận</option>
-                                        <option value="3">Đã Giao Hàng</option>
-                                        <option value="4">Huỷ đơn</option>  ` :
-                                        values.status == "2" ? `<option value="1">Đang Xác Nhận</option>
-                                        <option value="2" selected>Đã Xác Nhận</option>
-                                        <option value="3">Đã Giao Hàng</option>
-                                        <option value="4">Huỷ đơn</option>  ` :
-                                        values.status == "3" ? `<option value="1">Đang Xác Nhận</option>
-                                        <option value="2">Đã Xác Nhận</option>
-                                        <option value="3" selected>Đã Giao Hàng</option>
-                                        <option value="4">Huỷ đơn</option>  ` :
-                                        values.status == "4" ? `<option value="1">Đang Xác Nhận</option>
-                                        <option value="2">Đã Xác Nhận</option>
-                                        <option value="3">Đã Giao Hàng</option>
-                                        <option value="4" selected>Huỷ đơn</option>  ` :
-                                        ""
-                                    }             
-                                    </select>	
+                                    ${values.status == "1" ? `Đang Xác Nhận`:
+                                      values.status == "2" ? `Đã Xác Nhận ` :
+                                        values.status == "3" ? `Đã Giao Hàng` :
+                                        values.status == "4" ? `Huỷ đơn` : ""
+                                    }          
                                 </td>
                                 <td>
-                                    <select id="shipper" name="shipper">                                 
-                                        <option value="Đang Xác Thực">Thành Danh</option>
-                                        <option value="Đã Xác Nhận" selected>Đoan Thanh</option>
-                                        <option value="Đã Giao">Quốc Anh</option>
-                                        <option value="Đã Giao">Đỗ Phú</option>
-                                        <option value="Đã Giao">Công Huy</option>
-                                        <option value="Đã Giao">Kiều Loan</option>
-                                    </select>											  
+                                    ${values.shipper == null ? `` : values.shipper}										  
                                 </td>
                                 <td>
                                     <textarea style="border: none; resize: none;">

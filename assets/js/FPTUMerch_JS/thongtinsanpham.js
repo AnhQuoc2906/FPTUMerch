@@ -48,6 +48,9 @@ if (user == null) {
                                             ${checkProduct.productName}
                                         </td>
                                         <td>
+                                            ${values.amount}
+                                        </td>
+                                        <td>
                                             ${(checkProduct.price * values.amount).toLocaleString()} VND
                                         </td>
                                         <td>

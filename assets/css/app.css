@@ -7811,12 +7811,11 @@ button {
 
 .save{
   text-align: right;
-  
   color: greenyellow;
 }
 
 .save button{
-  padding: 10px 10px;
+  padding: 10px 20px;
   background-color: greenyellow;
   font-weight: bold;
   font-size: 10px;

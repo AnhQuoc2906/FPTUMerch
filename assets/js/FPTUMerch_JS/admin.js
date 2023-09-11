@@ -1,6 +1,6 @@
 let user = JSON.parse(localStorage.getItem('currentUser')); // LẤY THÔNG TIN NGƯỜI DÙNG
 let userName = document.querySelector('.user-name'); // SET USER NAME Ở TRÊN WEBSITE
-let tempList =[];
+let tempList = [];
 let orderList = document.querySelector('#OrderList');
 
 if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quyền cho người dùng đã đăng nhập
@@ -15,7 +15,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         return res.json();
     }).then(data => {
         orderList.innerHTML = "";
-        data.forEach((values,index) => {
+        data.forEach((values, index) => {
             if (values != null) {
                 let order = document.createElement('tr');
                 order.innerHTML = `<td>
@@ -49,9 +49,9 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     </td>
                                     <td id="earningMethod${index}">
                                     ${values.earningMethod == 1 ? "Tại FPT" :
-                                        values.earningMethod == 2 ? "Ship tận nhà" :
-                                            ""
-                                    }  
+                        values.earningMethod == 2 ? "Ship tận nhà" :
+                            ""
+                    }  
                                     </td>
                                     <td>
                                         <select id="status${index}" name="status">
@@ -88,7 +88,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     <td>
                                         <div class="save">
                                             <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
-                                                    CHỐT ĐƠN
+                                                    SỬA
                                             </button>
                                         </div>
                                     </td>
@@ -98,6 +98,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         })
         tempList.push(...data);
         console.log(tempList);
+        document.querySelector('.totalNumberOfOrders').innerHTML = data.length;
     }).catch(error => {
         console.log(error);
     })
@@ -115,7 +116,7 @@ function productInfo(key) {
         .then(res => res.json())
         .then(data => {
             localStorage.setItem('order', JSON.stringify(data));
-            console.log(localStorage.getItem('order'));         
+            console.log(localStorage.getItem('order'));
             window.location.href = './thongtinsanpham.html';
         })
         .catch(error => {
@@ -123,7 +124,7 @@ function productInfo(key) {
         });
 }
 
-function updateOrder(index){
+function updateOrder(index) {
     let orderID = document.querySelector('#orderID' + index).innerHTML;
     let orderName = document.querySelector('#orderName' + index).innerHTML;
     let email = document.getElementById('email' + index).value;
@@ -138,13 +139,13 @@ function updateOrder(index){
     let shipper = (document.querySelector('#shipper' + index)).options[(document.querySelector('#shipper' + index)).selectedIndex].value;
     let note = document.querySelector('#note' + index).innerHTML;
 
-    if(paidStatus == "true"){
+    if (paidStatus == "true") {
         paidStatus = true;
     } else paidStatus = false;
-    let orderUpdate ={
-        DiscountCodeID:discountCodeID,
-        OrdererName : orderName,
-        OrdererPhoneNumber : phoneNumber,
+    let orderUpdate = {
+        DiscountCodeID: discountCodeID,
+        OrdererName: orderName,
+        OrdererPhoneNumber: phoneNumber,
         OrdererEmail: email,
         DeliveryAddress: deliveryAddress,
         TotalPrice: totalPrice,
@@ -157,21 +158,30 @@ function updateOrder(index){
         OrderDetails: []
     };
     console.log(orderUpdate);
-    fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Put/" + orderID,{
-            method:"PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(orderUpdate),
-        }).then(res => {
-           return res.json();
-        }).then(data =>{
-            console.log(data);
-        }).catch(error =>{
-            console.log(error);
-        })
-    
+    fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Put/" + orderID, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(orderUpdate),
+    }).then(res => {
+        return res.json();
+    }).then(data => {
+        console.log(data);
+    }).catch(error => {
+        console.log(error);
+    })
+
+    // Display the pop-up
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+
+    // Set the content of the pop-up (customize this as needed)
+    popup.querySelector('.popup-content').innerHTML = 'SỬA ĐƠN THÀNH CÔNG';
+
+    // Automatically close the pop-up after 3 seconds (3000 milliseconds)
+    setTimeout(function () { popup.style.display = 'none'; }, 3000);
     //shirtSizeCombo.options[shirtSizeCombo.selectedIndex].text
-    location.reload();
+    //location.reload();
 }

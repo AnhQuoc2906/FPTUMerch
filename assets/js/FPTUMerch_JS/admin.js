@@ -1,6 +1,5 @@
 let user = JSON.parse(localStorage.getItem('currentUser')); // LẤY THÔNG TIN NGƯỜI DÙNG
 let userName = document.querySelector('.user-name'); // SET USER NAME Ở TRÊN WEBSITE
-let tempList = [];
 let orderList = document.querySelector('#OrderList');
 
 if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quyền cho người dùng đã đăng nhập
@@ -15,8 +14,15 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         return res.json();
     }).then(data => {
         orderList.innerHTML = "";
+        let paid = [];
+        let notPaid = [];
         data.forEach((values, index) => {
             if (values != null) {
+                if(values.paidStatus == true){
+                    paid.push(values);
+                } else{
+                    notPaid.push(values);
+                }
                 let order = document.createElement('tr');
                 order.innerHTML = `<td>
                                         <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
@@ -96,9 +102,9 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                 orderList.append(order);
             }
         })
-        tempList.push(...data);
-        console.log(tempList);
         document.querySelector('.totalNumberOfOrders').innerHTML = data.length;
+        document.querySelector('.totalNumberOfOrdersPaid').innerHTML = paid.length;
+        document.querySelector('.totalNumberOfOrdersNotPaid').innerHTML = notPaid.length;
     }).catch(error => {
         console.log(error);
     })

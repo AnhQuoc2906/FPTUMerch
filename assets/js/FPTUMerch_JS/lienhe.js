@@ -106,33 +106,6 @@ function submitInformation(){
     }
 }
 
-function completePayment(){
-    const popupButton = document.getElementById("popup-button");
-		const popup = document.getElementById("popup");
-		const popupClose = document.getElementById("popup-close");
-
-		popupButton.addEventListener("click", function() {
-    	popup.style.display = "block";
-		});
-
-		popupClose.addEventListener("click", function() {
-    	popup.style.display = "none";
-		});
-
-		popup.addEventListener("click", function(event) {
-    	if (event.target === popup) {
-        popup.style.display = "none";
-    		}
-		});
-}
-
-function mouse_over(){
-    document.getElementById("submitButton").style.backgroundColor = "black";
-}
-
-function mouse_out(){
-    document.getElementById("submitButton").style.backgroundColor = "#D80806";
-}
 
 $('.trigger04').on('click', function(e) {
     if(customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){

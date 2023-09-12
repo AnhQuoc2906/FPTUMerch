@@ -128,7 +128,7 @@ function discountCodeSubmit(e) {
                 for (let i = 0; i < listCarts.length; i++) {
                     currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
                 };
-                announce.innerHTML = "Mã hợp lệ";
+                announce.innerHTML = "Mã hợp lệ";s
                 announce.style.color = "green";
                 discountPrice.innerHTML = (parseInt(currentTotalPrice / 20)).toLocaleString() + " VND";
                 finalPrice.innerHTML = (parseInt(currentTotalPrice * 19 / 20)).toLocaleString() + " VND";
@@ -266,7 +266,7 @@ function changeQuantity(index, quantity) {
 function continueToLienHe() {
     console.log(currentTotalPrice);
     let orderInformation = {
-        discountCodeID: discountCode.value.toUpperCase(),
+        discountCodeID: discountCode.value.trim().toUpperCase(),
         totalPrice: currentTotalPrice,
         orderDetails: listCarts,
         note: orderNote.value

@@ -266,7 +266,7 @@ function changeQuantity(index, quantity) {
 function continueToLienHe() {
     console.log(currentTotalPrice);
     let orderInformation = {
-        discountCodeID: discountCode.value.toUpperCase(),
+        discountCodeID: discountCode.value.trim().toUpperCase(),
         totalPrice: currentTotalPrice,
         orderDetails: listCarts,
         note: orderNote.value

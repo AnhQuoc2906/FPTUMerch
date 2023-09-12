@@ -74,15 +74,20 @@ if (quantity && totalPrice) {
 };
 
 function submitInformation(){
-    let result = "";
     orderInformation.ordererName = customerName.value;
     orderInformation.ordererPhoneNumber = customerTelephone.value;
     orderInformation.ordererEmail = customerEmail.value;
     orderInformation.deliveryAddress = deliveryAddress.value;
-    orderInformation.totalPrice = currentTotalPrice;
     orderInformation.earningMethod = parseInt(earningMethod.options[earningMethod.selectedIndex].value);
     orderInformation.payments = 1;
-    if(document.querySelector('.orderCode').innerHTML == "" &&  document.querySelector('.orderFinalPrice').innerHTML == ""){
+    if((document.querySelector('#local')).options[(document.querySelector('#local')).selectedIndex].value == 2){
+        priceForLienHe = parseInt(priceForLienHe) + 30000;
+        console.log(priceForLienHe);
+    } else{
+        console.log(priceForLienHe);
+    };
+    if(document.querySelector('.orderCode').innerHTML == "" &&  document.querySelector('.orderFinalPrice').innerHTML == ""
+     && customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
             method:"POST",
             headers: {
@@ -128,3 +133,17 @@ function mouse_over(){
 function mouse_out(){
     document.getElementById("submitButton").style.backgroundColor = "#D80806";
 }
+
+$('.trigger04').on('click', function(e) {
+    if(customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
+        e.preventDefault();
+        var mask = '<div class="mask-overlay">';
+    
+        $('.quickview-wrapper01').toggleClass('open');
+        $(mask).hide().appendTo('body').fadeIn('fast');
+        $('.mask-overlay, .close-qv').on('click', function() {
+          $('.quickview-wrapper01').removeClass('open');
+          $('.mask-overlay').remove();
+        });
+    }
+});

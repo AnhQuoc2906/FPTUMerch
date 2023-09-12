@@ -220,9 +220,17 @@
 									<!-- Content of the pop-up goes here -->
 								</div>
 							</div>
-							<h5>Số lượng đơn hiện tại: <span class="totalNumberOfOrders" style="color:red"></span></h5>
-							<h5>Số lượng đơn đã thanh toán: <span class="totalNumberOfOrdersPaid" style="color:red"></span></h5>
-							<h5>Số lượng đơn chưa thanh toán: <span class="totalNumberOfOrdersNotPaid" style="color:red"></span></h5>
+							<form class="sidebar-widget sidebar-search col-xl-4" action="#" controller="#" >
+								<input type="text" placeholder="Tìm kiếm...." id="searchItem" size="50">
+								<button type="submit" onclick=""><i class="fas fa-search"></i></button>
+							</form>
+							<div class="summary" style="border: 2px solid; text-align:left; margin: 0 45% 0 0;">
+								<h5>Số lượng đơn hiện tại: <span class="totalNumberOfOrders" style="color:red"></span></h5>
+								<h5>Số lượng đơn đã thanh toán: <span class="totalNumberOfOrdersPaid" style="color:red"></span></h5>
+								<h5>Số lượng đơn chưa thanh toán: <span class="totalNumberOfOrdersNotPaid" style="color:red"></span></h5>
+								<h5>Tổng tiền dự kiến: <span class="totalNumberOfMoney" style="color:red"></span></h5>
+								<h5>Tổng tiền đã nhận được từ đơn hàng: <span class="totalNumberOfMoneyPaid" style="color:red"></span></h5>
+							</div>
 							<table class="tables">
 								<thead>
 									<tr>
@@ -242,7 +250,6 @@
 								<tbody id="OrderList">
 								</tbody>
 							</table>
-
 						</div>
 						<!-- /.cart-table -->
 					</div>

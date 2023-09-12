@@ -78,9 +78,14 @@ function submitInformation(){
     orderInformation.ordererPhoneNumber = customerTelephone.value;
     orderInformation.ordererEmail = customerEmail.value;
     orderInformation.deliveryAddress = deliveryAddress.value;
-    orderInformation.totalPrice = currentTotalPrice;
     orderInformation.earningMethod = parseInt(earningMethod.options[earningMethod.selectedIndex].value);
     orderInformation.payments = 1;
+    if((document.querySelector('#local')).options[(document.querySelector('#local')).selectedIndex].value == 2){
+        priceForLienHe = parseInt(priceForLienHe) + 30000;
+        console.log(priceForLienHe);
+    } else{
+        console.log(priceForLienHe);
+    };
     if(document.querySelector('.orderCode').innerHTML == "" &&  document.querySelector('.orderFinalPrice').innerHTML == ""
      && customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{

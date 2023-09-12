@@ -106,6 +106,12 @@ function submitInformation(){
     }
 }
 
+function completePayment(){
+    localStorage.removeItem('listCarts');
+    document.getElementById("completePayment").addEventListener("click", function () {         
+        window.location.href = "index.html?paymentComplete=true";
+    });
+}
 
 $('.trigger04').on('click', function(e) {
     if(customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){

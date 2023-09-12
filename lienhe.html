@@ -361,19 +361,20 @@
 				<div id="nh" class="col-md-5 bank">			
 					<img  src="media/images/TPBANK.png" alt="momo">			
 				</div>
+				
 				<div class="col-md-12 hoanthanh">
-					<button id="popup-button" onclick="completePayment()" style="background-color:#D80806; border:none;">HOÀN TẤT THANH TOÁN</button>
-    				<div id="popup" class="popup">
-        				<div class="popup-content">
-            				<span class="popup-close" id="popup-close">&times;</span>
-            				<p>Cảm ơn bạn đã tin dùng FPTU Merch
-							</p>
-        				</div>
-   					 </div>
-
+					<button id="completePayment">HOÀN TẤT THANH TOÁN</button>
 				</div>
-	<!-- /#site -->
 
+	<!-- /#site -->
+	
+	<script>
+        
+        document.getElementById("completePayment").addEventListener("click", function () {
+            
+            window.location.href = "index.html?paymentComplete=true";
+        });
+    </script>
 
 	<script>		
 		document.getElementById("local").addEventListener("change", function() {
@@ -392,13 +393,13 @@
 		var imageA = document.getElementById("momo");
 		var imageB = document.getElementById("nh");
 
-		// Lặp qua tất cả các nút radio và lắng nghe sự kiện onchange
+	
 		radioButtons.forEach(function(radioButton) {
     	radioButton.addEventListener("change", function() {
-        // Lấy giá trị của nút radio đã chọn
+   
         var selectedValue = this.value;
 
-        // Ẩn ảnh A và hiển thị ảnh B nếu chọn B, ngược lại thì hiển thị ảnh A
+        
         if (selectedValue === "TPBANK") {
             imageA.style.display = "none";
             imageB.style.display = "block";

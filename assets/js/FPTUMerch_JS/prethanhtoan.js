@@ -128,7 +128,7 @@ function discountCodeSubmit(e) {
                 for (let i = 0; i < listCarts.length; i++) {
                     currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
                 };
-                announce.innerHTML = "Mã hợp lệ";s
+                announce.innerHTML = "Mã hợp lệ";
                 announce.style.color = "green";
                 discountPrice.innerHTML = (parseInt(currentTotalPrice / 20)).toLocaleString() + " VND";
                 finalPrice.innerHTML = (parseInt(currentTotalPrice * 19 / 20)).toLocaleString() + " VND";

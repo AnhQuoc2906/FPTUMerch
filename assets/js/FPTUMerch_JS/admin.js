@@ -16,13 +16,16 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         orderList.innerHTML = "";
         let paid = [];
         let notPaid = [];
+        let totalMoney = 0, moneyReceived =0;
         data.forEach((values, index) => {
             if (values != null) {
                 if(values.paidStatus == true){
                     paid.push(values);
+                    moneyReceived += values.totalPrice;
                 } else{
                     notPaid.push(values);
                 }
+                totalMoney += values.totalPrice;
                 let order = document.createElement('tr');
                 order.innerHTML = `<td>
                                         <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
@@ -105,6 +108,8 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         document.querySelector('.totalNumberOfOrders').innerHTML = data.length;
         document.querySelector('.totalNumberOfOrdersPaid').innerHTML = paid.length;
         document.querySelector('.totalNumberOfOrdersNotPaid').innerHTML = notPaid.length;
+        document.querySelector('.totalNumberOfMoney').innerHTML = totalMoney.toLocaleString() + " VND";
+        document.querySelector('.totalNumberOfMoneyPaid').innerHTML = moneyReceived.toLocaleString() + " VND";
     }).catch(error => {
         console.log(error);
     })

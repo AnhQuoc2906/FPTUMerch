@@ -148,7 +148,7 @@ function updateOrder(index) {
     let earningMethod = document.getElementById('earning' + index).value;
     let status = (document.querySelector('#status' + index)).options[(document.querySelector('#status' + index)).selectedIndex].value;
     let shipper = (document.querySelector('#shipper' + index)).options[(document.querySelector('#shipper' + index)).selectedIndex].value;
-    let note = document.querySelector('#note' + index).innerHTML;
+    let note = document.getElementById('note' + index).value;
 
     if (paidStatus == "true") {
         paidStatus = true;

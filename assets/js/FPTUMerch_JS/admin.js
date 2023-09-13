@@ -8,7 +8,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
     document.querySelector('.user-welcome').innerHTML = "";
 } else {
     userName.innerHTML = user.FullName;
-    fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetOrders', {
+    fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetActiveOrders', {
         method: "GET"
     }).then(res => {
         return res.json();
@@ -58,9 +58,9 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     </td>
                                     <td id="earningMethod${index}">
                                     ${values.earningMethod == 1 ? "Tại FPT" :
-                        values.earningMethod == 2 ? "Ship tận nhà" :
-                            ""
-                    }  
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
                                     </td>
                                     <td>
                                         <select id="status${index}" name="status">
@@ -104,12 +104,13 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                         `;
                 orderList.append(order);
             }
-        })
+        });
         document.querySelector('.totalNumberOfOrders').innerHTML = data.length;
         document.querySelector('.totalNumberOfOrdersPaid').innerHTML = paid.length;
         document.querySelector('.totalNumberOfOrdersNotPaid').innerHTML = notPaid.length;
         document.querySelector('.totalNumberOfMoney').innerHTML = totalMoney.toLocaleString() + " VND";
         document.querySelector('.totalNumberOfMoneyPaid').innerHTML = moneyReceived.toLocaleString() + " VND";
+        document.getElementById('loader').remove();
     }).catch(error => {
         console.log(error);
     })

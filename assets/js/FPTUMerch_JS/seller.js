@@ -66,7 +66,8 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                         `;
                 orderList.append(order);
             }
-        })
+        });
+        document.getElementById('loader').remove();
     }).catch(error => {
         console.log(error);
     })

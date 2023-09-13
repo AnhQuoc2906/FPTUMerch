@@ -59,6 +59,7 @@ if (user == null) {
                                 `;
                 orderDetailsHTML.append(orderDetail);
             });
+            document.getElementById('loader').remove();
         })
         .catch(error => {
             console.log(error);

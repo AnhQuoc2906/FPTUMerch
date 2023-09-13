@@ -196,3 +196,31 @@ function updateOrder(index) {
     //shirtSizeCombo.options[shirtSizeCombo.selectedIndex].text
     //location.reload();
 }
+
+//test
+// function filterData() {
+//     const filterInput = document.getElementById("myInput");
+//     const data = order.innerHTML;
+//     const tableBody = document.getElementById("OrderList");
+
+//     filterInput.addEventListener("keyup", function () {
+//         const filterValue = filterInput.value.toLowerCase();
+//         tableBody.innerHTML = ""; // Xóa nội dung bảng hiện tại
+//         data.forEach(item => {
+//             const text = item.name.toLowerCase();
+//             if (text.indexOf(filterValue) > -1) {
+//                 const row = document.createElement("tr");
+//                 const nameCell = document.createElement("td");
+//                 nameCell.textContent = item.name;
+//                 const ageCell = document.createElement("td");
+//                 ageCell.textContent = item.age;
+//                 row.appendChild(nameCell);
+//                 row.appendChild(ageCell);
+//                 tableBody.appendChild(row);
+//             }
+//         });
+//     });
+// }
+
+// Gọi hàm filterData để bắt đầu sử dụng bộ lọc
+filterData();

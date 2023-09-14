@@ -82,12 +82,13 @@ function submitInformation(){
     orderInformation.payments = 1;
     if((document.querySelector('#local')).options[(document.querySelector('#local')).selectedIndex].value == 2){
         priceForLienHe = parseInt(priceForLienHe) + 30000;
-        console.log(priceForLienHe);
+        console.log(customerTelephone.value);
     } else{
-        console.log(priceForLienHe);
+        console.log(customerTelephone.value);
+        console.log(parseInt(customerTelephone.value));
     };
     if(document.querySelector('.orderCode').innerHTML == "" &&  document.querySelector('.orderFinalPrice').innerHTML == ""
-     && customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
+     && customerName.value != "" && customerTelephone.value.match(/^\d{10}$/) && customerEmail.value.includes("@")){
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
             method:"POST",
             mode: "cors",
@@ -115,7 +116,7 @@ function completePayment(){
 }
 
 $('.trigger04').on('click', function(e) {
-    if(customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
+    if(customerName.value != "" && customerTelephone.value.match(/^\d{10}$/) && customerEmail.value.includes("@")){
         e.preventDefault();
         var mask = '<div class="mask-overlay">';
     

@@ -522,6 +522,7 @@ window.onclick = (event) => {
         document.getElementById("dropdown-shipper").style.display= "none";
     }
 }
+
 function filter(type,value){
     document.getElementById('announce').innerHTML = "";
     orderList.innerHTML = "";

@@ -220,13 +220,16 @@
 									<!-- Content of the pop-up goes here -->
 								</div>
 							</div>
-							<form class="sidebar-widget sidebar-search col-xl-4" action="#" controller="#" >
-								<input type="text" placeholder="Tìm kiếm...." id="searchItem" size="50">
-								
-								<!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> -->
-
-								<button type="submit" onclick=""><i class="fas fa-search"></i></button>
-							</form>
+							<div class="sidebar-widget sidebar-search col-xl-4" action="#" controller="#" >
+								<input type="text" placeholder="Tìm kiếm...." id="searchItem">
+								<label>Tìm theo: </label>
+								<select id="searchBy" name="searchBy" style="width:150px">
+									<option value="1">Mã đơn hàng</option>
+									<option value="2">Tên người đặt</option>	
+									<option value="3">Mã giảm giá</option>									
+								</select>
+								<button type="submit" onclick="searchBy()"><i class="fas fa-search"></i></button>
+							</div>
 							<div class="summary" style="border: 2px solid; text-align:left; margin: 0 45% 0 0;">
 								<h5>Số lượng đơn hiện tại: <span class="totalNumberOfOrders" style="color:red"></span></h5>
 								<h5>Số lượng đơn đã thanh toán: <span class="totalNumberOfOrdersPaid" style="color:red"></span></h5>
@@ -241,11 +244,31 @@
 										<th>Tên Người Đặt</th>
 										<th>Mã Giảm Giá</th>
 										<th>Tổng </th>
-										<th>Phương Thức Thanh Toán</th>
-										<th>Tình Trạng Thanh Toán</th>
-										<th>Địa Điểm Nhận Hàng</th>
-										<th>Tình Trạng Đơn Hàng</th>
-										<th>Người Phụ Trách</th>
+										<th>Phương Thức Thanh Toán 
+											<a onclick="showSortOptions('payments')" class="dropbtn fa fa-filter"></a>
+											<div id="dropdown-payments" class="dropdown-content">
+											</div>
+										</th>
+										<th>Tình Trạng Thanh Toán 
+											<a onclick="showSortOptions('paidStatus')" class="dropbtn fa fa-filter"></a>
+											<div id="dropdown-paid-status" class="dropdown-content">
+											</div>
+										</th>
+										<th>Địa Điểm Nhận Hàng
+											<a onclick="showSortOptions('earningMethod')" class="dropbtn fa fa-filter"></a>
+											<div id="dropdown-earning-method" class="dropdown-content">
+											</div>
+										</th>
+										<th>Tình Trạng Đơn Hàng
+											<a onclick="showSortOptions('status')" class="dropbtn fa fa-filter"></a>
+											<div id="dropdown-status" class="dropdown-content">
+											</div>
+										</th>
+										<th>Người Phụ Trách
+											<a onclick="showSortOptions('shipper')" class="dropbtn fa fa-filter"></a>
+											<div id="dropdown-shipper" class="dropdown-content">
+											</div>
+										</th>
 										<th>Note</th>
 										<th>Thao tác</th>
 									</tr>
@@ -254,6 +277,7 @@
 								</tbody>
 							</table>
 							<div id="loader"></div>
+							<div id="announce"></div>
 						</div>
 						<!-- /.cart-table -->
 					</div>

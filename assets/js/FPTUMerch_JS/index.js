@@ -20,7 +20,8 @@ let cartTopMobile = document.querySelector('.cart-top-mobile'); // Show the cart
 let totalPriceMobile = document.querySelector('.totalPriceMobile');
 //Get all products and store in products variable
 fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get", {
-    method: "GET"
+    method: "GET",
+    mode: "cors"
 }).then(res => {
     return res.json();
 }).then(data => {

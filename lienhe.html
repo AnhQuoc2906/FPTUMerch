@@ -238,15 +238,18 @@
 									<form action="#" controller="#">
 										<div class="col-xl-12">
 											<h4>Họ và tên</h4>
-											<input type="text" id="name" placeholder="Họ và tên*" required>
+											<input type="text" id="name" placeholder="Họ và tên*" required
+												oninvalid="this.setCustomValidity('Hãy nhập tên của bạn vào nhé')">
 										</div>
 										<div class="col-xl-12">
 											<h4>Số điện thoại</h4>
-											<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Số điện thoại*" required>
+											<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Số điện thoại*" required
+												oninvalid="this.setCustomValidity('Hãy nhập số điện thoại của bạn vào nhé')">
 										</div>
 										<div class="col-xl-12">
 											<h4>Email</h4>
-											<input type="email" id="email" name="email" placeholder="Email*" required>
+											<input type="email" id="email" name="email" placeholder="Email*" required
+												oninvalid="this.setCustomValidity('Hãy nhập đúng format email của bạn vào nhé')">
 										</div>
 										<div class="col-xl-5 phuongthucnhanhang">
 											<h4>Địa điểm nhận hàng</h4>
@@ -267,8 +270,7 @@
 										<div class="col-xl-12">
 											<div class="trigger04">
 												<input id="submitButton" type="submit" value="THANH TOÁN" onclick="submitInformation()" 
-												style="background-color:#D80806" 
-												onmouseover="mouse_over()" onmouseout="mouse_out()">
+												style="background-color:#D80806" >
 											</div>
 										</div>
 									</form>

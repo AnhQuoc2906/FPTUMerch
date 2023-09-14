@@ -16,7 +16,8 @@ if (user == null) {
 } else {
     userName.innerHTML = user.FullName;
     fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get", {
-        method: "GET"
+        method: "GET",
+        mode: "cors"
     })
         .then(res => res.json())
         .then(data => {

@@ -9,7 +9,8 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
 } else {
     userName.innerHTML = user.FullName;
     fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetActiveOrders', {
-        method: "GET"
+        method: "GET",
+        mode: "cors"
     }).then(res => {
         return res.json();
     }).then(data => {
@@ -81,6 +82,7 @@ function logout() {
 function productInfo(key) {
     fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetOrdersByOrderID/' + key, {
         method: "GET",
+        mode: "cors"
     })
         .then(res => res.json())
         .then(data => {

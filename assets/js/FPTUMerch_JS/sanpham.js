@@ -84,7 +84,8 @@ if (quantity && totalPrice) {
 };
 
 fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get", {
-    method: "GET"
+    method: "GET",
+    mode: "cors"
 }).then(res => {
     return res.json();
 }).then(data => {
@@ -300,7 +301,8 @@ function searchByName() {
     productAfterSearch.innerHTML = "";
     if (searchName.value == "" || searchName.value == null) {
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/Get/", {
-            method: "GET"
+            method: "GET",
+            mode: "cors"
         }).then(res => {
             return res.json();
         }).then(data => {
@@ -442,7 +444,8 @@ function searchByName() {
         })
     } else {
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Product/GetByName/" + searchName.value, {
-            method: "GET"
+            method: "GET",
+            mode: "cors"
         }).then(res => {
             return res.json();
         }).then(data => {

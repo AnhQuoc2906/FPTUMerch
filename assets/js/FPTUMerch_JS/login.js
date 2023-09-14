@@ -10,7 +10,7 @@ function login(){
     announce.innerHTML = "";
     fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Users/GetByEmailAndPassword",{
         method:"POST",
-        mode:"cors",
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"

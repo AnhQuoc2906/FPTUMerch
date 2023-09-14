@@ -90,6 +90,7 @@ function submitInformation(){
      && customerName.value != "" && customerTelephone.value != "" && customerEmail.value != ""){
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Post",{
             method:"POST",
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"

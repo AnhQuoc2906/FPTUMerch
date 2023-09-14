@@ -1,6 +1,7 @@
 let user = JSON.parse(localStorage.getItem('currentUser')); // LẤY THÔNG TIN NGƯỜI DÙNG
 let userName = document.querySelector('.user-name'); // SET USER NAME Ở TRÊN WEBSITE
 let orderList = document.querySelector('#OrderList');
+let tmpList = []; //LƯU ORDER ĐỂ TIẾN HÀNH SEARCH THEO ORDER
 
 if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quyền cho người dùng đã đăng nhập
     document.querySelector('.account-table').innerHTML = `
@@ -9,7 +10,8 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
 } else {
     userName.innerHTML = user.FullName;
     fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetActiveOrders', {
-        method: "GET"
+        method: "GET",
+        mode: "cors"
     }).then(res => {
         return res.json();
     }).then(data => {
@@ -18,6 +20,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
         let notPaid = [];
         let totalMoney = 0, moneyReceived =0;
         data.forEach((values, index) => {
+            tmpList.push(values);
             if (values != null) {
                 if(values.paidStatus == true){
                     paid.push(values);
@@ -105,7 +108,7 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                 orderList.append(order);
             }
         });
-        document.querySelector('.totalNumberOfOrders').innerHTML = data.length;
+        document.querySelector('.totalNumberOfOrders').innerHTML = tmpList.length;
         document.querySelector('.totalNumberOfOrdersPaid').innerHTML = paid.length;
         document.querySelector('.totalNumberOfOrdersNotPaid').innerHTML = notPaid.length;
         document.querySelector('.totalNumberOfMoney').innerHTML = totalMoney.toLocaleString() + " VND";
@@ -124,6 +127,7 @@ function logout() {
 function productInfo(key) {
     fetch('https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/GetOrdersByOrderID/' + key, {
         method: "GET",
+        mode: "cors"
     })
         .then(res => res.json())
         .then(data => {
@@ -172,6 +176,7 @@ function updateOrder(index) {
     console.log(orderUpdate);
     fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/Orders/Put/" + orderID, {
         method: "PUT",
+        mode: "cors",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -198,30 +203,737 @@ function updateOrder(index) {
     //location.reload();
 }
 
-//test
-// function filterData() {
-//     const filterInput = document.getElementById("myInput");
-//     const data = order.innerHTML;
-//     const tableBody = document.getElementById("OrderList");
+function searchBy(){
+    let type = document.querySelector('#searchBy').value;
+    let searchValue = document.querySelector('#searchItem').value;
+    document.getElementById('announce').innerHTML = "";
+    orderList.innerHTML = "";
+    if(parseInt(type) == 1){ //Mã đơn hàng     
+        tmpList.forEach((values,index) =>{
+            if(values.orderID.includes(searchValue)){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    } else if(parseInt(type)==2){ //Tên người đặt
+        tmpList.forEach((values,index) =>{
+            if(values.ordererName.includes(searchValue)){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    } else if(parseInt(type)==3){ // Mã giảm giá
+        tmpList.forEach((values,index) =>{
+            if(values.discountCodeID.toUpperCase() == searchValue.toUpperCase()){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    } 
+    //TRƯỜNG HỢP ĐÃ TÌM VÀ TRẢ RA KHÔNG CÓ KẾT QUẢ
+    if(orderList.innerHTML == ""){
+        document.getElementById('announce').style.color = "red";
+        document.getElementById('announce').innerHTML = "<label>KHÔNG CÓ KẾT QUẢ, HÃY KIỂM TRA TỪ BẠN NHẬP HOẶC BẠN ĐANG TÌM THEO GÌ NHÉ</label>"
+    }
+}
 
-//     filterInput.addEventListener("keyup", function () {
-//         const filterValue = filterInput.value.toLowerCase();
-//         tableBody.innerHTML = ""; // Xóa nội dung bảng hiện tại
-//         data.forEach(item => {
-//             const text = item.name.toLowerCase();
-//             if (text.indexOf(filterValue) > -1) {
-//                 const row = document.createElement("tr");
-//                 const nameCell = document.createElement("td");
-//                 nameCell.textContent = item.name;
-//                 const ageCell = document.createElement("td");
-//                 ageCell.textContent = item.age;
-//                 row.appendChild(nameCell);
-//                 row.appendChild(ageCell);
-//                 tableBody.appendChild(row);
-//             }
-//         });
-//     });
-// }
+function showSortOptions(index){
+    const dropdowns = document.querySelectorAll('.dropdown-content')
+    dropdowns.forEach(dropdown => {
+        dropdown.style.display = 'none';
+        dropdown.innerHTML = '';
+    });
+    if(index === "payments"){
+        document.getElementById("dropdown-payments").innerHTML = `
+        <a onclick="filter('payments','1')">Momo</a>
+		<a onclick="filter('payments','2')">Chuyển khoản ngân hàng</a>`;
+        document.getElementById("dropdown-payments").style.display= "block";
+    } else if(index === "paidStatus"){
+        document.getElementById("dropdown-paid-status").innerHTML = `
+        <a onclick="filter('paidStatus',true)">Đã thanh toán</a>
+        <a onclick="filter('paidStatus',false)">Chưa Thanh Toán</a>`;
+        document.getElementById("dropdown-paid-status").style.display= "block";
+    } else if(index === "earningMethod"){
+        document.getElementById("dropdown-earning-method").innerHTML = `
+        <a onclick="filter('earningMethod','1')">Tại FPT</a>
+		<a onclick="filter('earningMethod','2')">Ship tận nhà</a>`;
+        document.getElementById("dropdown-earning-method").style.display= "block";
+    } else if(index === "status"){
+        document.getElementById("dropdown-status").innerHTML = `
+        <a onclick="filter('status','1')">Đang xác nhận</a>
+        <a onclick="filter('status','2')">Đã Xác Nhận</a>
+        <a onclick="filter('status','3')">Đã Giao Hàng</a>
+        <a onclick="filter('status','4')">Huỷ đơn</a>`;
+        document.getElementById("dropdown-status").style.display= "block";
+    } else if(index === "shipper"){
+        document.getElementById("dropdown-shipper").innerHTML = `
+        <a onclick="filter('shipper','Nhật Linh')">Nhật Linh</a>
+        <a onclick="filter('shipper','Tâm Hào')">Tâm Hào</a>
+        <a onclick="filter('shipper','Phương Thảo')">Phương Thảo</a>
+        <a onclick="filter('shipper','Thanh Phước')">Thanh Phước</a>
+        <a onclick="filter('shipper','Thành Danh')">Thành Danh</a>
+        <a onclick="filter('shipper','Ngọc Thiện')">Ngọc Thiện</a>
+        <a onclick="filter('shipper','Thanh Hằng')">Thanh Hằng</a>
+        <a onclick="filter('shipper','Đoan Thanh')">Đoan Thanh</a>
+        <a onclick="filter('shipper','Quốc Anh')">Quốc Anh</a>
+        <a onclick="filter('shipper','Bảo Quân')">Bảo Quân</a>
+        <a onclick="filter('shipper','Tỷ Phú')">Tỷ Phú</a>
+        <a onclick="filter('shipper','Hạnh Nhân')">Hạnh Nhân</a>
+        <a onclick="filter('shipper','Đức Trọng')">Đức Trọng</a>
+        <a onclick="filter('shipper','Công Huy')">Công Huy</a>
+        <a onclick="filter('shipper','Kiều Loan')">Kiều Loan</a>`;
+        document.getElementById("dropdown-shipper").style.display= "block";
+        document.getElementById("dropdown-shipper").style.overflowY = "scroll";
+        document.getElementById("dropdown-shipper").style.maxHeight = "250px";
+    }
+}
 
-// Gọi hàm filterData để bắt đầu sử dụng bộ lọc
-filterData();
+window.onclick = (event) => {
+    if(!event.target.matches('.fa-filter')){
+        document.getElementById("dropdown-payments").style.display = "none";
+        document.getElementById("dropdown-paid-status").style.display= "none";
+        document.getElementById("dropdown-earning-method").style.display= "none";
+        document.getElementById("dropdown-status").style.display= "none";
+        document.getElementById("dropdown-shipper").style.display= "none";
+    }
+}
+function filter(type,value){
+    document.getElementById('announce').innerHTML = "";
+    orderList.innerHTML = "";
+    if(type === "payments"){
+        tmpList.forEach((values,index) =>{
+            if(values.payments == value){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    }else if(type === "paidStatus"){
+        tmpList.forEach((values,index) =>{
+            if(values.paidStatus == value){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    }else if(type === "earningMethod"){
+        tmpList.forEach((values,index) =>{
+            if(values.earningMethod == value){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    }else if(type === "status"){
+        tmpList.forEach((values,index) =>{
+            if(values.status == value){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    }else if(type === "shipper"){
+        tmpList.forEach((values,index) =>{
+            if(values.shipper == value){
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="discountCodeID${index}">
+                                    ${values.discountCodeID}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+            }
+        });
+    }
+}

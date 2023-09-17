@@ -112,7 +112,8 @@ function discountCodeSubmit(e) {
         checkDiscountCode = false;
     } else {
         fetch("https://fptumerchapi-cocsaigon.up.railway.app/api/DiscountCode/" + discountCode.value, {
-            method: "GET"
+            method: "GET",
+            mode: "cors"
         }).then(res => {
             return res.json();
         }).then(data => {

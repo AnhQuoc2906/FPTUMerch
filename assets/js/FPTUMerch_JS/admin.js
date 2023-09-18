@@ -29,6 +29,11 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                     notPaid.push(values);
                 }
                 totalMoney += values.totalPrice;
+                const date = new Date(Date.parse(values.createDate));
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const day = date.getDate();
+                const orderDate = [day, month, year].join('/');
                 let order = document.createElement('tr');
                 order.innerHTML = `<td>
                                         <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
@@ -37,6 +42,10 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                         <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
                                         <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
                                         <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                        <input type="hidden" id="discountCodeID${index}" value=${values.discountCodeID} readonly/>
+                                    </td>
+                                    <td id="orderDate${index}">
+                                    ${orderDate}
                                     </td>
                                     <td id="orderName${index}">
                                     ${values.ordererName}

@@ -41,9 +41,6 @@ if (JSON.parse(localStorage.getItem('currentUser') == null)) { //Chỉ cấp quy
                                     <td id="orderName${index}">
                                     ${values.ordererName}
                                     </td>
-                                    <td id="discountCodeID${index}">
-                                    ${values.discountCodeID}
-                                    </td>
                                     <td id="totalPrice${index}">
                                     ${values.totalPrice.toLocaleString()} VND
                                     </td>
@@ -133,7 +130,7 @@ function productInfo(key) {
         .then(data => {
             localStorage.setItem('order', JSON.stringify(data));
             console.log(localStorage.getItem('order'));
-            window.location.href = './thongtinsanpham.html';
+            window.location.href = './thongtinsanphamadmin.html';
         })
         .catch(error => {
             console.log(error);

@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>FPTU MERCH 2023 - ADMIN</title>
+	<title>FPTU MERCH 2023 - THÔNG TIN ĐƠN HÀNG</title>
 
 	<!-- Fav Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/fav-icons/apple-touch-icon.png">
@@ -84,11 +84,12 @@
 							<li><a href="vechungtoi.html" onclick="passData()">VỀ CHÚNG TÔI</a></li>
 							<li><a href="chinhsach.html" onclick="passData()">CHÍNH SÁCH</a></li>	
 							<li class="has-child"><a href="https://www.facebook.com/cocsaigonfuhcm" target="_blank" rel="noopener noreferrer">FACEBOOK</a>
-							</li>
+
 						</ul>
 					</div>
 				</div>
 				<!--Menu container end-->
+
 				<!--Col end-->
 			</div>
 			<!--Row end-->
@@ -123,23 +124,6 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-4">
-					<div class="top-cart">
-						<a href="javascript:void(0)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> (<a class="quantity-mobile">0</a>)</a>
-						<div class="cart-drop">
-							<div class="cart-top-mobile"></div>
-							<div class="cart-bottom">
-								
-								<div class="cart-sub-total">
-									<p>TỔNG <span class="total-price-mobile">0 VND</span></p>
-								</div>
-								<div class="cart-checkout">
-									<a href="prethanhtoan.html"><i class="fa fa-shopping-cart"></i>Xem trước</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<!-- /.row end -->
 		</div>
@@ -159,6 +143,7 @@
 				<li>
 					<a href="index.html" class="out-link" onclick="passData()">TRANG CHỦ</a>
 				</li>
+
 				<li>
 					<a href="sanpham.html" class="out-link" onclick="passData()">SẢN PHẨM</a>
 				</li>
@@ -192,7 +177,7 @@
 				<div class="row">
 					<div class="col-xl-12 col-md-12 d-flex justify-content-between">
 						<div class="bc-inner">
-							<p><a href="##">TRANG CHỦ  |</a> ADMIN</p>
+							<p><a href="##">TRANG CHỦ  |</a> SELLER</p>
 						</div>
 						<div class="user-welcome">
 							<p>Welcome <b class="user-name">User</b> | <a href="#" style="color:red" onclick="logout()">LOG OUT</a></p>
@@ -213,73 +198,65 @@
 			<div class="container-fluid custom-container">
 				<div class="row">
 					<div class="col-xl-12">
+						<a id="backToPrevious" onclick="backToPrevious()" style="margin:20px 20px">
+							Quay trở lại trang trước
+						</a>
 						<div class="account-table">
-							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">ĐƠN ĐẶT HÀNG</h3>
-							<div id="popup" class="popup">
-								<div class="popup-content">
-									<!-- Content of the pop-up goes here -->
+							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">THÔNG TIN ĐƠN HÀNG</h3>
+							<div id="summaryBox">
+								<div id="customerOrderID">
+									<span style="font-weight:bold">Mã đơn hàng:</span>
+									<span id="orderID"></span>
+								</div>
+								<div id="customerName">
+									<span style="font-weight:bold">Tên khách hàng:</span>
+									<span id="name"></span>
+								</div>
+								<div id="customerPhoneNumber">
+									<span style="font-weight:bold">Số điện thoại:</span>
+									<span id="phoneNumber"></span>
+								</div>
+								<div id="customerEmail">
+									<span style="font-weight:bold">Email:</span>
+									<span id="email"></span>
+								</div>
+								<div id="customerAddress">
+									<span style="font-weight:bold">Địa chỉ giao hàng:</span>
+									<span id="address"></span>
+								</div>
+								<div id="customerDiscountCode">
+									<span style="font-weight:bold">Mã giảm giá:</span>
+									<span id="discountCode"></span>
+								</div>
+								<div id="customerTotalPrice">
+									<span style="font-weight:bold">Tổng tiền cho đơn hàng:</span>
+									<span id="totalPrice"></span>
 								</div>
 							</div>
-							<div class="sidebar-widget sidebar-search col-xl-4" action="#" controller="#" >
-								<input type="text" placeholder="Tìm kiếm...." id="searchItem">
-								<label>Tìm theo: </label>
-								<select id="searchBy" name="searchBy" style="width:150px">
-									<option value="1">Mã đơn hàng</option>
-									<option value="2">Tên người đặt</option>	
-									<option value="3">Mã giảm giá</option>									
-								</select>
-								<button type="submit" onclick="searchBy()"><i class="fas fa-search"></i></button>
-							</div>
-							<div class="summary" style="border: 2px solid; text-align:left; margin: 0 45% 0 0;">
-								<h5>Số lượng đơn hiện tại: <span class="totalNumberOfOrders" style="color:red"></span></h5>
-								<h5>Số lượng đơn đã thanh toán: <span class="totalNumberOfOrdersPaid" style="color:red"></span></h5>
-								<h5>Số lượng đơn chưa thanh toán: <span class="totalNumberOfOrdersNotPaid" style="color:red"></span></h5>
-								<h5>Tổng tiền dự kiến: <span class="totalNumberOfMoney" style="color:red"></span></h5>
-								<h5>Tổng tiền đã nhận được từ đơn hàng: <span class="totalNumberOfMoneyPaid" style="color:red"></span></h5>
-							</div>
+							<h6>---</h6>
+							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">Danh sách vật phẩm:</h3>
 							<table class="tables">
 								<thead>
 									<tr>
-										<th>Mã Đơn Hàng</th>
-										<th>Tên Người Đặt</th>
-										<th>Tổng </th>
-										<th>Phương Thức Thanh Toán 
-											<a onclick="showSortOptions('payments')" class="dropbtn fa fa-filter"></a>
-											<div id="dropdown-payments" class="dropdown-content">
-											</div>
-										</th>
-										<th>Tình Trạng Thanh Toán 
-											<a onclick="showSortOptions('paidStatus')" class="dropbtn fa fa-filter"></a>
-											<div id="dropdown-paid-status" class="dropdown-content">
-											</div>
-										</th>
-										<th>Địa Điểm Nhận Hàng
-											<a onclick="showSortOptions('earningMethod')" class="dropbtn fa fa-filter"></a>
-											<div id="dropdown-earning-method" class="dropdown-content">
-											</div>
-										</th>
-										<th>Tình Trạng Đơn Hàng
-											<a onclick="showSortOptions('status')" class="dropbtn fa fa-filter"></a>
-											<div id="dropdown-status" class="dropdown-content">
-											</div>
-										</th>
-										<th>Người Phụ Trách
-											<a onclick="showSortOptions('shipper')" class="dropbtn fa fa-filter"></a>
-											<div id="dropdown-shipper" class="dropdown-content">
-											</div>
-										</th>
-										<th>Note</th>
-										<th>Thao tác</th>
+                                        <!-- <th>Mã Đơn Hàng</th>
+										<th>Họ Vả Tên</th>
+										<th>Số Điện Thoại</th>
+										<th>Gmail</th>
+										<th>Địa Chỉ </th> -->
+                                        <th>Tên Sản Phẩm </th>
+										<th>Số lượng</th>
+										<th>Ghi Chú</th>
 									</tr>
 								</thead>
-								<tbody id="OrderList">
+								<tbody id="orderDetail">
 								</tbody>
 							</table>
 							<div id="loader"></div>
-							<div id="announce"></div>
 						</div>
 						<!-- /.cart-table -->
 					</div>
+					<!-- /.col-xl-9 -->
+
 				</div>
 			</div>
 		</section>
@@ -330,6 +307,7 @@
 	<!-- /#site -->
 	
 
+	
 
 	<!-- Dependency Scripts -->
 	<script src="dependencies/jquery/jquery.min.js"></script>
@@ -351,7 +329,7 @@
 
 	<!-- Site Scripts -->
 	<script src="assets/js/app.js"></script>
-	<script src="assets/js/FPTUMerch_JS/admin.js"></script>
+	<script src="assets/js/FPTUMerch_JS/thongtinsanphamadmin.js"></script>
 
 </body>
 

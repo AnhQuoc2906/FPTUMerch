@@ -492,7 +492,12 @@ function showSortOptions(index){
         dropdown.style.display = 'none';
         dropdown.innerHTML = '';
     });
-    if(index === "payments"){
+    if(index === "orderDate"){
+        document.getElementById("dropdown-orders").innerHTML = `
+        <a onclick="filter('orders','asc')">Sớm nhất</a>
+		<a onclick="filter('orders','desc')">Trễ nhất</a>`;
+        document.getElementById("dropdown-orders").style.display= "block";
+    }else if(index === "payments"){
         document.getElementById("dropdown-payments").innerHTML = `
         <a onclick="filter('payments','1')">Momo</a>
 		<a onclick="filter('payments','2')">Chuyển khoản ngân hàng</a>`;
@@ -550,7 +555,103 @@ window.onclick = (event) => {
 function filter(type,value){
     document.getElementById('announce').innerHTML = "";
     orderList.innerHTML = "";
-    if(type === "payments"){
+    if(type === "orders"){
+        if(value === "desc"){
+            tmpList.sort(function(a,b){
+                return new Date(b.createDate) - new Date(a.createDate);
+            });
+        } else if(value === "asc"){
+            tmpList.sort(function(a,b){
+                return new Date(b.createDate) - new Date(a.createDate);
+            });
+            tmpList.reverse();
+        }
+        tmpList.forEach((values,index) =>{
+                const date = new Date(Date.parse(values.createDate));
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+                const day = date.getDate();
+                const orderDate = [day, month, year].join('/');
+                let order = document.createElement('tr');
+                order.innerHTML = `<td>
+                                        <a href="#" id="orderID${index}" rel="noopener noreferrer" onclick="productInfo('${values.orderID}')">${values.orderID}</a>
+                                        <input type="hidden" id="phoneNumber${index}" value="${values.ordererPhoneNumber}" readonly/>
+                                        <input type="hidden" id="email${index}" value="${values.ordererEmail}" readonly/>
+                                        <input type="hidden" id="address${index}" value="${values.deliveryAddress}" readonly/>
+                                        <input type="hidden" id="price${index}" value=${values.totalPrice} readonly/>
+                                        <input type="hidden" id="earning${index}" value=${values.earningMethod} readonly/>
+                                        <input type="hidden" id="discountCodeID${index}" value=${values.discountCodeID} readonly/>
+                                    </td>
+                                    <td id="orderDate${index}">
+                                    ${orderDate}
+                                    </td>
+                                    <td id="orderName${index}">
+                                    ${values.ordererName}
+                                    </td>
+                                    <td id="totalPrice${index}">
+                                    ${values.totalPrice.toLocaleString()} VND
+                                    </td>
+                                    <td>
+                                        <select id="payments${index}" name="payments" style="width:100px">
+                                            <option value="1" ${values.payments == 1 ? "selected" : ""}>Momo</option>
+                                            <option value="2" ${values.payments == 2 ? "selected" : ""}>Chuyển khoản ngân hàng</option>									
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="paidStatus${index}" name="paidStatus">
+                                            <option value="true" ${values.paidStatus == true ? "selected" : ""}>Đã Thanh Toán</option>
+                                            <option value="false" ${values.paidStatus == false ? "selected" : ""}>Chưa Thanh Toán</option>									
+                                        </select>
+                                    </td>
+                                    <td id="earningMethod${index}">
+                                    ${values.earningMethod == 1 ? "Tại FPT" :
+                                    values.earningMethod == 2 ? "Ship tận nhà" :
+                                        ""
+                                    }  
+                                    </td>
+                                    <td>
+                                        <select id="status${index}" name="status">
+                                            <option value="1" ${values.status == 1 ? "selected" : ""}>Đang Xác Nhận</option>
+                                            <option value="2" ${values.status == 2 ? "selected" : ""}>Đã Xác Nhận</option>
+                                            <option value="3" ${values.status == 3 ? "selected" : ""}>Đã Giao Hàng</option>
+                                            <option value="4" ${values.status == 4 ? "selected" : ""}>Huỷ Đơn</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select id="shipper${index}" name="shipper">
+                                            <option value="Nhật Linh" ${values.shipper === "Nhật Linh" ? "selected" : ""}>Nhật Linh</option>
+                                            <option value="Tâm Hào" ${values.shipper === "Tâm Hào" ? "selected" : ""}>Tâm Hào</option>
+                                            <option value="Phương Thảo" ${values.shipper === "Phương Thảo" ? "selected" : ""}>Phương Thảo</option>
+                                            <option value="Thanh Phước" ${values.shipper === "Thanh Phước" ? "selected" : ""}>Thanh Phước</option>
+                                            <option value="Thành Danh" ${values.shipper === "Thành Danh" ? "selected" : ""}>Thành Danh</option>
+                                            <option value="Ngọc Thiện" ${values.shipper === "Ngọc Thiện" ? "selected" : ""}>Ngọc Thiện</option>
+                                            <option value="Thanh Hằng" ${values.shipper === "Thanh Hằng" ? "selected" : ""}>Thanh Hằng</option>
+                                            <option value="Đoan Thanh" ${values.shipper === "Đoan Thanh" ? "selected" : ""}>Đoan Thanh</option>
+                                            <option value="Quốc Anh" ${values.shipper === "Quốc Anh" ? "selected" : ""}>Quốc Anh</option>
+                                            <option value="Bảo Quân" ${values.shipper === "Bảo Quân" ? "selected" : ""}>Bảo Quân</option>
+                                            <option value="Tỷ Phú" ${values.shipper === "Tỷ Phú" ? "selected" : ""}>Tỷ Phú</option>
+                                            <option value="Hạnh Nhân" ${values.shipper === "Hạnh Nhân" ? "selected" : ""}>Hạnh Nhân</option>
+                                            <option value="Đức Trọng" ${values.shipper === "Đức Trọng" ? "selected" : ""}>Đức Trọng</option>
+                                            <option value="Công Huy" ${values.shipper === "Công Huy" ? "selected" : ""}>Công Huy</option>
+                                            <option value="Kiều Loan" ${values.shipper === "Kiều Loan" ? "selected" : ""}>Kiều Loan</option>
+                                        </select>											  
+                                    </td>
+                                    <td>
+                                        <textarea style="border: none; resize: none;" id="note${index}">
+                                            ${values.note}
+                                        </textarea>
+                                    </td>
+                                    <td>
+                                        <div class="save">
+                                            <button id="saveOrder" onclick="updateOrder('${index}')" class="button-to-top">
+                                                    SỬA
+                                            </button>
+                                        </div>
+                                    </td>
+                        `;
+                orderList.append(order);
+        });
+    }else if(type === "payments"){
         tmpList.forEach((values,index) =>{
             if(values.payments == value){
                 const date = new Date(Date.parse(values.createDate));

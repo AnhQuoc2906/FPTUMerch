@@ -2,6 +2,13 @@ let order = JSON.parse(localStorage.getItem('order'));
 let user = localStorage.getItem('currentUser');
 let userName = document.querySelector('.user-name'); // SET USER NAME Ở TRÊN WEBSITE
 let orderDetailsHTML = document.querySelector('#orderDetail');
+let name = document.querySelector('#name');
+let orderID = document.querySelector('#orderID');
+let phoneNumber = document.querySelector('#phoneNumber');
+let email = document.querySelector('#email');
+let address = document.querySelector('#address');
+let discountCode = document.querySelector('#discountCode');
+let totalPrice = document.querySelector('#totalPrice');
 let orderDetails = [];
 let products = [];
 
@@ -28,31 +35,33 @@ if (user == null) {
             Object.values(order.orderDetails).forEach((values) => {
                 let checkProduct = products.find(element => {
                     return element.productID == values.productID;
-                })
+                });
+                name.innerHTML = order.ordererName;
+                orderID.innerHTML = order.orderID;
+                phoneNumber.innerHTML = order.ordererPhoneNumber;
+                email.innerHTML = order.ordererEmail;
+                if(order.deliveryAddress != ""){
+                    address.innerHTML = order.deliveryAddress;
+                } else{
+                    address.innerHTML = "Nhận tại trường";
+                    address.style.color = "red";
+                    address.style.fontWeight = "bold";
+                }
+                //Kiểm tra mã giảm giá:
+                if(order.discountCodeID != ""){
+                    discountCode.innerHTML = order.discountCodeID;
+                } else{
+                    discountCode.innerHTML = "Không có";
+                }
+                //Note lại tổng tiền cho đơn hàng
+                totalPrice.innerHTML = order.totalPrice.toLocaleString() + " VND";
                 let orderDetail = document.createElement('tr');
-                orderDetail.innerHTML = `	<td>
-                                            ${order.orderID}
-                                        </td>
-                                        <td>
-                                            ${order.ordererName}
-                                        </td>
-                                        <td>
-                                            ${order.ordererPhoneNumber}
-                                        </td>
-                                        <td>
-                                            ${order.ordererEmail}
-                                        </td>
-                                        <td>
-                                            ${order.deliveryAddress}
-                                        </td>
+                orderDetail.innerHTML = `
                                         <td>
                                             ${checkProduct.productName}
                                         </td>
                                         <td>
                                             ${values.amount}
-                                        </td>
-                                        <td>
-                                            ${(checkProduct.price * values.amount).toLocaleString()} VND
                                         </td>
                                         <td>
                                             ${values.note}
@@ -71,3 +80,8 @@ function logout() {
     localStorage.removeItem('currentUser');
     window.location.href = "./login.html?";
 }
+
+function backToPrevious(){
+    history.back();
+}
+

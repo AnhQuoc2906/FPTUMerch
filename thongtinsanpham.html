@@ -236,19 +236,48 @@
 			<div class="container-fluid custom-container">
 				<div class="row">
 					<div class="col-xl-12">
+						<a id="backToPrevious" onclick="backToPrevious()" style="margin:20px 20px">
+							Quay trở lại trang trước
+						</a>
 						<div class="account-table">
-							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">THÔNG TIN ĐƠN HÀNG</h3>			
+							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">THÔNG TIN ĐƠN HÀNG</h3>
+							<div id="summaryBox">
+								<div id="customerOrderID">
+									<span style="font-weight:bold">Mã đơn hàng:</span>
+									<span id="orderID"></span>
+								</div>
+								<div id="customerName">
+									<span style="font-weight:bold">Tên khách hàng:</span>
+									<span id="name"></span>
+								</div>
+								<div id="customerPhoneNumber">
+									<span style="font-weight:bold">Số điện thoại:</span>
+									<span id="phoneNumber"></span>
+								</div>
+								<div id="customerEmail">
+									<span style="font-weight:bold">Email:</span>
+									<span id="email"></span>
+								</div>
+								<div id="customerAddress">
+									<span style="font-weight:bold">Địa chỉ giao hàng:</span>
+									<span id="address"></span>
+								</div>
+								<div id="customerDiscountCode">
+									<span style="font-weight:bold">Mã giảm giá:</span>
+									<span id="discountCode"></span>
+								</div>
+								<div id="customerTotalPrice">
+									<span style="font-weight:bold">Tổng tiền cho đơn hàng:</span>
+									<span id="totalPrice"></span>
+								</div>
+							</div>
+							<h6>---</h6>
+							<h3 style="padding-bottom: 20px; font-size: 3rem; font-weight: bold;">Danh sách vật phẩm:</h3>
 							<table class="tables">
 								<thead>
 									<tr>
-                                        <th>Mã Đơn Hàng</th>
-										<th>Họ Vả Tên</th>
-										<th>Số Điện Thoại</th>
-										<th>Gmail</th>
-										<th>Địa Chỉ </th>
                                         <th>Tên Sản Phẩm </th>
 										<th>Số lượng</th>
-                                        <th>Tổng</th>
 										<th>Ghi Chú</th>
 									</tr>
 								</thead>

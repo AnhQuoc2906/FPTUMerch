@@ -35,7 +35,7 @@ if (user == null) {
             Object.values(order.orderDetails).forEach((values) => {
                 let checkProduct = products.find(element => {
                     return element.productID == values.productID;
-                })
+                });
                 name.innerHTML = order.ordererName;
                 orderID.innerHTML = order.orderID;
                 phoneNumber.innerHTML = order.ordererPhoneNumber;

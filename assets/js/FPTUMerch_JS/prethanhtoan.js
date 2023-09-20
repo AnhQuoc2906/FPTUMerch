@@ -125,15 +125,22 @@ function discountCodeSubmit(e) {
                 finalPriceInteger = currentTotalPrice;
                 checkDiscountCode = false;
             } else {
+                let tmpDiscountPrice = 0;
                 currentTotalPrice = 0;
                 for (let i = 0; i < listCarts.length; i++) {
-                    currentTotalPrice += listCarts[i].price * listCarts[i].amount; // Calculate total price
+                    if(listCarts[i].productName === "ÁO THUN FPTYOU" || listCarts[i].productName === "COMBO FULL KIT"){
+                        currentTotalPrice += (listCarts[i].price * listCarts[i].amount) * 19/20; // Calculate total price
+                        tmpDiscountPrice += listCarts[i].price * listCarts[i].amount;
+                    } else {
+                        currentTotalPrice += listCarts[i].price * listCarts[i].amount;
+                        tmpDiscountPrice += listCarts[i].price * listCarts[i].amount;
+                    }
                 };
                 announce.innerHTML = "Mã hợp lệ";
                 announce.style.color = "green";
-                discountPrice.innerHTML = (parseInt(currentTotalPrice / 20)).toLocaleString() + " VND";
-                finalPrice.innerHTML = (parseInt(currentTotalPrice * 19 / 20)).toLocaleString() + " VND";
-                finalPriceInteger = currentTotalPrice * 19 / 20;
+                discountPrice.innerHTML = parseInt(tmpDiscountPrice-currentTotalPrice).toLocaleString() + " VND";
+                finalPrice.innerHTML = parseInt(currentTotalPrice).toLocaleString() + " VND";
+                finalPriceInteger = currentTotalPrice;
                 checkDiscountCode = true;
             }
         }).catch(error => {
